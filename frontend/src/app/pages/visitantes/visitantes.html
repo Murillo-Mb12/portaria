@@ -1,0 +1,66 @@
+<h1>Visitantes</h1>
+
+<div class="card">
+  <h3>{{ editandoId() ? 'Editar visitante' : 'Cadastrar visitante' }}</h3>
+  <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
+    <label>Nome
+      <input formControlName="nome">
+      <app-erro-campo [control]="form.controls.nome" />
+    </label>
+    <label>CPF / RG
+      <input formControlName="documento">
+      <app-erro-campo [control]="form.controls.documento" />
+    </label>
+    <label>Telefone
+      <input formControlName="telefone" placeholder="(15) 91234-5678">
+      <app-erro-campo [control]="form.controls.telefone" formato="Telefone inválido." />
+    </label>
+    <label>Vínculo com o morador
+      <select formControlName="vinculo">
+        @for (v of vinculos; track v) {
+          <option [value]="v">{{ vinculoLabel[v] }}</option>
+        }
+      </select>
+    </label>
+
+    <div class="largura-total campo-lista">
+      <span class="titulo-campo">Moradores que visita <small>(só eles aparecerão na entrada deste visitante)</small></span>
+      <app-selecao-multipla [control]="form.controls.moradorIds" [opcoes]="opcoesMoradores()"
+                            vazio="Cadastre um morador primeiro." />
+    </div>
+
+    <div class="acoes">
+      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
+      @if (editandoId()) {
+        <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card tabela-scroll">
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Documento</th><th>Telefone</th><th>Vínculo</th><th>Moradores</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (v of visitantes(); track v.id) {
+        <tr [class.editando]="v.id === editandoId()">
+          <td>{{ v.nome }}</td>
+          <td>{{ v.documento }}</td>
+          <td>{{ v.telefone }}</td>
+          <td>{{ vinculoLabel[v.vinculo] }}</td>
+          <td>{{ nomesMoradores(v) }}</td>
+          <td class="acoes-linha">
+            <button type="button" class="sm" (click)="editar(v)">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(v)">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6">Nenhum registro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

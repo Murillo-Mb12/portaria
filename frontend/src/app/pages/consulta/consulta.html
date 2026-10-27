@@ -1,0 +1,18 @@
+<h1>Consulta de acessos</h1>
+
+<div class="card">
+  <form class="grid" [formGroup]="filtro" (ngSubmit)="filtrar()">
+    <label>Buscar <input formControlName="busca" placeholder="Nome, placa, morador, doação..."></label>
+    <label>De <input formControlName="de" type="date"></label>
+    <label>Até <input formControlName="ate" type="date"></label>
+    <div class="acoes">
+      <button type="submit">Filtrar</button>
+      <button type="button" class="sec" (click)="limpar()">Limpar</button>
+    </div>
+  </form>
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card">
+  <app-tabela-acessos [acessos]="acessos()" />
+</div>

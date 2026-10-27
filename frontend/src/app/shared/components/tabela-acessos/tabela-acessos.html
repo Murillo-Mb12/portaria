@@ -1,0 +1,28 @@
+<div class="tabela-scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Objetivo</th>
+        <th>Detalhe</th>
+        <th>Veículo</th>
+        <th>Entrada</th>
+        <th>Saída</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (a of acessos(); track a.id) {
+        <tr>
+          <td>{{ a.nome }}</td>
+          <td>{{ objetivoLabel[a.objetivo] }}</td>
+          <td>{{ a.detalhe }}</td>
+          <td>{{ a.veiculo ?? '—' }}</td>
+          <td>{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ a.saida ? (a.saida | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6">Nenhum registro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

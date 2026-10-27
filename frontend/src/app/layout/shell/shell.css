@@ -1,0 +1,16 @@
+.layout { display: flex; min-height: 100vh; }
+
+nav { width: 220px; background: #1e3a5f; color: #fff; padding: 16px; flex-shrink: 0; display: flex; flex-direction: column; }
+nav h2 { font-size: 16px; margin: 0 0 4px; }
+nav small { opacity: .7; margin-bottom: 8px; }
+nav a { display: block; padding: 10px; margin-top: 6px; border-radius: 8px; color: #fff; text-decoration: none; font-size: 14px; }
+nav a:hover, nav a.ativo { background: #2f5a8f; }
+nav .sair { margin-top: 18px; background: transparent; border: 1px solid #ffffff55; text-align: left; }
+nav .sair:hover { background: #2f5a8f; }
+
+main { flex: 1; padding: 24px; overflow: auto; min-width: 0; }
+
+@media (max-width: 720px) {
+  .layout { flex-direction: column; }
+  nav { width: auto; }
+}

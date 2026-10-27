@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PortariaApplication<portaria>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.portaria.PortariaApplication",
+            "projectName": "portaria",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

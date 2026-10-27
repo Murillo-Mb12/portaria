@@ -1,0 +1,16 @@
+# Opcional: sobe um PostgreSQL pronto para o projeto (precisa do Docker instalado)
+#   docker compose up -d
+services:
+  postgres:
+    image: postgres:16
+    container_name: portaria-postgres
+    environment:
+      POSTGRES_DB: portariadb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - portaria-dados:/var/lib/postgresql/data
+volumes:
+  portaria-dados:

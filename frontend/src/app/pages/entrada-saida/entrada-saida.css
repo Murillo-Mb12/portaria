@@ -1,0 +1,18 @@
+.titulo-campo { display: block; margin: 8px 0 6px; }
+
+.objetivos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.objetivo {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left;
+  background: #fff; color: #1f2937; border: 2px solid #e2e8f0; padding: 12px 14px;
+}
+.objetivo:hover { background: #f8fafc; border-color: #94a3b8; }
+.objetivo small { color: #64748b; font-size: 12px; }
+.objetivo.ativo { border-color: #2f5a8f; background: #eef4fb; }
+.objetivo.ativo strong { color: #1e3a5f; }
+
+.dica { color: #64748b; font-size: 13px; margin: 10px 0 0; }
+
+.etiqueta { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.etiqueta.VISITA { background: #dbeafe; color: #1e40af; }
+.etiqueta.DOACAO { background: #dcfce7; color: #166534; }
+.etiqueta.OUTROS { background: #fef3c7; color: #92400e; }

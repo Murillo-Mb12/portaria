@@ -1,0 +1,60 @@
+<h1>Funcionários</h1>
+
+<div class="card">
+  <h3>{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h3>
+  <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
+    <label>Nome
+      <input formControlName="nome">
+      <app-erro-campo [control]="form.controls.nome" />
+    </label>
+    <label>Usuário
+      <input formControlName="usuario" autocomplete="off">
+      <app-erro-campo [control]="form.controls.usuario" />
+    </label>
+    <label>{{ editandoId() ? 'Nova senha' : 'Senha' }}
+      <input formControlName="senha" type="password" autocomplete="new-password">
+      <app-erro-campo [control]="form.controls.senha" />
+    </label>
+    <label>Perfil
+      <select formControlName="perfil">
+        @for (p of perfis; track p) {
+          <option [value]="p">{{ perfilLabel[p] }}</option>
+        }
+      </select>
+    </label>
+    <div class="acoes">
+      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
+      @if (editandoId()) {
+        <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card tabela-scroll">
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Usuário</th><th>Perfil</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (f of funcionarios(); track f.id) {
+        <tr [class.editando]="f.id === editandoId()">
+          <td>{{ f.nome }}</td>
+          <td>{{ f.usuario }}</td>
+          <td>{{ perfilLabel[f.perfil] }}</td>
+          <td class="acoes-linha">
+            <button type="button" class="sm" (click)="editar(f)">Editar</button>
+            <!-- não deixa o usuário logado excluir a si mesmo -->
+            @if (f.id !== auth.usuario()?.id) {
+              <button type="button" class="sm perigo" (click)="excluir(f)">Excluir</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4">Nenhum registro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,18 @@
+<h1>Relatório de acessos</h1>
+
+<div class="card noprint">
+  <form class="grid" [formGroup]="periodo" (ngSubmit)="gerar()">
+    <label>De <input formControlName="de" type="date"></label>
+    <label>Até <input formControlName="ate" type="date"></label>
+    <button type="submit">Gerar</button>
+  </form>
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+@if (acessos(); as lista) {
+  <div class="card">
+    <app-tabela-acessos [acessos]="lista" />
+    <p><strong>Total de acessos: {{ lista.length }}</strong></p>
+    <button type="button" class="noprint" (click)="imprimir()">Imprimir / salvar PDF</button>
+  </div>
+}

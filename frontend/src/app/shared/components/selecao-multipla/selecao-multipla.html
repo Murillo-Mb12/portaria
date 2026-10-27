@@ -1,0 +1,16 @@
+<div class="lista" [class.invalida]="control().invalid && control().touched">
+  @for (o of opcoes(); track o.id) {
+    <label class="opcao" [class.marcada]="marcado(o.id)">
+      <input type="checkbox" [checked]="marcado(o.id)" (change)="alternar(o.id, $any($event.target).checked)">
+      <span>
+        {{ o.rotulo }}
+        @if (o.detalhe) { <small>{{ o.detalhe }}</small> }
+      </span>
+    </label>
+  } @empty {
+    <span class="vazio">{{ vazio() }}</span>
+  }
+</div>
+@if (control().invalid && control().touched) {
+  <small class="err">Selecione pelo menos uma opção.</small>
+}

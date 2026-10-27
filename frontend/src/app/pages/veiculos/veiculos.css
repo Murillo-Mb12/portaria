@@ -1,0 +1,20 @@
+.pessoas { display: flex; flex-direction: column; gap: 8px; }
+.pessoas:empty { display: none; }
+
+.linha-pessoa {
+  display: grid; grid-template-columns: 28px minmax(180px, 1fr) minmax(220px, 1.6fr) auto;
+  gap: 10px; align-items: start;
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 12px;
+}
+.numero {
+  margin-top: calc(var(--altura-label) + (var(--altura-campo) - 28px) / 2); height: 28px; width: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: #2f5a8f; color: #fff; border-radius: 50%; font-size: 13px; font-weight: 600;
+}
+.remover { margin-top: var(--altura-label); height: var(--altura-campo); }
+
+@media (max-width: 720px) {
+  .linha-pessoa { grid-template-columns: 28px 1fr; }
+  .linha-pessoa label, .remover { grid-column: 2; }
+  .remover { margin-top: 0; justify-self: start; }
+}

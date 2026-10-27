@@ -1,0 +1,116 @@
+<h1>Registro de entrada e saída</h1>
+
+<div class="card">
+  <h3>Registrar entrada</h3>
+
+  <span class="titulo-campo">Qual o objetivo no Lar?</span>
+  <div class="objetivos">
+    @for (o of objetivos; track o.valor) {
+      <button type="button" class="objetivo" [class.ativo]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
+        <strong>{{ o.titulo }}</strong>
+        <small>{{ o.descricao }}</small>
+      </button>
+    }
+  </div>
+
+  <form class="grid" [formGroup]="form" (ngSubmit)="registrar()">
+    @switch (objetivo()) {
+      @case ('VISITA') {
+        <label>Visitante
+          <select formControlName="visitanteId">
+            <option [ngValue]="null" disabled>Selecione...</option>
+            @for (p of visitantes(); track p.id) {
+              <option [ngValue]="p.id">{{ p.nome }}</option>
+            }
+          </select>
+        </label>
+        <label>Morador visitado
+          <select formControlName="moradorId">
+            <option [ngValue]="null" disabled>{{ form.controls.visitanteId.value ? 'Selecione...' : 'Escolha o visitante primeiro' }}</option>
+            @for (m of moradoresDoVisitante(); track m.id) {
+              <option [ngValue]="m.id">{{ m.nome }} - {{ m.unidade }}</option>
+            }
+          </select>
+        </label>
+      }
+      @case ('DOACAO') {
+        <label>Nome de quem traz a doação
+          <input formControlName="nome" maxlength="100">
+        </label>
+        <label>Documento (opcional)
+          <input formControlName="documento" maxlength="20">
+        </label>
+      }
+      @case ('OUTROS') {
+        <label>Nome
+          <input formControlName="nome" maxlength="100">
+        </label>
+        <label>Documento (opcional)
+          <input formControlName="documento" maxlength="20">
+        </label>
+        <label>Finalidade
+          <select formControlName="finalidade">
+            <option [ngValue]="null" disabled>Selecione...</option>
+            @for (f of finalidades; track f) {
+              <option [ngValue]="f">{{ finalidadeLabel[f] }}</option>
+            }
+          </select>
+        </label>
+      }
+    }
+
+    <!-- Veículo é sempre opcional: fica em "Sem veículo" quando a pessoa chega a pé -->
+    <label>Veículo (opcional)
+      <select formControlName="veiculoId">
+        <option [ngValue]="null">Sem veículo (a pé)</option>
+        @for (v of veiculosDisponiveis(); track v.id) {
+          <option [ngValue]="v.id">{{ descricaoVeiculo(v) }}</option>
+        }
+      </select>
+    </label>
+
+    @if (objetivo() === 'DOACAO') {
+      <label class="largura-total">Itens doados
+        <textarea formControlName="descricao" maxlength="255" placeholder="Ex.: 10 cestas básicas, 5 pacotes de fraldas geriátricas"></textarea>
+      </label>
+    }
+    @if (objetivo() === 'OUTROS') {
+      <label class="largura-total">Observação (opcional)
+        <input formControlName="descricao" maxlength="255" placeholder="Ex.: reunião com a assistente social">
+      </label>
+    }
+
+    <div class="acoes">
+      <button type="submit">Registrar entrada</button>
+    </div>
+  </form>
+
+  @if (objetivo() === 'VISITA' && form.controls.visitanteId.value && !veiculosDisponiveis().length) {
+    <p class="dica">Este visitante não tem veículo vinculado. Se ele chegou de carro, cadastre o veículo em "Veículos".</p>
+  }
+  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card tabela-scroll">
+  <h3>Presentes agora</h3>
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Objetivo</th><th>Detalhe</th><th>Veículo</th><th>Entrada</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (a of presentes(); track a.id) {
+        <tr>
+          <td>{{ a.nome }}</td>
+          <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
+          <td>{{ a.detalhe }}</td>
+          <td>{{ a.veiculo ?? '—' }}</td>
+          <td>{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td class="acoes-linha"><button type="button" class="sm alerta" (click)="registrarSaida(a)">Registrar saída</button></td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6">Ninguém no Lar no momento.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

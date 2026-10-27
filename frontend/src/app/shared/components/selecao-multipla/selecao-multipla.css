@@ -1,0 +1,14 @@
+.lista {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px;
+  border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; max-height: 210px; overflow-y: auto; background: #fff;
+}
+.lista.invalida { border-color: #b91c1c; }
+.opcao {
+  flex-direction: row; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px;
+  cursor: pointer; font-size: 14px;
+}
+.opcao:hover { background: #f1f5f9; }
+.opcao.marcada { background: #e0ecfa; }
+.opcao input { height: auto; width: 16px; margin: 0; }
+.opcao small { display: block; color: #64748b; font-size: 12px; }
+.vazio { color: #64748b; font-size: 13px; padding: 4px; }

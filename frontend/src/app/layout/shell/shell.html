@@ -1,0 +1,24 @@
+<div class="layout">
+  <nav class="noprint">
+    <h2>Portaria</h2>
+    @if (auth.usuario(); as u) {
+      <small>{{ u.nome }} ({{ perfilLabel[u.perfil] }})</small>
+    }
+
+    <a routerLink="/entrada-saida" routerLinkActive="ativo">Entrada / Saída</a>
+    <a routerLink="/visitantes" routerLinkActive="ativo">Visitantes</a>
+    <a routerLink="/moradores" routerLinkActive="ativo">Moradores</a>
+    <a routerLink="/veiculos" routerLinkActive="ativo">Veículos</a>
+    @if (auth.isAdmin()) {
+      <a routerLink="/funcionarios" routerLinkActive="ativo">Funcionários</a>
+    }
+    <a routerLink="/consulta" routerLinkActive="ativo">Consulta de acessos</a>
+    <a routerLink="/relatorio" routerLinkActive="ativo">Relatórios</a>
+
+    <button type="button" class="sair" (click)="sair()">Sair</button>
+  </nav>
+
+  <main>
+    <router-outlet />
+  </main>
+</div>

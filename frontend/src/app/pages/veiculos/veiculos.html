@@ -1,0 +1,110 @@
+<h1>Veículos</h1>
+
+<div class="card">
+  <h3>{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h3>
+  <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
+    <label>Placa
+      <input formControlName="placa" placeholder="ABC1D23" maxlength="8">
+      <app-erro-campo [control]="form.controls.placa" formato="Use ABC1D23 ou ABC1234." />
+    </label>
+    <label>Marca
+      <input formControlName="marca" placeholder="Fiat">
+      <app-erro-campo [control]="form.controls.marca" />
+    </label>
+    <label>Modelo (nome do carro)
+      <input formControlName="modelo" placeholder="Uno">
+      <app-erro-campo [control]="form.controls.modelo" />
+    </label>
+    <label>Cor
+      <input formControlName="cor" placeholder="Prata">
+      <app-erro-campo [control]="form.controls.cor" />
+    </label>
+    <label>Tipo
+      <select formControlName="tipo">
+        @for (t of tipos; track t) {
+          <option [value]="t">{{ tipoLabel[t] }}</option>
+        }
+      </select>
+    </label>
+
+    @if (deVisitante()) {
+      <div class="largura-total campo-lista">
+        <span class="titulo-campo">Pessoas que usam o veículo <small>(ex.: membros da mesma família)</small></span>
+
+        <div formArrayName="pessoas" class="pessoas">
+          @for (linha of pessoas.controls; track linha; let i = $index) {
+            <div class="linha-pessoa" [formGroupName]="i">
+              <span class="numero">{{ i + 1 }}</span>
+              <label>Filtrar por morador
+                <select formControlName="moradorId" (change)="aoTrocarMorador(i)">
+                  <option [ngValue]="null">Todos os moradores</option>
+                  @for (m of moradores(); track m.id) {
+                    <option [ngValue]="m.id">{{ m.nome }}</option>
+                  }
+                </select>
+              </label>
+              <label>Pessoa (visitante)
+                <select formControlName="visitanteId">
+                  <option [ngValue]="null" disabled>
+                    {{ opcoesVisitantes(i).length ? 'Selecione...' : 'Nenhum visitante para este morador' }}
+                  </option>
+                  @for (v of opcoesVisitantes(i); track v.id) {
+                    <option [ngValue]="v.id">{{ v.nome }} (visita {{ moradoresDe(v.id) }})</option>
+                  }
+                </select>
+                <app-erro-campo [control]="linha.controls.visitanteId" />
+              </label>
+              <button type="button" class="sm perigo remover" (click)="removerPessoa(i)">Remover</button>
+            </div>
+          }
+        </div>
+
+        <div>
+          <button type="button" class="sec" (click)="adicionarPessoa()">+ Adicionar pessoa</button>
+        </div>
+        @if (pessoas.touched && pessoas.errors?.['semPessoas']) {
+          <small class="err">Adicione pelo menos uma pessoa.</small>
+        }
+      </div>
+    } @else {
+      <label>Responsável
+        <input formControlName="responsavel" placeholder="Lar São Vicente de Paulo">
+        <app-erro-campo [control]="form.controls.responsavel" />
+      </label>
+    }
+
+    <div class="acoes">
+      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
+      @if (editandoId()) {
+        <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card tabela-scroll">
+  <table>
+    <thead>
+      <tr><th>Placa</th><th>Veículo</th><th>Cor</th><th>Tipo</th><th>Quem usa / Responsável</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (v of veiculos(); track v.id) {
+        <tr [class.editando]="v.id === editandoId()">
+          <td>{{ v.placa }}</td>
+          <td>{{ v.marca }} {{ v.modelo }}</td>
+          <td>{{ v.cor }}</td>
+          <td>{{ tipoLabel[v.tipo] }}</td>
+          <td>{{ quemUsa(v) }}</td>
+          <td class="acoes-linha">
+            <button type="button" class="sm" (click)="editar(v)">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(v)">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="6">Nenhum registro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>

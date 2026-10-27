@@ -1,0 +1,10 @@
+<form class="login" [formGroup]="form" (ngSubmit)="entrar()">
+  <h2>Controle de Portaria</h2>
+  <label>Usuário <input formControlName="usuario" autocomplete="username"></label>
+  <label>Senha <input formControlName="senha" type="password" autocomplete="current-password"></label>
+  <button type="submit" [disabled]="carregando()">{{ carregando() ? 'Entrando...' : 'Entrar' }}</button>
+  @if (erro()) {
+    <p class="err">{{ erro() }}</p>
+  }
+  <small>Demo: porteiro / 1234 — admin / admin123</small>
+</form>

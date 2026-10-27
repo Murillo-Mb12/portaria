@@ -1,0 +1,50 @@
+<h1>Moradores</h1>
+
+<div class="card">
+  <h3>{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h3>
+  <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
+    <label>Nome
+      <input formControlName="nome">
+      <app-erro-campo [control]="form.controls.nome" />
+    </label>
+    <label>Unidade
+      <input formControlName="unidade" placeholder="Ala São José - Quarto 04">
+      <app-erro-campo [control]="form.controls.unidade" />
+    </label>
+    <label>Telefone
+      <input formControlName="telefone" placeholder="(11) 91234-5678">
+      <app-erro-campo [control]="form.controls.telefone" formato="Telefone inválido." />
+    </label>
+    <div class="acoes">
+      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
+      @if (editandoId()) {
+        <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
+      }
+    </div>
+  </form>
+  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+  @if (erro()) { <p class="err">{{ erro() }}</p> }
+</div>
+
+<div class="card tabela-scroll">
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>Unidade</th><th>Telefone</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (m of moradores(); track m.id) {
+        <tr [class.editando]="m.id === editandoId()">
+          <td>{{ m.nome }}</td>
+          <td>{{ m.unidade }}</td>
+          <td>{{ m.telefone }}</td>
+          <td class="acoes-linha">
+            <button type="button" class="sm" (click)="editar(m)">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(m)">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4">Nenhum registro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
