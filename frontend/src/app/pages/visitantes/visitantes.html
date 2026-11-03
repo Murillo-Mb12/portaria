@@ -26,6 +26,7 @@
     <div class="largura-total campo-lista">
       <span class="titulo-campo">Moradores que visita <small>(só eles aparecerão na entrada deste visitante)</small></span>
       <app-selecao-multipla [control]="form.controls.moradorIds" [opcoes]="opcoesMoradores()"
+                            placeholder="Pesquisar morador pelo nome, ala ou quarto..."
                             vazio="Cadastre um morador primeiro." />
     </div>
 

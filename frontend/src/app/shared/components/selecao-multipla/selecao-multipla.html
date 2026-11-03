@@ -1,16 +1,57 @@
-<div class="lista" [class.invalida]="control().invalid && control().touched">
-  @for (o of opcoes(); track o.id) {
-    <label class="opcao" [class.marcada]="marcado(o.id)">
-      <input type="checkbox" [checked]="marcado(o.id)" (change)="alternar(o.id, $any($event.target).checked)">
-      <span>
-        {{ o.rotulo }}
-        @if (o.detalhe) { <small>{{ o.detalhe }}</small> }
+<div class="caixa" [class.invalida]="control().invalid && control().touched">
+
+  <!-- Busca rápida -->
+  <div class="busca">
+    <svg class="lupa" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <line x1="16.5" y1="16.5" x2="21" y2="21" />
+    </svg>
+    <input type="search" [placeholder]="placeholder()" [value]="busca()"
+           (input)="pesquisar($any($event.target).value)"
+           (keydown.enter)="$event.preventDefault()"
+           aria-label="Pesquisar">
+    @if (busca()) {
+      <button type="button" class="limpar" (click)="limparBusca()" aria-label="Limpar pesquisa">×</button>
+    }
+  </div>
+
+  <!-- Resumo do que já foi marcado (aparece mesmo se o item estiver escondido) -->
+  @if (selecionados().length) {
+    <div class="selecionados">
+      <span class="rotulo-selecionados">Selecionados ({{ selecionados().length }}):</span>
+      @for (s of selecionados(); track s.id) {
+        <span class="chip">
+          {{ s.rotulo }}
+          <button type="button" (click)="alternar(s.id, false)" [attr.aria-label]="'Remover ' + s.rotulo">×</button>
+        </span>
+      }
+    </div>
+  }
+
+  <!-- Lista -->
+  <div class="lista">
+    @for (o of visiveis(); track o.id) {
+      <label class="opcao" [class.marcada]="marcado(o.id)">
+        <input type="checkbox" [checked]="marcado(o.id)" (change)="alternar(o.id, $any($event.target).checked)">
+        <span>
+          {{ o.rotulo }}
+          @if (o.detalhe) { <small>{{ o.detalhe }}</small> }
+        </span>
+      </label>
+    } @empty {
+      <span class="vazio">
+        {{ busca() ? 'Nenhum resultado para "' + busca() + '".' : vazio() }}
       </span>
-    </label>
-  } @empty {
-    <span class="vazio">{{ vazio() }}</span>
+    }
+  </div>
+
+  @if (filtradas().length > limite()) {
+    <button type="button" class="ver-mais" (click)="alternarExpandido()">
+      {{ expandido() ? 'Ver menos' : 'Ver mais (' + escondidas() + ')' }}
+    </button>
   }
 </div>
+
 @if (control().invalid && control().touched) {
   <small class="err">Selecione pelo menos uma opção.</small>
 }
