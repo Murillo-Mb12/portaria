@@ -10,7 +10,7 @@ public class MoradorMapper {
         Morador morador = new Morador();
         morador.setNome(request.nome().trim());
         morador.setUnidade(request.unidade().trim());
-        morador.setTelefone(request.telefone().trim());
+        morador.setCpf(request.cpf().trim());
         return morador;
     }
 
@@ -19,6 +19,6 @@ public class MoradorMapper {
                 morador.getId(),
                 morador.getNome(),
                 morador.getUnidade(),
-                morador.getTelefone());
+                morador.getCpf());
     }
 }

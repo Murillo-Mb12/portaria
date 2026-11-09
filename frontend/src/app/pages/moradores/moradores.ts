@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { MoradorResponse } from '../../core/models';
 import { MoradorService } from '../../core/services/morador.service';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
-import { TELEFONE_REGEX } from '../../core/utils/validadores';
+import { CPF_REGEX } from '../../core/utils/validadores';
 import { ErroCampo } from '../../shared/components/erro-campo/erro-campo';
+import { Mascara } from '../../shared/directives/mascara';
 
 // RF03 - Cadastro de moradores (CRUD)
 @Component({
   selector: 'app-moradores',
-  imports: [ReactiveFormsModule, ErroCampo],
+  imports: [ReactiveFormsModule, ErroCampo, Mascara],
   templateUrl: './moradores.html',
 })
 export class Moradores implements OnInit {
@@ -26,7 +27,7 @@ export class Moradores implements OnInit {
   form = this.fb.nonNullable.group({
     nome: ['', [Validators.required, Validators.maxLength(100)]],
     unidade: ['', [Validators.required, Validators.maxLength(50)]],
-    telefone: ['', [Validators.required, Validators.pattern(TELEFONE_REGEX)]],
+    cpf: ['', [Validators.required, Validators.pattern(CPF_REGEX)]],
   });
 
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class Moradores implements OnInit {
 
   editar(m: MoradorResponse): void {
     this.editandoId.set(m.id);
-    this.form.setValue({ nome: m.nome, unidade: m.unidade, telefone: m.telefone });
+    this.form.setValue({ nome: m.nome, unidade: m.unidade, cpf: m.cpf ?? '' });
     this.mensagem.set('');
   }
 

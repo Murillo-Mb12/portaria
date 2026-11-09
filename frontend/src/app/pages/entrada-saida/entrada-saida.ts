@@ -18,6 +18,8 @@ import { AcessoService } from '../../core/services/acesso.service';
 import { VeiculoService } from '../../core/services/veiculo.service';
 import { VisitanteService } from '../../core/services/visitante.service';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
+import { CPF_REGEX } from '../../core/utils/validadores';
+import { Mascara } from '../../shared/directives/mascara';
 
 interface OpcaoObjetivo {
   valor: ObjetivoAcesso;
@@ -28,7 +30,7 @@ interface OpcaoObjetivo {
 // RF06 a RF09 - Entrada e saída (a pessoa pode ou não estar com um veículo)
 @Component({
   selector: 'app-entrada-saida',
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [ReactiveFormsModule, DatePipe, Mascara],
   templateUrl: './entrada-saida.html',
   styleUrl: './entrada-saida.css',
 })
@@ -121,6 +123,7 @@ export class EntradaSaida implements OnInit {
       (visita && !f.visitanteId && 'Selecione o visitante.') ||
       (visita && !f.moradorId && 'Selecione o morador visitado.') ||
       (!visita && !f.nome?.trim() && 'Informe o nome.') ||
+      (!visita && !!f.documento && !CPF_REGEX.test(f.documento) && 'CPF incompleto (000.000.000-00).') ||
       (objetivo === 'DOACAO' && !f.descricao?.trim() && 'Descreva os itens doados.') ||
       (objetivo === 'OUTROS' && !f.finalidade && 'Selecione a finalidade.');
     if (faltando) {

@@ -4,8 +4,8 @@
   <h3>{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h3>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Placa
-      <input formControlName="placa" placeholder="ABC1D23" maxlength="8">
-      <app-erro-campo [control]="form.controls.placa" formato="Use ABC1D23 ou ABC1234." />
+      <input formControlName="placa" appMascara="placa" placeholder="ABC1D23 ou ABC-1234">
+      <app-erro-campo [control]="form.controls.placa" formato="Placa incompleta (ABC1D23 ou ABC-1234)." />
     </label>
     <label>Marca
       <input formControlName="marca" placeholder="Fiat">

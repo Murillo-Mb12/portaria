@@ -50,7 +50,7 @@ public class VisitanteService {
 
     public VisitanteResponse save(VisitanteRequest request) {
         if (repository.existsByDocumento(request.documento().trim())) {
-            throw new BusinessException("Já existe um visitante com o documento " + request.documento().trim());
+            throw new BusinessException("Já existe um visitante com o CPF " + request.documento().trim());
         }
         Visitante visitante = VisitanteMapper.toEntity(request, buscarMoradores(request.moradorIds()));
         return VisitanteMapper.toDTO(repository.save(visitante));
@@ -59,7 +59,7 @@ public class VisitanteService {
     public void update(long id, VisitanteRequest request) {
         Visitante aux = findEntity(id);
         if (repository.existsByDocumentoAndIdNot(request.documento().trim(), id)) {
-            throw new BusinessException("Já existe um visitante com o documento " + request.documento().trim());
+            throw new BusinessException("Já existe um visitante com o CPF " + request.documento().trim());
         }
         aux.setNome(request.nome().trim());
         aux.setDocumento(request.documento().trim());

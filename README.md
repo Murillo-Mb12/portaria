@@ -53,6 +53,10 @@ As senhas ficam gravadas no banco como hash BCrypt.
 
 ## Regras de negócio principais
 
+- **Morador** tem nome, unidade (ala/quarto) e **CPF** (sem telefone).
+- Os campos de **CPF** (000.000.000-00), **telefone/celular** ((00) 0000-0000 ou (00) 00000-0000)
+  e **placa** (ABC-1234 ou ABC1D23) são formatados automaticamente enquanto se digita.
+
 - **Visitante** é parente, cuidador ou amigo e fica **vinculado a um ou mais moradores**.
   Na entrada, só aparecem os moradores vinculados ao visitante escolhido.
 - **Veículo** tem placa, marca, modelo e cor. Se for de visitante, pode ter **várias pessoas
@@ -122,6 +126,6 @@ O endereço da API fica em `frontend/src/environments/environment.ts`.
 
 - No H2 os dados somem ao reiniciar. No PostgreSQL ficam salvos; para voltar aos dados de
   exemplo, apague e recrie o banco `portariadb`.
-- Mudou alguma tabela? Crie um novo arquivo `V4__descricao.sql` em `db/migration`.
+- Mudou alguma tabela? Crie um novo arquivo `V5__descricao.sql` em `db/migration`.
   Nunca altere um script que já foi executado.
 - O login ainda não gera token (JWT). O passo seguinte seria Spring Security com JWT.

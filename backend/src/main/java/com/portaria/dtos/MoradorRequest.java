@@ -13,7 +13,7 @@ public record MoradorRequest(
         @Size(max = 50, message = "A unidade deve ter no máximo 50 caracteres")
         String unidade,
 
-        @NotBlank(message = "O telefone é obrigatório")
-        @Pattern(regexp = ValidationPatterns.TELEFONE, message = "Telefone inválido")
-        String telefone) {
+        @NotBlank(message = "O CPF é obrigatório")
+        @Pattern(regexp = ValidationPatterns.CPF, message = "CPF inválido (use 000.000.000-00)")
+        String cpf) {
 }

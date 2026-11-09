@@ -1,7 +1,7 @@
 export interface MoradorRequest {
   nome: string;
   unidade: string;
-  telefone: string;
+  cpf: string;
 }
 
 export interface MoradorResponse extends MoradorRequest {

@@ -21,8 +21,8 @@ public class Morador {
     @Column(nullable = false, length = 50)
     private String unidade;
 
-    @Column(nullable = false, length = 20)
-    private String telefone;
+    @Column(unique = true, length = 14)
+    private String cpf;
 
     public Morador() {
     }
@@ -36,6 +36,6 @@ public class Morador {
     public String getUnidade() { return unidade; }
     public void setUnidade(String unidade) { this.unidade = unidade; }
 
-    public String getTelefone() { return telefone; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 }

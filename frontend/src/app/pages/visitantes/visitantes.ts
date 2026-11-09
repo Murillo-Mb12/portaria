@@ -6,14 +6,15 @@ import { MoradorResponse, VINCULO_LABEL, VinculoVisitante, VisitanteResponse } f
 import { MoradorService } from '../../core/services/morador.service';
 import { VisitanteService } from '../../core/services/visitante.service';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
-import { TELEFONE_REGEX } from '../../core/utils/validadores';
+import { CPF_REGEX, TELEFONE_REGEX } from '../../core/utils/validadores';
 import { ErroCampo } from '../../shared/components/erro-campo/erro-campo';
+import { Mascara } from '../../shared/directives/mascara';
 import { OpcaoSelecao, SelecaoMultipla } from '../../shared/components/selecao-multipla/selecao-multipla';
 
 // RF02 - Cadastro de visitantes (parente, cuidador ou amigo de um ou mais moradores)
 @Component({
   selector: 'app-visitantes',
-  imports: [ReactiveFormsModule, ErroCampo, SelecaoMultipla],
+  imports: [ReactiveFormsModule, ErroCampo, SelecaoMultipla, Mascara],
   templateUrl: './visitantes.html',
 })
 export class Visitantes implements OnInit {
@@ -37,7 +38,7 @@ export class Visitantes implements OnInit {
 
   form = this.fb.nonNullable.group({
     nome: ['', [Validators.required, Validators.maxLength(100)]],
-    documento: ['', [Validators.required, Validators.maxLength(20)]],
+    documento: ['', [Validators.required, Validators.pattern(CPF_REGEX)]],
     telefone: ['', [Validators.required, Validators.pattern(TELEFONE_REGEX)]],
     vinculo: ['FAMILIAR' as VinculoVisitante, Validators.required],
     moradorIds: [[] as number[], Validators.required],

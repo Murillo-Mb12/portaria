@@ -43,15 +43,21 @@ public class MoradorService {
     }
 
     public MoradorResponse save(MoradorRequest request) {
+        if (repository.existsByCpf(request.cpf().trim())) {
+            throw new BusinessException("Já existe um morador com o CPF " + request.cpf().trim());
+        }
         Morador morador = repository.save(MoradorMapper.toEntity(request));
         return MoradorMapper.toDTO(morador);
     }
 
     public void update(long id, MoradorRequest request) {
         Morador aux = findEntity(id);
+        if (repository.existsByCpfAndIdNot(request.cpf().trim(), id)) {
+            throw new BusinessException("Já existe um morador com o CPF " + request.cpf().trim());
+        }
         aux.setNome(request.nome().trim());
         aux.setUnidade(request.unidade().trim());
-        aux.setTelefone(request.telefone().trim());
+        aux.setCpf(request.cpf().trim());
         repository.save(aux);
     }
 

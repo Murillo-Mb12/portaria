@@ -7,13 +7,13 @@
       <input formControlName="nome">
       <app-erro-campo [control]="form.controls.nome" />
     </label>
-    <label>CPF / RG
-      <input formControlName="documento">
-      <app-erro-campo [control]="form.controls.documento" />
+    <label>CPF
+      <input formControlName="documento" appMascara="cpf" placeholder="000.000.000-00">
+      <app-erro-campo [control]="form.controls.documento" formato="CPF incompleto (000.000.000-00)." />
     </label>
-    <label>Telefone
-      <input formControlName="telefone" placeholder="(15) 91234-5678">
-      <app-erro-campo [control]="form.controls.telefone" formato="Telefone inválido." />
+    <label>Telefone / celular
+      <input formControlName="telefone" appMascara="telefone" placeholder="(15) 91234-5678">
+      <app-erro-campo [control]="form.controls.telefone" formato="Telefone incompleto." />
     </label>
     <label>Vínculo com o morador
       <select formControlName="vinculo">
@@ -44,7 +44,7 @@
 <div class="card tabela-scroll">
   <table>
     <thead>
-      <tr><th>Nome</th><th>Documento</th><th>Telefone</th><th>Vínculo</th><th>Moradores</th><th></th></tr>
+      <tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Vínculo</th><th>Moradores</th><th></th></tr>
     </thead>
     <tbody>
       @for (v of visitantes(); track v.id) {

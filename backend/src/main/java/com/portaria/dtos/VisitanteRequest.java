@@ -15,12 +15,12 @@ public record VisitanteRequest(
         @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
         String nome,
 
-        @NotBlank(message = "O documento (CPF/RG) é obrigatório")
-        @Size(max = 20, message = "O documento deve ter no máximo 20 caracteres")
+        @NotBlank(message = "O CPF é obrigatório")
+        @Pattern(regexp = ValidationPatterns.CPF, message = "CPF inválido (use 000.000.000-00)")
         String documento,
 
         @NotBlank(message = "O telefone é obrigatório")
-        @Pattern(regexp = ValidationPatterns.TELEFONE, message = "Telefone inválido")
+        @Pattern(regexp = ValidationPatterns.TELEFONE, message = "Telefone inválido (use (00) 00000-0000)")
         String telefone,
 
         @NotNull(message = "Informe o vínculo (familiar, cuidador ou amigo)")

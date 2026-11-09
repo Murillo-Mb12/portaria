@@ -4,6 +4,7 @@ import com.portaria.entities.enums.FinalidadeAcesso;
 import com.portaria.entities.enums.ObjetivoAcesso;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 /**
@@ -25,7 +26,7 @@ public record EntradaRequest(
         @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
         String nome,
 
-        @Size(max = 20, message = "O documento deve ter no máximo 20 caracteres")
+        @Pattern(regexp = ValidationPatterns.CPF, message = "CPF inválido (use 000.000.000-00)")
         String documento,
 
         FinalidadeAcesso finalidade,

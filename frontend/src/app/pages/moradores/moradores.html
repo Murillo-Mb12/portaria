@@ -11,9 +11,9 @@
       <input formControlName="unidade" placeholder="Ala São José - Quarto 04">
       <app-erro-campo [control]="form.controls.unidade" />
     </label>
-    <label>Telefone
-      <input formControlName="telefone" placeholder="(11) 91234-5678">
-      <app-erro-campo [control]="form.controls.telefone" formato="Telefone inválido." />
+    <label>CPF
+      <input formControlName="cpf" appMascara="cpf" placeholder="000.000.000-00">
+      <app-erro-campo [control]="form.controls.cpf" formato="CPF incompleto (000.000.000-00)." />
     </label>
     <div class="acoes">
       <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
@@ -29,14 +29,14 @@
 <div class="card tabela-scroll">
   <table>
     <thead>
-      <tr><th>Nome</th><th>Unidade</th><th>Telefone</th><th></th></tr>
+      <tr><th>Nome</th><th>Unidade</th><th>CPF</th><th></th></tr>
     </thead>
     <tbody>
       @for (m of moradores(); track m.id) {
         <tr [class.editando]="m.id === editandoId()">
           <td>{{ m.nome }}</td>
           <td>{{ m.unidade }}</td>
-          <td>{{ m.telefone }}</td>
+          <td>{{ m.cpf ?? '—' }}</td>
           <td class="acoes-linha">
             <button type="button" class="sm" (click)="editar(m)">Editar</button>
             <button type="button" class="sm perigo" (click)="excluir(m)">Excluir</button>

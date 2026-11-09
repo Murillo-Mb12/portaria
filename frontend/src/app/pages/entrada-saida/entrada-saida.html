@@ -37,16 +37,16 @@
         <label>Nome de quem traz a doação
           <input formControlName="nome" maxlength="100">
         </label>
-        <label>Documento (opcional)
-          <input formControlName="documento" maxlength="20">
+        <label>CPF (opcional)
+          <input formControlName="documento" appMascara="cpf" placeholder="000.000.000-00">
         </label>
       }
       @case ('OUTROS') {
         <label>Nome
           <input formControlName="nome" maxlength="100">
         </label>
-        <label>Documento (opcional)
-          <input formControlName="documento" maxlength="20">
+        <label>CPF (opcional)
+          <input formControlName="documento" appMascara="cpf" placeholder="000.000.000-00">
         </label>
         <label>Finalidade
           <select formControlName="finalidade">
