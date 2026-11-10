@@ -4,6 +4,9 @@ export interface MoradorRequest {
   cpf: string;
 }
 
-export interface MoradorResponse extends MoradorRequest {
+export interface MoradorResponse {
   id: number;
+  nome: string;
+  unidade: string;
+  cpf: string | null;  // moradores cadastrados antes do V4 podem estar sem CPF
 }

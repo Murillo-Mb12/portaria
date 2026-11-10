@@ -1,61 +1,176 @@
-/* Estilos globais (vindos do protótipo). Estilos do menu e do login ficam nos próprios componentes. */
+/* =====================================================================
+   Portaria LSVP — estilos globais
+   Fonte Atkinson Hyperlegible: criada para leitura fácil; distingue bem
+   0/O e 1/l/I, o que ajuda a ler placas e CPFs. Vai embutida no projeto
+   (funciona sem internet).
+   ===================================================================== */
+@import '@fontsource/atkinson-hyperlegible/400.css';
+@import '@fontsource/atkinson-hyperlegible/700.css';
+
+:root {
+  /* Cores */
+  --tinta: #22303f;          /* texto principal */
+  --suave: #5b6b7f;          /* texto de apoio */
+  --azul: #1d4f91;           /* ação principal */
+  --azul-forte: #163d70;
+  --azul-claro: #e6eef8;
+  --fundo: #eef2f7;
+  --superficie: #ffffff;
+  --linha: #d8e0ea;
+  --linha-forte: #b9c6d6;
+  --verde: #1e7a4c;  --verde-claro: #e3f3ea;
+  --ambar: #a15c07;  --ambar-claro: #fdf0dc;
+  --vermelho: #b42318; --vermelho-claro: #fdecea;
+  --foco: #f2a900;           /* contorno de foco do teclado: bem visível */
+
+  /* Medidas */
+  --altura-campo: 44px;
+  --altura-label: calc(14px * 1.35 + 6px);
+  --raio-painel: 14px;
+  --raio-campo: 9px;
+
+  color-scheme: light;
+}
+
 * { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, sans-serif; background: #f3f5f8; color: #1f2937; }
-h1 { margin-top: 0; font-size: 22px; }
-h3 { margin-top: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: var(--fundo);
+}
 
-/* Cartões e grade */
-.card { background: #fff; border-radius: 12px; padding: 18px; margin-bottom: 18px; box-shadow: 0 1px 6px #0001; }
-.row { display: flex; gap: 18px; flex-wrap: wrap; }
-.row > .card { flex: 1; min-width: 280px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: start; }
-.acoes { display: flex; gap: 8px; }
+/* ---------- Títulos das páginas ---------- */
+h1 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -0.01em; }
+h3 { margin: 0 0 14px; font-size: 19px; line-height: 1.3; }
+.cabecalho-pagina { margin-bottom: 22px; }
+.cabecalho-pagina p { margin: 6px 0 0; color: var(--suave); max-width: 70ch; }
 
-/* Formulários
-   Campos e botões têm a mesma altura (--altura-campo). Os botões que ficam ao
-   lado dos campos descem a altura do texto do label (--altura-label), ficando
-   alinhados com a caixa do campo e não com o título dele. */
-:root { --altura-campo: 38px; --altura-label: calc(13px * 1.3 + 4px); }
-label { font-size: 13px; line-height: 1.3; display: flex; flex-direction: column; gap: 4px; }
-input, select { height: var(--altura-campo); padding: 0 9px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff; }
-textarea { padding: 9px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical; min-height: 60px; }
-.grid > button, .grid > .acoes { margin-top: var(--altura-label); }
-.grid > button, .grid > .acoes button { height: var(--altura-campo); padding-top: 0; padding-bottom: 0; }
+/* ---------- Painéis ---------- */
+.card {
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-painel);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+.row { display: flex; gap: 20px; flex-wrap: wrap; }
+.row > .card { flex: 1; min-width: 300px; }
+
+/* ---------- Formulários ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px 18px; align-items: start; }
+.acoes { display: flex; gap: 10px; flex-wrap: wrap; }
 .largura-total { grid-column: 1 / -1; }
-.campo-lista { display: flex; flex-direction: column; gap: 4px; }
-.titulo-campo { font-size: 13px; line-height: 1.3; }
-.titulo-campo small { color: #64748b; }
-input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched { border-color: #b91c1c; }
 
-/* Botões */
-button { padding: 10px 14px; border: 0; border-radius: 8px; background: #2f5a8f; color: #fff; cursor: pointer; font-size: 14px; font-family: inherit; }
-button:hover { background: #1e3a5f; }
-button:disabled { opacity: .6; cursor: default; }
-button.sec { background: #64748b; }
-button.sec:hover { background: #475569; }
-.card > button.sec { margin-top: 12px; }
-button.sm { padding: 5px 10px; font-size: 12px; }
-button.alerta { background: #b45309; }
-button.alerta:hover { background: #92400e; }
-button.perigo { background: #b91c1c; }
-button.perigo:hover { background: #7f1d1d; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.35; font-weight: 700; }
+.titulo-campo { font-size: 14px; line-height: 1.35; font-weight: 700; }
+.titulo-campo small, label small:not(.err) { font-weight: 400; color: var(--suave); }
+.campo-lista { display: flex; flex-direction: column; gap: 6px; }
 
-/* Tabelas */
+input, select, textarea {
+  font: inherit; font-size: 16px; font-weight: 400; color: var(--tinta);
+  background: var(--superficie);
+  border: 1.5px solid var(--linha-forte);
+  border-radius: var(--raio-campo);
+  transition: border-color .15s, box-shadow .15s;
+}
+input, select { height: var(--altura-campo); padding: 0 12px; }
+textarea { padding: 10px 12px; min-height: 76px; resize: vertical; }
+select { cursor: pointer; }
+input::placeholder, textarea::placeholder { color: #8a97a8; }
+input:hover, select:hover, textarea:hover { border-color: #93a5bb; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(29, 79, 145, .18); }
+input:disabled, select:disabled { background: #f3f5f8; color: var(--suave); }
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched { border-color: var(--vermelho); }
+input[type="date"] { min-width: 0; }
+
+/* Botões ao lado dos campos ficam alinhados com a caixa do campo */
+.grid > button, .grid > .acoes { margin-top: var(--altura-label); }
+.grid > button, .grid > .acoes button { height: var(--altura-campo); }
+.grid > button { justify-self: start; }
+.nowrap { white-space: nowrap; }
+
+/* ---------- Botões ---------- */
+button {
+  font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 40px; padding: 0 18px;
+  border: 1.5px solid transparent; border-radius: var(--raio-campo);
+  background: var(--azul); color: #fff; cursor: pointer;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+button:hover { background: var(--azul-forte); }
+button:disabled { opacity: .55; cursor: default; }
+
+button.sec { background: var(--superficie); color: var(--azul); border-color: var(--linha-forte); }
+button.sec:hover { background: var(--azul-claro); border-color: var(--azul); }
+
+button.sm { min-height: 34px; padding: 0 12px; font-size: 14px; }
+button.sm:not(.perigo):not(.alerta) { background: var(--superficie); color: var(--azul); border-color: var(--linha-forte); }
+button.sm:not(.perigo):not(.alerta):hover { background: var(--azul-claro); border-color: var(--azul); }
+
+button.perigo { background: var(--superficie); color: var(--vermelho); border-color: #e9b4ae; }
+button.perigo:hover { background: var(--vermelho-claro); border-color: var(--vermelho); }
+
+button.alerta { background: var(--ambar); color: #fff; }
+button.alerta:hover { background: #874d06; }
+
+/* Foco do teclado bem visível (acessibilidade) */
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+
+/* ---------- Tabelas ---------- */
 .tabela-scroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th, td { text-align: left; padding: 9px; border-bottom: 1px solid #e5e7eb; }
-th { background: #f1f5f9; }
-tr.editando td { background: #fef9c3; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 12px 12px; border-bottom: 1px solid #e6ebf1; vertical-align: middle; }
+th { font-size: 13px; font-weight: 700; color: var(--suave); background: #f6f8fb; border-bottom: 1.5px solid var(--linha); white-space: nowrap; }
+th:first-child { border-top-left-radius: 8px; }
+th:last-child { border-top-right-radius: 8px; }
+tbody tr:hover td { background: #f8fafd; }
+tbody tr:last-child td { border-bottom: none; }
+tr.editando td, tr.editando:hover td { background: #fff7db; }
 .acoes-linha { white-space: nowrap; text-align: right; }
-.acoes-linha button + button { margin-left: 6px; }
+.acoes-linha button + button { margin-left: 8px; }
+td[colspan] { text-align: center; color: var(--suave); padding: 28px 12px; }
 
-/* Mensagens */
-.err { color: #b91c1c; font-size: 13px; margin: 0; }
-.ok { color: #15803d; font-size: 13px; }
+/* ---------- Etiquetas de objetivo / perfil ---------- */
+.etiqueta { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.etiqueta.VISITA { background: var(--azul-claro); color: var(--azul); }
+.etiqueta.DOACAO { background: var(--verde-claro); color: var(--verde); }
+.etiqueta.OUTROS { background: var(--ambar-claro); color: var(--ambar); }
+.etiqueta.ADMINISTRADOR { background: #ede9fe; color: #5b3fa8; }
+.etiqueta.PORTEIRO { background: #eef2f7; color: var(--tinta); }
 
-/* Impressão (relatório) */
+/* ---------- Mensagens de sucesso e erro ---------- */
+p.ok, p.err {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin: 16px 0 0; padding: 12px 14px; border-radius: var(--raio-campo);
+  font-size: 15px; line-height: 1.4;
+}
+p.ok { background: var(--verde-claro); color: #165c39; border: 1px solid #b5dec7; }
+p.err { background: var(--vermelho-claro); color: #8e1c13; border: 1px solid #f1c0ba; }
+p.ok::before, p.err::before {
+  content: ''; flex-shrink: 0; width: 20px; height: 20px; margin-top: -1px; background: currentColor;
+  -webkit-mask: var(--icone) center / contain no-repeat; mask: var(--icone) center / contain no-repeat;
+}
+p.ok::before { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8 12.5l2.5 2.5L16 9.5'/%3E%3C/svg%3E"); }
+p.err::before { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5M12 16.5v.01'/%3E%3C/svg%3E"); }
+
+/* Mensagem de erro embaixo de um campo */
+small.err { color: var(--vermelho); font-size: 13px; font-weight: 700; }
+
+/* ---------- Movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Impressão (relatório) ---------- */
 @media print {
   .noprint { display: none !important; }
-  body { background: #fff; }
-  .card { box-shadow: none; }
+  body { background: #fff; font-size: 12pt; }
+  .card { border: none; padding: 0; }
+  th { background: #eee; color: #000; }
 }

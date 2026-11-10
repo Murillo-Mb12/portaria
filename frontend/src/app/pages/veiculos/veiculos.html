@@ -1,4 +1,7 @@
-<h1>Veículos</h1>
+<header class="cabecalho-pagina">
+  <h1>Veículos</h1>
+  <p>Carros dos visitantes e do Lar. Um carro pode ter várias pessoas vinculadas, como membros da mesma família.</p>
+</header>
 
 <div class="card">
   <h3>{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h3>
@@ -103,7 +106,7 @@
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum registro.</td></tr>
+        <tr><td colspan="6">Nenhum veículo cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
       }
     </tbody>
   </table>

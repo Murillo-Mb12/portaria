@@ -1,4 +1,7 @@
-<h1>Registro de entrada e saída</h1>
+<header class="cabecalho-pagina">
+  <h1>Registro de entrada e saída</h1>
+  <p>Registre quem chega ao Lar e marque a saída quando a pessoa for embora.</p>
+</header>
 
 <div class="card">
   <h3>Registrar entrada</h3>
@@ -6,9 +9,13 @@
   <span class="titulo-campo">Qual o objetivo no Lar?</span>
   <div class="objetivos">
     @for (o of objetivos; track o.valor) {
-      <button type="button" class="objetivo" [class.ativo]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
-        <strong>{{ o.titulo }}</strong>
-        <small>{{ o.descricao }}</small>
+      <button type="button" class="objetivo" [class.ativo]="objetivo() === o.valor"
+              [attr.aria-pressed]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
+        <span class="objetivo-icone"><app-icone [nome]="o.icone" [tamanho]="22" /></span>
+        <span class="objetivo-texto">
+          <strong>{{ o.titulo }}</strong>
+          <small>{{ o.descricao }}</small>
+        </span>
       </button>
     }
   </div>
@@ -93,10 +100,15 @@
 </div>
 
 <div class="card tabela-scroll">
-  <h3>Presentes agora</h3>
+  <div class="presentes-topo">
+    <h3>Presentes agora</h3>
+    <span class="contador" [class.vazio]="!presentes().length">
+      <span class="ponto" aria-hidden="true"></span>{{ textoContador() }}
+    </span>
+  </div>
   <table>
     <thead>
-      <tr><th>Nome</th><th>Objetivo</th><th>Detalhe</th><th>Veículo</th><th>Entrada</th><th></th></tr>
+      <tr><th>Nome</th><th>Objetivo</th><th>Detalhe</th><th>Veículo</th><th>Entrada</th><th>Tempo no Lar</th><th></th></tr>
     </thead>
     <tbody>
       @for (a of presentes(); track a.id) {
@@ -105,11 +117,12 @@
           <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
           <td>{{ a.detalhe }}</td>
           <td>{{ a.veiculo ?? '—' }}</td>
-          <td>{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td class="nowrap">{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td class="tempo">{{ tempoNoLar(a.entrada) }}</td>
           <td class="acoes-linha"><button type="button" class="sm alerta" (click)="registrarSaida(a)">Registrar saída</button></td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Ninguém no Lar no momento.</td></tr>
+        <tr><td colspan="7">Ninguém no Lar no momento.</td></tr>
       }
     </tbody>
   </table>

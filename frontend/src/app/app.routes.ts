@@ -3,17 +3,17 @@ import { Routes } from '@angular/router';
 import { adminGuard } from './core/guards/admin.guard';
 import { authGuard } from './core/guards/auth.guard';
 import { Shell } from './layout/shell/shell';
-import { Consulta } from './pages/consulta/consulta';
-import { EntradaSaida } from './pages/entrada-saida/entrada-saida';
-import { Funcionarios } from './pages/funcionarios/funcionarios';
-import { Login } from './pages/login/login';
-import { Moradores } from './pages/moradores/moradores';
-import { Relatorio } from './pages/relatorio/relatorio';
-import { Veiculos } from './pages/veiculos/veiculos';
-import { Visitantes } from './pages/visitantes/visitantes';
 
+/**
+ * Cada tela é carregada sob demanda (lazy loading): o navegador só baixa o código
+ * de uma tela quando ela é aberta pela primeira vez, então o sistema abre mais rápido.
+ */
 export const routes: Routes = [
-  { path: 'login', component: Login, title: 'Login - Portaria' },
+  {
+    path: 'login',
+    title: 'Login - Portaria',
+    loadComponent: () => import('./pages/login/login').then((m) => m.Login),
+  },
   {
     // Tudo aqui dentro usa o layout com menu e exige login
     path: '',
@@ -21,13 +21,42 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'entrada-saida' },
-      { path: 'entrada-saida', component: EntradaSaida, title: 'Entrada / Saída' },
-      { path: 'visitantes', component: Visitantes, title: 'Visitantes' },
-      { path: 'moradores', component: Moradores, title: 'Moradores' },
-      { path: 'veiculos', component: Veiculos, title: 'Veículos' },
-      { path: 'funcionarios', component: Funcionarios, title: 'Funcionários', canActivate: [adminGuard] },
-      { path: 'consulta', component: Consulta, title: 'Consulta de acessos' },
-      { path: 'relatorio', component: Relatorio, title: 'Relatórios' },
+      {
+        path: 'entrada-saida',
+        title: 'Entrada / Saída',
+        loadComponent: () => import('./pages/entrada-saida/entrada-saida').then((m) => m.EntradaSaida),
+      },
+      {
+        path: 'visitantes',
+        title: 'Visitantes',
+        loadComponent: () => import('./pages/visitantes/visitantes').then((m) => m.Visitantes),
+      },
+      {
+        path: 'moradores',
+        title: 'Moradores',
+        loadComponent: () => import('./pages/moradores/moradores').then((m) => m.Moradores),
+      },
+      {
+        path: 'veiculos',
+        title: 'Veículos',
+        loadComponent: () => import('./pages/veiculos/veiculos').then((m) => m.Veiculos),
+      },
+      {
+        path: 'funcionarios',
+        title: 'Funcionários',
+        canActivate: [adminGuard],
+        loadComponent: () => import('./pages/funcionarios/funcionarios').then((m) => m.Funcionarios),
+      },
+      {
+        path: 'consulta',
+        title: 'Consulta de acessos',
+        loadComponent: () => import('./pages/consulta/consulta').then((m) => m.Consulta),
+      },
+      {
+        path: 'relatorio',
+        title: 'Relatórios',
+        loadComponent: () => import('./pages/relatorio/relatorio').then((m) => m.Relatorio),
+      },
     ],
   },
   { path: '**', redirectTo: '' },

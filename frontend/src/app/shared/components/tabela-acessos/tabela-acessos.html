@@ -14,14 +14,14 @@
       @for (a of acessos(); track a.id) {
         <tr>
           <td>{{ a.nome }}</td>
-          <td>{{ objetivoLabel[a.objetivo] }}</td>
+          <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
           <td>{{ a.detalhe }}</td>
           <td>{{ a.veiculo ?? '—' }}</td>
-          <td>{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
-          <td>{{ a.saida ? (a.saida | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+          <td class="nowrap">{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td class="nowrap">{{ a.saida ? (a.saida | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum registro.</td></tr>
+        <tr><td colspan="6">Nenhum acesso encontrado.</td></tr>
       }
     </tbody>
   </table>

@@ -1,16 +1,92 @@
 .layout { display: flex; min-height: 100vh; }
 
-nav { width: 220px; background: #1e3a5f; color: #fff; padding: 16px; flex-shrink: 0; display: flex; flex-direction: column; }
-nav h2 { font-size: 16px; margin: 0 0 4px; }
-nav small { opacity: .7; margin-bottom: 8px; }
-nav a { display: block; padding: 10px; margin-top: 6px; border-radius: 8px; color: #fff; text-decoration: none; font-size: 14px; }
-nav a:hover, nav a.ativo { background: #2f5a8f; }
-nav .sair { margin-top: 18px; background: transparent; border: 1px solid #ffffff55; text-align: left; }
-nav .sair:hover { background: #2f5a8f; }
+/* ---------- Menu lateral ---------- */
+.lateral {
+  width: 248px; flex-shrink: 0;
+  position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column;
+  background: var(--superficie); border-right: 1px solid var(--linha);
+}
 
-main { flex: 1; padding: 24px; overflow: auto; min-width: 0; }
+.marca {
+  display: flex; align-items: center; gap: 12px;
+  margin: 14px; padding: 14px; border-radius: 12px;
+  background: var(--azul); color: #fff;
+}
+.marca-icone {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(255, 255, 255, .16);
+}
+.marca-texto { display: flex; flex-direction: column; line-height: 1.2; }
+.marca-texto strong { font-size: 16px; }
+.marca-texto small { font-size: 13px; opacity: .85; }
 
-@media (max-width: 720px) {
+nav { flex: 1; overflow-y: auto; padding: 4px 12px 12px; display: flex; flex-direction: column; gap: 2px; }
+.grupo { margin: 16px 12px 6px; font-size: 13px; font-weight: 700; color: var(--suave); }
+
+nav a {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  min-height: 44px; padding: 0 12px; border-radius: 10px;
+  color: var(--tinta); text-decoration: none; font-size: 15px;
+}
+nav a app-icone { color: var(--suave); }
+nav a:hover { background: #f1f5fa; }
+nav a.ativo { background: var(--azul-claro); color: var(--azul); font-weight: 700; }
+nav a.ativo app-icone { color: var(--azul); }
+nav a.ativo::before {
+  content: ''; position: absolute; left: -12px; top: 10px; bottom: 10px; width: 4px;
+  border-radius: 0 4px 4px 0; background: var(--azul);
+}
+
+/* ---------- Usuário logado ---------- */
+.usuario {
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center;
+  margin: 0 12px 14px; padding: 14px 12px 12px; border-top: 1px solid var(--linha);
+}
+.avatar {
+  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--azul-claro); color: var(--azul); font-weight: 700; font-size: 15px;
+}
+.usuario-info { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.usuario-info strong { font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.usuario-info small { font-size: 13px; color: var(--suave); }
+.sair {
+  grid-column: 1 / -1; margin-top: 10px; width: 100%;
+  background: var(--superficie); color: var(--tinta); border-color: var(--linha-forte);
+}
+.sair:hover { background: #f1f5fa; border-color: var(--suave); }
+
+/* ---------- Área principal ---------- */
+.principal { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.topo {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 14px 32px; background: var(--superficie); border-bottom: 1px solid var(--linha);
+}
+.saudacao { font-size: 16px; color: var(--suave); }
+.data-hora { display: flex; align-items: center; gap: 16px; }
+.data { display: inline-block; color: var(--suave); }
+.data::first-letter { text-transform: uppercase; }
+.hora {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 999px; background: var(--azul-claro); color: var(--azul);
+  font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+
+main { flex: 1; padding: 28px 32px 40px; max-width: 1280px; width: 100%; }
+
+/* ---------- Telas pequenas: menu vira barra no topo ---------- */
+@media (max-width: 860px) {
   .layout { flex-direction: column; }
-  nav { width: auto; }
+  .lateral { position: static; width: auto; height: auto; border-right: none; border-bottom: 1px solid var(--linha); }
+  .marca { margin: 10px 12px 6px; padding: 10px 12px; }
+  nav { flex-direction: row; overflow-x: auto; padding: 4px 12px 10px; gap: 6px; }
+  nav a { white-space: nowrap; flex-shrink: 0; }
+  nav a.ativo::before { display: none; }
+  .grupo { display: none; }
+  .usuario { grid-template-columns: auto 1fr auto; margin: 0 12px 10px; padding-top: 10px; }
+  .sair { grid-column: auto; margin-top: 0; width: auto; }
+  .topo, main { padding-left: 16px; padding-right: 16px; }
+  .data { display: none; }
 }

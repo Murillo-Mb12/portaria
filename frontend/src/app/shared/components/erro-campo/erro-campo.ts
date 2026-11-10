@@ -9,7 +9,7 @@ import { AbstractControl } from '@angular/forms';
   selector: 'app-erro-campo',
   template: `
     @if (control().invalid && control().touched) {
-      <small class="err">{{ mensagem() }}</small>
+      <small class="err" role="alert">{{ mensagem() }}</small>
     }
   `,
 })

@@ -1,24 +1,67 @@
 <div class="layout">
-  <nav class="noprint">
-    <h2>Portaria</h2>
+  <aside class="lateral noprint">
+    <div class="marca">
+      <span class="marca-icone"><app-icone nome="morador" [tamanho]="22" /></span>
+      <span class="marca-texto">
+        <strong>Lar São Vicente</strong>
+        <small>Portaria</small>
+      </span>
+    </div>
+
+    <nav aria-label="Menu principal">
+      <a routerLink="/entrada-saida" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="entrada" />Entrada / Saída
+      </a>
+
+      <span class="grupo">Cadastros</span>
+      <a routerLink="/visitantes" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="visitante" />Visitantes
+      </a>
+      <a routerLink="/moradores" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="morador" />Moradores
+      </a>
+      <a routerLink="/veiculos" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="veiculo" />Veículos
+      </a>
+      @if (auth.isAdmin()) {
+        <a routerLink="/funcionarios" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="funcionario" />Funcionários
+        </a>
+      }
+
+      <span class="grupo">Histórico</span>
+      <a routerLink="/consulta" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="consulta" />Consulta de acessos
+      </a>
+      <a routerLink="/relatorio" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+        <app-icone nome="relatorio" />Relatórios
+      </a>
+    </nav>
+
     @if (auth.usuario(); as u) {
-      <small>{{ u.nome }} ({{ perfilLabel[u.perfil] }})</small>
+      <div class="usuario">
+        <span class="avatar" aria-hidden="true">{{ iniciais() }}</span>
+        <span class="usuario-info">
+          <strong>{{ u.nome }}</strong>
+          <small>{{ perfilLabel[u.perfil] }}</small>
+        </span>
+        <button type="button" class="sair" (click)="sair()" title="Sair do sistema">
+          <app-icone nome="sair" [tamanho]="18" />Sair
+        </button>
+      </div>
     }
+  </aside>
 
-    <a routerLink="/entrada-saida" routerLinkActive="ativo">Entrada / Saída</a>
-    <a routerLink="/visitantes" routerLinkActive="ativo">Visitantes</a>
-    <a routerLink="/moradores" routerLinkActive="ativo">Moradores</a>
-    <a routerLink="/veiculos" routerLinkActive="ativo">Veículos</a>
-    @if (auth.isAdmin()) {
-      <a routerLink="/funcionarios" routerLinkActive="ativo">Funcionários</a>
-    }
-    <a routerLink="/consulta" routerLinkActive="ativo">Consulta de acessos</a>
-    <a routerLink="/relatorio" routerLinkActive="ativo">Relatórios</a>
-
-    <button type="button" class="sair" (click)="sair()">Sair</button>
-  </nav>
-
-  <main>
-    <router-outlet />
-  </main>
+  <div class="principal">
+    <header class="topo noprint">
+      <span class="saudacao">{{ saudacao() }}, {{ primeiroNome() }}</span>
+      <span class="data-hora">
+        <span class="data">{{ agora() | date: "EEEE, d 'de' MMMM 'de' y" }}</span>
+        <span class="hora"><app-icone nome="relogio" [tamanho]="18" />{{ agora() | date: 'HH:mm' }}</span>
+      </span>
+    </header>
+    <main>
+      <router-outlet />
+    </main>
+  </div>
 </div>

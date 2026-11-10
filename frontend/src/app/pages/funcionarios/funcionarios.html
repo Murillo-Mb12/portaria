@@ -1,4 +1,7 @@
-<h1>Funcionários</h1>
+<header class="cabecalho-pagina">
+  <h1>Funcionários</h1>
+  <p>Quem pode entrar no sistema. Porteiros registram entradas e cadastros; administradores também gerenciam funcionários.</p>
+</header>
 
 <div class="card">
   <h3>{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h3>
@@ -43,7 +46,7 @@
         <tr [class.editando]="f.id === editandoId()">
           <td>{{ f.nome }}</td>
           <td>{{ f.usuario }}</td>
-          <td>{{ perfilLabel[f.perfil] }}</td>
+          <td><span [class]="'etiqueta ' + f.perfil">{{ perfilLabel[f.perfil] }}</span></td>
           <td class="acoes-linha">
             <button type="button" class="sm" (click)="editar(f)">Editar</button>
             <!-- não deixa o usuário logado excluir a si mesmo -->

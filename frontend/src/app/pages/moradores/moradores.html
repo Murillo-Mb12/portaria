@@ -1,4 +1,7 @@
-<h1>Moradores</h1>
+<header class="cabecalho-pagina">
+  <h1>Moradores</h1>
+  <p>Residentes do Lar, com a ala e o quarto onde estão.</p>
+</header>
 
 <div class="card">
   <h3>{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h3>
@@ -43,7 +46,7 @@
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="4">Nenhum registro.</td></tr>
+        <tr><td colspan="4">Nenhum morador cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
       }
     </tbody>
   </table>

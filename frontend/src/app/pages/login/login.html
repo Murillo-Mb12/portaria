@@ -1,10 +1,36 @@
-<form class="login" [formGroup]="form" (ngSubmit)="entrar()">
-  <h2>Controle de Portaria</h2>
-  <label>Usuário <input formControlName="usuario" autocomplete="username"></label>
-  <label>Senha <input formControlName="senha" type="password" autocomplete="current-password"></label>
-  <button type="submit" [disabled]="carregando()">{{ carregando() ? 'Entrando...' : 'Entrar' }}</button>
-  @if (erro()) {
-    <p class="err">{{ erro() }}</p>
-  }
-  <small>Demo: porteiro / 1234 — admin / admin123</small>
-</form>
+<div class="pagina-login">
+  <section class="apresentacao">
+    <span class="marca-icone"><app-icone nome="morador" [tamanho]="30" /></span>
+    <h1>Lar São Vicente de Paulo</h1>
+    <p>Controle de entrada e saída da portaria.</p>
+  </section>
+
+  <form class="login" [formGroup]="form" (ngSubmit)="entrar()">
+    <h2>Entrar no sistema</h2>
+    <p class="sub">Use o usuário e a senha fornecidos pela administração.</p>
+
+    <label>Usuário
+      <input formControlName="usuario" autocomplete="username" autofocus>
+    </label>
+
+    <label>Senha
+      <span class="campo-senha">
+        <input formControlName="senha" [type]="mostrarSenha() ? 'text' : 'password'" autocomplete="current-password">
+        <button type="button" class="mostrar" (click)="mostrarSenha.set(!mostrarSenha())"
+                [attr.aria-pressed]="mostrarSenha()">
+          {{ mostrarSenha() ? 'Ocultar' : 'Mostrar' }}
+        </button>
+      </span>
+    </label>
+
+    <button type="submit" class="entrar" [disabled]="carregando()">
+      <app-icone nome="entrada" [tamanho]="18" />{{ carregando() ? 'Entrando...' : 'Entrar' }}
+    </button>
+
+    @if (erro()) {
+      <p class="err">{{ erro() }}</p>
+    }
+
+    <small class="demo">Demonstração: porteiro / 1234 ou admin / admin123</small>
+  </form>
+</div>

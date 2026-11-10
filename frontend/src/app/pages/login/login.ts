@@ -3,12 +3,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/services/auth.service';
+import { Icone } from '../../shared/components/icone/icone';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
 
 // RF01 - Login
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Icone],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -19,6 +20,7 @@ export class Login {
 
   erro = signal('');
   carregando = signal(false);
+  mostrarSenha = signal(false);
 
   form = this.fb.nonNullable.group({
     usuario: ['', Validators.required],

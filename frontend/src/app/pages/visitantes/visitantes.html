@@ -1,4 +1,7 @@
-<h1>Visitantes</h1>
+<header class="cabecalho-pagina">
+  <h1>Visitantes</h1>
+  <p>Parentes, cuidadores e amigos dos moradores. Na entrada, cada visitante só pode visitar os moradores marcados aqui.</p>
+</header>
 
 <div class="card">
   <h3>{{ editandoId() ? 'Editar visitante' : 'Cadastrar visitante' }}</h3>
@@ -60,7 +63,7 @@
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum registro.</td></tr>
+        <tr><td colspan="6">Nenhum visitante cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
       }
     </tbody>
   </table>
