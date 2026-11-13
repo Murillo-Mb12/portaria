@@ -1,10 +1,15 @@
-<header class="cabecalho-pagina">
-  <h1>Registro de entrada e saída</h1>
-  <p>Registre quem chega ao Lar e marque a saída quando a pessoa for embora.</p>
+<header class="cabecalho-pagina cabecalho-com-resumo">
+  <div>
+    <h1>Registro de entrada e saída</h1>
+    <p>Registre quem chega ao Lar e marque a saída quando a pessoa for embora.</p>
+  </div>
+  <span class="contador" [class.vazio]="!presentes().length" role="status">
+    <span class="ponto" aria-hidden="true"></span>{{ textoContador() }}
+  </span>
 </header>
 
 <div class="card">
-  <h3>Registrar entrada</h3>
+  <h2 class="titulo-cartao">Registrar entrada</h2>
 
   <span class="titulo-campo">Qual o objetivo no Lar?</span>
   <div class="objetivos">
@@ -87,7 +92,7 @@
       </label>
     }
 
-    <div class="acoes">
+    <div class="acoes acoes-final">
       <button type="submit">Registrar entrada</button>
     </div>
   </form>
@@ -101,10 +106,7 @@
 
 <div class="card tabela-scroll">
   <div class="presentes-topo">
-    <h3>Presentes agora</h3>
-    <span class="contador" [class.vazio]="!presentes().length">
-      <span class="ponto" aria-hidden="true"></span>{{ textoContador() }}
-    </span>
+    <h2 class="titulo-cartao">Presentes agora</h2>
   </div>
   <table>
     <thead>
@@ -112,7 +114,7 @@
     </thead>
     <tbody>
       @for (a of presentes(); track a.id) {
-        <tr>
+        <tr [class.recente]="a.id === recenteId()">
           <td>{{ a.nome }}</td>
           <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
           <td>{{ a.detalhe }}</td>

@@ -7,11 +7,11 @@
   background: #f8fafd; border: 1px solid var(--linha); border-radius: 12px; padding: 12px 14px;
 }
 .numero {
-  margin-top: calc(var(--altura-label) + (var(--altura-campo) - 28px) / 2); height: 28px; width: 28px;
+  margin-top: calc(var(--rotulo) + (var(--campo) - 28px) / 2); height: 28px; width: 28px;
   display: flex; align-items: center; justify-content: center;
-  background: var(--azul); color: #fff; border-radius: 50%; font-size: 13px; font-weight: 600;
+  background: var(--marca); color: #fff; border-radius: 50%; font-size: 13px; font-weight: 600;
 }
-.remover { margin-top: var(--altura-label); height: var(--altura-campo); }
+.remover { margin-top: var(--rotulo); height: var(--campo); }
 
 @media (max-width: 720px) {
   .linha-pessoa { grid-template-columns: 28px 1fr; }

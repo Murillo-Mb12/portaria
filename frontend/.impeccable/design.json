@@ -1,0 +1,277 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "2026-11-13T01:47:00.253696+00:00",
+ "title": "Design System: Portaria LSVP",
+ "extensions": {
+  "colorMeta": {
+   "marca": {
+    "role": "primary",
+    "displayName": "Azul de Marca (provisório)",
+    "canonical": "#1351b4",
+    "tonalRamp": [
+     "#142f5b",
+     "#133c7b",
+     "#13489c",
+     "#1351b4",
+     "#5a85ca",
+     "#95b1dd",
+     "#d0dcf0",
+     "#eef3fa"
+    ]
+   },
+   "tinta": {
+    "role": "neutral",
+    "displayName": "Tinta Quente",
+    "canonical": "#2b2a26",
+    "tonalRamp": [
+     "#1e1e1b",
+     "#23221f",
+     "#282723",
+     "#2b2a26",
+     "#6b6a67",
+     "#a09f9d",
+     "#d5d4d4",
+     "#f0f0f0"
+    ]
+   },
+   "fundo": {
+    "role": "neutral",
+    "displayName": "Fundo de Trabalho",
+    "canonical": "#fafaf8",
+    "tonalRamp": [
+     "#7b7b79",
+     "#aaaaa8",
+     "#d8d8d6",
+     "#fafaf8",
+     "#fcfcfa",
+     "#fdfdfc",
+     "#fefefe",
+     "#ffffff"
+    ]
+   },
+   "lateral": {
+    "role": "neutral",
+    "displayName": "Menu Lateral",
+    "canonical": "#f3f2ee",
+    "tonalRamp": [
+     "#787875",
+     "#a5a4a1",
+     "#d2d1cd",
+     "#f3f2ee",
+     "#f7f6f3",
+     "#faf9f7",
+     "#fdfcfc",
+     "#fefefe"
+    ]
+   },
+   "sucesso": {
+    "role": "semantic",
+    "displayName": "Verde Doação/Sucesso",
+    "canonical": "#136b3e",
+    "tonalRamp": [
+     "#143b26",
+     "#134d2f",
+     "#135e37",
+     "#136b3e",
+     "#5a9778",
+     "#95bca8",
+     "#d0e1d8",
+     "#eef5f1"
+    ]
+   },
+   "outros-texto": {
+    "role": "semantic",
+    "displayName": "Âmbar Outros",
+    "canonical": "#7f4a00",
+    "tonalRamp": [
+     "#442c0a",
+     "#5a3706",
+     "#6f4203",
+     "#7f4a00",
+     "#a5804c",
+     "#c5ae8c",
+     "#e5dbcc",
+     "#f6f2ed"
+    ]
+   },
+   "erro": {
+    "role": "semantic",
+    "displayName": "Vermelho Erro",
+    "canonical": "#b42318",
+    "tonalRamp": [
+     "#5c1b15",
+     "#7c1e16",
+     "#9c2117",
+     "#b42318",
+     "#ca655d",
+     "#dd9c97",
+     "#f0d3d1",
+     "#faf0ef"
+    ]
+   },
+   "foco": {
+    "role": "semantic",
+    "displayName": "Âmbar Foco",
+    "canonical": "#c2850c",
+    "tonalRamp": [
+     "#62470f",
+     "#855d0e",
+     "#a8740d",
+     "#c2850c",
+     "#d4aa55",
+     "#e4c892",
+     "#f3e7ce",
+     "#fbf6ee"
+    ]
+   }
+  },
+  "typographyMeta": {
+   "display": {
+    "displayName": "Título da página",
+    "purpose": "h1 de cada tela."
+   },
+   "title": {
+    "displayName": "Título de cartão",
+    "purpose": "h2 dos cartões."
+   },
+   "body": {
+    "displayName": "Texto",
+    "purpose": "Texto corrido e campos."
+   },
+   "label": {
+    "displayName": "Rótulo",
+    "purpose": "Rótulos de campo e grupos do menu."
+   }
+  },
+  "shadows": [
+   {
+    "name": "cartao",
+    "value": "0 1px 2px rgba(43,42,38,.05), 0 2px 8px rgba(43,42,38,.04)",
+    "purpose": "Cartões de conteúdo."
+   },
+   {
+    "name": "gaveta",
+    "value": "0 10px 40px rgba(43,42,38,.18)",
+    "purpose": "Menu em gaveta no celular e tablet."
+   }
+  ],
+  "motion": [
+   {
+    "name": "estado",
+    "value": "150ms ease-out",
+    "purpose": "Hover e foco."
+   },
+   {
+    "name": "gaveta",
+    "value": "250ms cubic-bezier(.2,.8,.2,1)",
+    "purpose": "Abrir e fechar o menu."
+   },
+   {
+    "name": "acender",
+    "value": "3.2s cubic-bezier(.16,1,.3,1)",
+    "purpose": "Linha recém-registrada em Presentes agora."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "celular",
+    "value": "600px"
+   },
+   {
+    "name": "gaveta",
+    "value": "960px"
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Botão principal",
+   "kind": "button",
+   "refersTo": "button-primary",
+   "description": "Ação principal de cada área (Registrar entrada, Salvar).",
+   "html": "<button class=\"ds-btn-primary\">Registrar entrada</button>",
+   "css": ".ds-btn-primary{font-family:'Atkinson Hyperlegible',system-ui,sans-serif;font-size:16px;font-weight:700;min-height:44px;padding:0 24px;border:1px solid transparent;border-radius:999px;background:#1351b4;color:#fff;cursor:pointer;transition:background-color .15s ease-out}.ds-btn-primary:hover{background:#0c3d8c}.ds-btn-primary:focus-visible{outline:3px solid #c2850c;outline-offset:2px}"
+  },
+  {
+   "name": "Botão secundário",
+   "kind": "button",
+   "refersTo": "button-secondary",
+   "description": "Ações secundárias (Cancelar, Adicionar pessoa).",
+   "html": "<button class=\"ds-btn-sec\">Cancelar</button>",
+   "css": ".ds-btn-sec{font-family:'Atkinson Hyperlegible',system-ui,sans-serif;font-size:16px;font-weight:700;min-height:44px;padding:0 24px;border:1px solid #1351b4;border-radius:999px;background:#fff;color:#1351b4;cursor:pointer}.ds-btn-sec:hover{background:#e8effa}.ds-btn-sec:focus-visible{outline:3px solid #c2850c;outline-offset:2px}"
+  },
+  {
+   "name": "Campo de texto",
+   "kind": "input",
+   "refersTo": "input",
+   "description": "Campo com rótulo acima, 44 px.",
+   "html": "<label class=\"ds-label\">CPF<input class=\"ds-input\" placeholder=\"000.000.000-00\"></label>",
+   "css": ".ds-label{display:flex;flex-direction:column;gap:6px;font:700 15px/1.35 'Atkinson Hyperlegible',system-ui,sans-serif;color:#2b2a26}.ds-input{height:44px;padding:0 14px;border:1px solid #8d8a83;border-radius:8px;font:400 16px 'Atkinson Hyperlegible',system-ui,sans-serif;color:#2b2a26;background:#fff}.ds-input:hover{border-color:#5f5d57}.ds-input:focus{outline:none;border-color:#1351b4;box-shadow:0 0 0 3px #e8effa}"
+  },
+  {
+   "name": "Etiqueta de objetivo",
+   "kind": "chip",
+   "refersTo": "chip-visita",
+   "description": "Visita, Doação ou Outros.",
+   "html": "<span class=\"ds-chip ds-visita\">Visita</span> <span class=\"ds-chip ds-doacao\">Doação</span> <span class=\"ds-chip ds-outros\">Outros</span>",
+   "css": ".ds-chip{display:inline-flex;padding:3px 10px;border-radius:6px;font:700 14px 'Atkinson Hyperlegible',system-ui,sans-serif}.ds-visita{background:#e3edfb;color:#1351b4}.ds-doacao{background:#def3e6;color:#136b3e}.ds-outros{background:#fcefd6;color:#7f4a00}"
+  },
+  {
+   "name": "Cartão",
+   "kind": "card",
+   "refersTo": "card",
+   "description": "Contêiner de formulários e tabelas.",
+   "html": "<div class=\"ds-card\"><h2 class=\"ds-card-title\">Registrar entrada</h2><p class=\"ds-card-text\">Conteúdo do cartão.</p></div>",
+   "css": ".ds-card{background:#fff;border:1px solid #e7e5e0;border-radius:12px;box-shadow:0 1px 2px rgba(43,42,38,.05),0 2px 8px rgba(43,42,38,.04);padding:24px;font-family:'Atkinson Hyperlegible',system-ui,sans-serif;color:#2b2a26}.ds-card-title{margin:0 0 18px;font-size:20px;letter-spacing:-.01em}.ds-card-text{margin:0;color:#5f5d57}"
+  },
+  {
+   "name": "Item de menu",
+   "kind": "nav",
+   "refersTo": "nav-item-active",
+   "description": "Navegação lateral com item ativo.",
+   "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item ds-ativo\" href=\"#\">Entrada / Saída</a><a class=\"ds-nav-item\" href=\"#\">Visitantes</a></nav>",
+   "css": ".ds-nav{display:flex;flex-direction:column;gap:2px;padding:12px;background:#f3f2ee;width:240px;font-family:'Atkinson Hyperlegible',system-ui,sans-serif}.ds-nav-item{display:flex;align-items:center;min-height:46px;padding:0 12px;border-radius:10px;color:#2b2a26;text-decoration:none;font-size:16px}.ds-nav-item:hover{background:#e9e7e1}.ds-ativo{background:#fff;font-weight:700;box-shadow:0 1px 2px rgba(43,42,38,.08),0 0 0 1px #e7e5e0}.ds-nav-item:focus-visible{outline:3px solid #c2850c;outline-offset:2px}"
+  }
+ ],
+ "narrative": {
+  "northStar": "O Balcão Acolhedor",
+  "overview": "Um sistema de gestão no formato que todo mundo já conhece, com o acabamento de Notion/Trello e a acessibilidade do gov.br, em neutros quentes, letra grande e etiquetas coloridas.",
+  "keyCharacteristics": [
+   "Cânone de sistemas de gestão, sem enfeites temáticos.",
+   "Neutros quentes e cartões brancos com borda de 1px.",
+   "Atkinson Hyperlegible.",
+   "Botões em pílula, campos de 44 px e foco âmbar.",
+   "Etiquetas coloridas por objetivo e perfil."
+  ],
+  "rules": [
+   {
+    "name": "A Regra da Cor que Age",
+    "body": "A cor de marca aparece só onde há ação ou seleção.",
+    "section": "colors"
+   },
+   {
+    "name": "A Regra da Etiqueta",
+    "body": "Objetivo e perfil são sempre etiquetas coloridas.",
+    "section": "colors"
+   },
+   {
+    "name": "A Regra do Mínimo de 14",
+    "body": "Nenhum texto da interface fica abaixo de 14 px.",
+    "section": "typography"
+   }
+  ],
+  "dos": [
+   "Do usar a cor de marca só em ação e seleção.",
+   "Do manter campos e botões com 44 px de altura e texto de no mínimo 14 px.",
+   "Do colocar a ação de envio no fim do formulário, à direita.",
+   "Do mostrar objetivo e perfil como etiquetas coloridas.",
+   "Do trocar as variáveis --marca pela cor do logotipo do LSVP quando ele chegar."
+  ],
+  "donts": [
+   "Don't fazer a interface parecer sistema frio de empresa.",
+   "Don't usar faixas coloridas laterais.",
+   "Don't usar caracteres de texto ou emoji como ícones.",
+   "Don't inventar logotipo ou cores oficiais do LSVP."
+  ]
+ }
+}

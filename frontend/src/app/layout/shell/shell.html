@@ -1,14 +1,19 @@
-<div class="layout">
-  <aside class="lateral noprint">
+<div class="layout" [class.menu-aberto]="menuAberto()">
+  <aside class="lateral noprint" id="menu-principal">
     <div class="marca">
-      <span class="marca-icone"><app-icone nome="morador" [tamanho]="22" /></span>
+      @if (!semLogo()) {
+        <img class="marca-logo" src="logo-lsvp.png" alt="" (error)="semLogo.set(true)">
+      } @else {
+        <span class="marca-simbolo"><app-icone nome="morador" [tamanho]="22" /></span>
+      }
       <span class="marca-texto">
-        <strong>Lar São Vicente</strong>
+        <strong>Lar São Vicente de Paulo</strong>
         <small>Portaria</small>
       </span>
     </div>
 
     <nav aria-label="Menu principal">
+      <span class="grupo">Portaria</span>
       <a routerLink="/entrada-saida" routerLinkActive="ativo" ariaCurrentWhenActive="page">
         <app-icone nome="entrada" />Entrada / Saída
       </a>
@@ -43,20 +48,30 @@
         <span class="avatar" aria-hidden="true">{{ iniciais() }}</span>
         <span class="usuario-info">
           <strong>{{ u.nome }}</strong>
-          <small>{{ perfilLabel[u.perfil] }}</small>
+          <span>{{ perfilLabel[u.perfil] }}</span>
         </span>
-        <button type="button" class="sair" (click)="sair()" title="Sair do sistema">
+        <button type="button" class="sair" (click)="sair()">
           <app-icone nome="sair" [tamanho]="18" />Sair
         </button>
       </div>
     }
   </aside>
 
+  <!-- Fundo escurecido atrás da gaveta (celular e tablet) -->
+  <div class="veu noprint" (click)="menuAberto.set(false)" aria-hidden="true"></div>
+
   <div class="principal">
     <header class="topo noprint">
-      <span class="saudacao">{{ saudacao() }}, {{ primeiroNome() }}</span>
+      <button type="button" class="botao-menu" (click)="menuAberto.set(!menuAberto())"
+              [attr.aria-expanded]="menuAberto()" aria-controls="menu-principal">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        Menu
+      </button>
+      <span class="saudacao">{{ saudacao() }}, <strong>{{ primeiroNome() }}</strong></span>
       <span class="data-hora">
-        <span class="data">{{ agora() | date: "EEEE, d 'de' MMMM 'de' y" }}</span>
+        <span class="data">{{ agora() | date: "EEEE, d 'de' MMMM" }}</span>
         <span class="hora"><app-icone nome="relogio" [tamanho]="18" />{{ agora() | date: 'HH:mm' }}</span>
       </span>
     </header>

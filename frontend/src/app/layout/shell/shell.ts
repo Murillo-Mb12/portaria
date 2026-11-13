@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 
 import { PERFIL_LABEL } from '../../core/models';
 import { AuthService } from '../../core/services/auth.service';
@@ -21,6 +23,12 @@ export class Shell {
   // Relógio da portaria (referência para os horários de entrada e saída)
   protected agora = signal(new Date());
 
+  // Menu em gaveta (celular e tablet)
+  protected menuAberto = signal(false);
+
+  // Logotipo do LSVP: se o arquivo public/logo-lsvp.png não existir, mostra o símbolo reserva
+  protected semLogo = signal(false);
+
   protected saudacao = computed(() => {
     const hora = this.agora().getHours();
     return hora < 12 ? 'Bom dia' : hora < 18 ? 'Boa tarde' : 'Boa noite';
@@ -37,6 +45,11 @@ export class Shell {
     // Atualiza o relógio a cada 10 s e para o timer quando o layout é destruído (logout)
     const relogio = setInterval(() => this.agora.set(new Date()), 10_000);
     inject(DestroyRef).onDestroy(() => clearInterval(relogio));
+
+    // Fecha a gaveta ao trocar de tela
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.menuAberto.set(false));
   }
 
   sair(): void {

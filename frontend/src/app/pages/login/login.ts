@@ -21,6 +21,8 @@ export class Login {
   erro = signal('');
   carregando = signal(false);
   mostrarSenha = signal(false);
+  // Logotipo do LSVP: se public/logo-lsvp.png não existir, mostra o símbolo reserva
+  semLogo = signal(false);
 
   form = this.fb.nonNullable.group({
     usuario: ['', Validators.required],

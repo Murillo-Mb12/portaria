@@ -11,7 +11,7 @@
            (keydown.enter)="$event.preventDefault()"
            aria-label="Pesquisar">
     @if (busca()) {
-      <button type="button" class="limpar" (click)="limparBusca()" aria-label="Limpar pesquisa">×</button>
+      <button type="button" class="limpar" (click)="limparBusca()" aria-label="Limpar pesquisa"><app-icone nome="fechar" [tamanho]="16" /></button>
     }
   </div>
 
@@ -22,7 +22,7 @@
       @for (s of selecionados(); track s.id) {
         <span class="chip">
           {{ s.rotulo }}
-          <button type="button" (click)="alternar(s.id, false)" [attr.aria-label]="'Remover ' + s.rotulo">×</button>
+          <button type="button" (click)="alternar(s.id, false)" [attr.aria-label]="'Remover ' + s.rotulo"><app-icone nome="fechar" [tamanho]="14" /></button>
         </span>
       }
     </div>

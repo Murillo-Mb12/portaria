@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 
 export type NomeIcone =
   | 'entrada' | 'visitante' | 'morador' | 'veiculo' | 'funcionario' | 'consulta' | 'relatorio'
-  | 'sair' | 'visita' | 'doacao' | 'outros' | 'relogio' | 'usuario' | 'cadeado';
+  | 'sair' | 'visita' | 'doacao' | 'outros' | 'relogio' | 'usuario' | 'cadeado' | 'mais' | 'fechar';
 
 /**
  * Ícones desenhados em SVG (traço de 2px, estilo linha).
@@ -54,6 +54,12 @@ export type NomeIcone =
         }
         @case ('usuario') {
           <circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" />
+        }
+        @case ('mais') {
+          <path d="M12 5v14M5 12h14" />
+        }
+        @case ('fechar') {
+          <path d="M6 6l12 12M18 6L6 18" />
         }
         @case ('cadeado') {
           <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" />

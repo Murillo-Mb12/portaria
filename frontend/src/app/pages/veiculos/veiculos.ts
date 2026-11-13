@@ -17,6 +17,7 @@ import { VisitanteService } from '../../core/services/visitante.service';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
 import { PLACA_REGEX } from '../../core/utils/validadores';
 import { ErroCampo } from '../../shared/components/erro-campo/erro-campo';
+import { Icone } from '../../shared/components/icone/icone';
 import { Mascara } from '../../shared/directives/mascara';
 
 /** Uma linha de "pessoa que usa o veículo": filtro por morador + visitante escolhido. */
@@ -33,7 +34,7 @@ function peloMenosUmaPessoa(control: AbstractControl): ValidationErrors | null {
 // RF04 - Cadastro de veículos (CRUD)
 @Component({
   selector: 'app-veiculos',
-  imports: [ReactiveFormsModule, ErroCampo, Mascara],
+  imports: [ReactiveFormsModule, ErroCampo, Mascara, Icone],
   templateUrl: './veiculos.html',
   styleUrl: './veiculos.css',
 })

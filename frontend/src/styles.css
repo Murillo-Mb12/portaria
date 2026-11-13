@@ -1,35 +1,49 @@
 /* =====================================================================
-   Portaria LSVP — estilos globais
-   Fonte Atkinson Hyperlegible: criada para leitura fácil; distingue bem
-   0/O e 1/l/I, o que ajuda a ler placas e CPFs. Vai embutida no projeto
-   (funciona sem internet).
+   Portaria LSVP — sistema visual
+   Cânone de sistemas de gestão, com o acabamento de Notion/Trello
+   (neutros quentes, etiquetas coloridas) e gov.br (acessibilidade,
+   botões em pílula, campos de 44px, foco bem visível).
+   Fonte Atkinson Hyperlegible: leitura fácil, distingue 0/O e 1/l/I.
    ===================================================================== */
 @import '@fontsource/atkinson-hyperlegible/400.css';
 @import '@fontsource/atkinson-hyperlegible/700.css';
 
 :root {
-  /* Cores */
-  --tinta: #22303f;          /* texto principal */
-  --suave: #5b6b7f;          /* texto de apoio */
-  --azul: #1d4f91;           /* ação principal */
-  --azul-forte: #163d70;
-  --azul-claro: #e6eef8;
-  --fundo: #eef2f7;
-  --superficie: #ffffff;
-  --linha: #d8e0ea;
-  --linha-forte: #b9c6d6;
-  --verde: #1e7a4c;  --verde-claro: #e3f3ea;
-  --ambar: #a15c07;  --ambar-claro: #fdf0dc;
-  --vermelho: #b42318; --vermelho-claro: #fdecea;
-  --foco: #f2a900;           /* contorno de foco do teclado: bem visível */
+  /* Marca — PROVISÓRIA: trocar pela cor principal do logotipo do LSVP */
+  --marca: #1351b4;
+  --marca-forte: #0c3d8c;
+  --marca-suave: #e8effa;
+  --marca-borda: #b9cdee;
+
+  /* Neutros quentes */
+  --tinta: #2b2a26;          /* texto principal */
+  --tinta-2: #5f5d57;        /* texto de apoio (5,9:1 sobre o fundo) */
+  --fundo: #fafaf8;          /* área de trabalho */
+  --lateral: #f3f2ee;        /* menu lateral */
+  --superficie: #ffffff;     /* cartões */
+  --linha: #e7e5e0;          /* divisórias */
+  --linha-campo: #8d8a83;    /* borda de campos (3:1) */
+  --hover: #f1f0ec;
+
+  /* Etiquetas (estilo Trello) e estados */
+  --visita-fundo: #e3edfb;  --visita-texto: #1351b4;
+  --doacao-fundo: #def3e6;  --doacao-texto: #136b3e;
+  --outros-fundo: #fcefd6;  --outros-texto: #7f4a00;
+  --admin-fundo: #ece6fb;   --admin-texto: #57399f;
+  --sucesso: #136b3e; --sucesso-fundo: #e9f6ee; --sucesso-borda: #b3dcc2;
+  --erro: #b42318;    --erro-fundo: #fdeeec;    --erro-borda: #f2c2bc;
+  --aviso: #7f4a00;
+  --foco: #c2850c;           /* contorno de foco (padrão gov.br) */
 
   /* Medidas */
-  --altura-campo: 44px;
-  --altura-label: calc(14px * 1.35 + 6px);
-  --raio-painel: 14px;
-  --raio-campo: 9px;
+  --campo: 44px;
+  --rotulo: calc(15px * 1.35 + 6px);
+  --raio: 12px;
+  --raio-campo: 8px;
+  --sombra: 0 1px 2px rgba(43, 42, 38, .05), 0 2px 8px rgba(43, 42, 38, .04);
 
   color-scheme: light;
+  accent-color: var(--marca);
 }
 
 * { box-sizing: border-box; }
@@ -41,82 +55,96 @@ body {
   line-height: 1.5;
   color: var(--tinta);
   background: var(--fundo);
+  caret-color: var(--marca);
 }
+::selection { background: var(--marca-suave); color: var(--marca-forte); }
 
-/* ---------- Títulos das páginas ---------- */
-h1 { margin: 0; font-size: 28px; line-height: 1.2; letter-spacing: -0.01em; }
-h3 { margin: 0 0 14px; font-size: 19px; line-height: 1.3; }
-.cabecalho-pagina { margin-bottom: 22px; }
-.cabecalho-pagina p { margin: 6px 0 0; color: var(--suave); max-width: 70ch; }
+/* Barra de rolagem discreta, na paleta */
+* { scrollbar-width: thin; scrollbar-color: #cfccc5 transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #cfccc5; border-radius: 10px; border: 2px solid var(--fundo); }
+::-webkit-scrollbar-track { background: transparent; }
 
-/* ---------- Painéis ---------- */
+a { color: var(--marca); text-underline-offset: 3px; }
+
+/* ---------- Cabeçalho das páginas ---------- */
+h1 { margin: 0; font-size: 30px; line-height: 1.2; letter-spacing: -0.015em; }
+h2, h3 { margin: 0 0 16px; line-height: 1.3; }
+.titulo-cartao { margin: 0 0 18px; font-size: 20px; letter-spacing: -0.01em; }
+.cabecalho-pagina { margin-bottom: 24px; }
+.cabecalho-pagina p { margin: 6px 0 0; color: var(--tinta-2); max-width: 68ch; }
+
+/* ---------- Cartões ---------- */
 .card {
   background: var(--superficie);
   border: 1px solid var(--linha);
-  border-radius: var(--raio-painel);
-  padding: 22px 24px;
-  margin-bottom: 20px;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+  margin-bottom: 24px;
 }
-.row { display: flex; gap: 20px; flex-wrap: wrap; }
+.row { display: flex; gap: 24px; flex-wrap: wrap; }
 .row > .card { flex: 1; min-width: 300px; }
 
 /* ---------- Formulários ---------- */
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px 18px; align-items: start; }
-.acoes { display: flex; gap: 10px; flex-wrap: wrap; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px 20px; align-items: start; }
+.acoes { display: flex; gap: 12px; flex-wrap: wrap; }
 .largura-total { grid-column: 1 / -1; }
 
-label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.35; font-weight: 700; }
-.titulo-campo { font-size: 14px; line-height: 1.35; font-weight: 700; }
-.titulo-campo small, label small:not(.err) { font-weight: 400; color: var(--suave); }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.35; font-weight: 700; color: var(--tinta); }
+.titulo-campo { font-size: 15px; line-height: 1.35; font-weight: 700; }
+.titulo-campo small, label small:not(.err) { font-weight: 400; color: var(--tinta-2); font-size: 14px; }
 .campo-lista { display: flex; flex-direction: column; gap: 6px; }
 
 input, select, textarea {
   font: inherit; font-size: 16px; font-weight: 400; color: var(--tinta);
   background: var(--superficie);
-  border: 1.5px solid var(--linha-forte);
+  border: 1px solid var(--linha-campo);
   border-radius: var(--raio-campo);
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .15s ease-out, box-shadow .15s ease-out;
 }
-input, select { height: var(--altura-campo); padding: 0 12px; }
-textarea { padding: 10px 12px; min-height: 76px; resize: vertical; }
+input, select { height: var(--campo); padding: 0 14px; }
+textarea { padding: 11px 14px; min-height: 84px; resize: vertical; }
 select { cursor: pointer; }
-input::placeholder, textarea::placeholder { color: #8a97a8; }
-input:hover, select:hover, textarea:hover { border-color: #93a5bb; }
-input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(29, 79, 145, .18); }
-input:disabled, select:disabled { background: #f3f5f8; color: var(--suave); }
-input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched { border-color: var(--vermelho); }
+input::placeholder, textarea::placeholder { color: #8a877f; }
+input:hover, select:hover, textarea:hover { border-color: var(--tinta-2); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--marca); box-shadow: 0 0 0 3px var(--marca-suave); }
+input:disabled, select:disabled { background: var(--hover); color: var(--tinta-2); }
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched { border-color: var(--erro); }
 input[type="date"] { min-width: 0; }
+input[type="checkbox"] { width: 18px; height: 18px; }
 
-/* Botões ao lado dos campos ficam alinhados com a caixa do campo */
-.grid > button, .grid > .acoes { margin-top: var(--altura-label); }
-.grid > button, .grid > .acoes button { height: var(--altura-campo); }
+/* Botões ao lado dos campos ficam na altura da caixa do campo */
+.grid > button, .grid > .acoes { margin-top: var(--rotulo); }
 .grid > button { justify-self: start; }
+/* Ação de envio: linha própria no fim do formulário, alinhada à direita */
+.grid > .acoes.acoes-final { grid-column: 1 / -1; justify-content: flex-end; margin-top: 4px; }
 .nowrap { white-space: nowrap; }
 
-/* ---------- Botões ---------- */
+/* ---------- Botões (pílula, padrão gov.br) ---------- */
 button {
-  font: inherit; font-size: 15px; font-weight: 700; line-height: 1.2;
+  font: inherit; font-size: 16px; font-weight: 700; line-height: 1.2;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 40px; padding: 0 18px;
-  border: 1.5px solid transparent; border-radius: var(--raio-campo);
-  background: var(--azul); color: #fff; cursor: pointer;
-  transition: background-color .15s, border-color .15s, color .15s;
+  min-height: var(--campo); padding: 0 24px;
+  border: 1px solid transparent; border-radius: 999px;
+  background: var(--marca); color: #fff; cursor: pointer;
+  transition: background-color .15s ease-out, border-color .15s ease-out, color .15s ease-out;
 }
-button:hover { background: var(--azul-forte); }
-button:disabled { opacity: .55; cursor: default; }
+button:hover { background: var(--marca-forte); }
+button:disabled { opacity: .5; cursor: not-allowed; }
 
-button.sec { background: var(--superficie); color: var(--azul); border-color: var(--linha-forte); }
-button.sec:hover { background: var(--azul-claro); border-color: var(--azul); }
+button.sec { background: var(--superficie); color: var(--marca); border-color: var(--marca); }
+button.sec:hover { background: var(--marca-suave); }
 
-button.sm { min-height: 34px; padding: 0 12px; font-size: 14px; }
-button.sm:not(.perigo):not(.alerta) { background: var(--superficie); color: var(--azul); border-color: var(--linha-forte); }
-button.sm:not(.perigo):not(.alerta):hover { background: var(--azul-claro); border-color: var(--azul); }
+button.sm { min-height: 36px; padding: 0 16px; font-size: 15px; }
+button.sm:not(.perigo):not(.alerta) { background: var(--superficie); color: var(--marca); border-color: var(--marca-borda); }
+button.sm:not(.perigo):not(.alerta):hover { background: var(--marca-suave); border-color: var(--marca); }
 
-button.perigo { background: var(--superficie); color: var(--vermelho); border-color: #e9b4ae; }
-button.perigo:hover { background: var(--vermelho-claro); border-color: var(--vermelho); }
+button.perigo { background: transparent; color: var(--erro); border-color: transparent; }
+button.perigo:hover { background: var(--erro-fundo); border-color: var(--erro-borda); }
 
-button.alerta { background: var(--ambar); color: #fff; }
-button.alerta:hover { background: #874d06; }
+button.alerta { background: var(--superficie); color: var(--tinta); border-color: var(--linha-campo); }
+button.alerta:hover { background: var(--hover); border-color: var(--tinta); }
 
 /* Foco do teclado bem visível (acessibilidade) */
 :focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
@@ -124,43 +152,69 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
 
 /* ---------- Tabelas ---------- */
 .tabela-scroll { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
-th, td { text-align: left; padding: 12px 12px; border-bottom: 1px solid #e6ebf1; vertical-align: middle; }
-th { font-size: 13px; font-weight: 700; color: var(--suave); background: #f6f8fb; border-bottom: 1.5px solid var(--linha); white-space: nowrap; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 13px 14px; border-bottom: 1px solid var(--linha); vertical-align: middle; }
+th { font-size: 14px; font-weight: 700; color: var(--tinta-2); background: var(--lateral); white-space: nowrap; }
 th:first-child { border-top-left-radius: 8px; }
 th:last-child { border-top-right-radius: 8px; }
-tbody tr:hover td { background: #f8fafd; }
+tbody tr { transition: background-color .15s ease-out; }
+tbody tr:hover td { background: var(--fundo); }
 tbody tr:last-child td { border-bottom: none; }
-tr.editando td, tr.editando:hover td { background: #fff7db; }
+tr.editando td, tr.editando:hover td { background: #fff6dc; }
 .acoes-linha { white-space: nowrap; text-align: right; }
-.acoes-linha button + button { margin-left: 8px; }
-td[colspan] { text-align: center; color: var(--suave); padding: 28px 12px; }
+.acoes-linha button + button { margin-left: 4px; }
+td[colspan] { text-align: center; color: var(--tinta-2); padding: 36px 14px; }
 
-/* ---------- Etiquetas de objetivo / perfil ---------- */
-.etiqueta { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; }
-.etiqueta.VISITA { background: var(--azul-claro); color: var(--azul); }
-.etiqueta.DOACAO { background: var(--verde-claro); color: var(--verde); }
-.etiqueta.OUTROS { background: var(--ambar-claro); color: var(--ambar); }
-.etiqueta.ADMINISTRADOR { background: #ede9fe; color: #5b3fa8; }
-.etiqueta.PORTEIRO { background: #eef2f7; color: var(--tinta); }
+/* Coluna de ações sempre visível quando a tabela rola para o lado (tablet e celular) */
+@media (max-width: 960px) {
+  td.acoes-linha, th:last-child:empty {
+    position: sticky; right: 0; z-index: 1;
+    background: var(--superficie);
+    box-shadow: -8px 0 12px -10px rgba(43, 42, 38, .35);
+  }
+  th:last-child:empty { background: var(--lateral); }
+  tbody tr:hover td.acoes-linha { background: var(--fundo); }
+  /* a tabela encosta nas bordas do cartão, para a coluna fixa não deixar fresta */
+  .card.tabela-scroll { padding-left: 0; padding-right: 0; }
+  .card.tabela-scroll > :not(table) { margin-left: 20px; margin-right: 20px; }
+  .card.tabela-scroll th:first-child, .card.tabela-scroll td:first-child { padding-left: 20px; }
+  .card.tabela-scroll th:first-child { border-top-left-radius: 0; }
+  .card.tabela-scroll th:last-child { border-top-right-radius: 0; }
+}
 
-/* ---------- Mensagens de sucesso e erro ---------- */
+/* Celular: botões de envio ocupam a largura toda (alvo de toque maior) */
+@media (max-width: 600px) {
+  .grid > button { justify-self: stretch; }
+  .grid > .acoes { width: 100%; }
+  .grid > .acoes button { flex: 1; }
+  .card { padding: 20px 16px; }
+  h1 { font-size: 26px; }
+}
+
+/* ---------- Etiquetas ---------- */
+.etiqueta { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 6px; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.etiqueta.VISITA { background: var(--visita-fundo); color: var(--visita-texto); }
+.etiqueta.DOACAO { background: var(--doacao-fundo); color: var(--doacao-texto); }
+.etiqueta.OUTROS { background: var(--outros-fundo); color: var(--outros-texto); }
+.etiqueta.ADMINISTRADOR { background: var(--admin-fundo); color: var(--admin-texto); }
+.etiqueta.PORTEIRO { background: var(--lateral); color: var(--tinta); }
+
+/* ---------- Mensagens (estilo gov.br) ---------- */
 p.ok, p.err {
   display: flex; align-items: flex-start; gap: 10px;
-  margin: 16px 0 0; padding: 12px 14px; border-radius: var(--raio-campo);
-  font-size: 15px; line-height: 1.4;
+  margin: 18px 0 0; padding: 14px 16px; border-radius: var(--raio-campo);
+  font-size: 16px; line-height: 1.4;
 }
-p.ok { background: var(--verde-claro); color: #165c39; border: 1px solid #b5dec7; }
-p.err { background: var(--vermelho-claro); color: #8e1c13; border: 1px solid #f1c0ba; }
+p.ok { background: var(--sucesso-fundo); color: var(--sucesso); border: 1px solid var(--sucesso-borda); }
+p.err { background: var(--erro-fundo); color: #8e1c13; border: 1px solid var(--erro-borda); }
 p.ok::before, p.err::before {
-  content: ''; flex-shrink: 0; width: 20px; height: 20px; margin-top: -1px; background: currentColor;
+  content: ''; flex-shrink: 0; width: 22px; height: 22px; margin-top: -1px; background: currentColor;
   -webkit-mask: var(--icone) center / contain no-repeat; mask: var(--icone) center / contain no-repeat;
 }
 p.ok::before { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8 12.5l2.5 2.5L16 9.5'/%3E%3C/svg%3E"); }
 p.err::before { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7.5v5.5M12 16.5v.01'/%3E%3C/svg%3E"); }
 
-/* Mensagem de erro embaixo de um campo */
-small.err { color: var(--vermelho); font-size: 13px; font-weight: 700; }
+small.err { color: var(--erro); font-size: 14px; font-weight: 700; }
 
 /* ---------- Movimento reduzido ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -171,6 +225,6 @@ small.err { color: var(--vermelho); font-size: 13px; font-weight: 700; }
 @media print {
   .noprint { display: none !important; }
   body { background: #fff; font-size: 12pt; }
-  .card { border: none; padding: 0; }
+  .card { border: none; box-shadow: none; padding: 0; }
   th { background: #eee; color: #000; }
 }

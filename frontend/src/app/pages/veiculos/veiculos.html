@@ -4,7 +4,7 @@
 </header>
 
 <div class="card">
-  <h3>{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h3>
+  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Placa
       <input formControlName="placa" appMascara="placa" placeholder="ABC1D23 ou ABC-1234">
@@ -63,7 +63,7 @@
         </div>
 
         <div>
-          <button type="button" class="sec" (click)="adicionarPessoa()">+ Adicionar pessoa</button>
+          <button type="button" class="sec" (click)="adicionarPessoa()"><app-icone nome="mais" [tamanho]="18" />Adicionar pessoa</button>
         </div>
         @if (pessoas.touched && pessoas.errors?.['semPessoas']) {
           <small class="err">Adicione pelo menos uma pessoa.</small>
@@ -76,7 +76,7 @@
       </label>
     }
 
-    <div class="acoes">
+    <div class="acoes acoes-final">
       <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>

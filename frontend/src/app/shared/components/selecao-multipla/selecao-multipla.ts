@@ -1,6 +1,8 @@
 import { Component, computed, input, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { Icone } from '../icone/icone';
+
 export interface OpcaoSelecao {
   id: number;
   rotulo: string;
@@ -22,6 +24,7 @@ function normalizar(texto: string): string {
  */
 @Component({
   selector: 'app-selecao-multipla',
+  imports: [Icone],
   templateUrl: './selecao-multipla.html',
   styleUrl: './selecao-multipla.css',
 })

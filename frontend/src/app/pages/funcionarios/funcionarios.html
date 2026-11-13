@@ -4,7 +4,7 @@
 </header>
 
 <div class="card">
-  <h3>{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h3>
+  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Nome
       <input formControlName="nome">
@@ -25,7 +25,7 @@
         }
       </select>
     </label>
-    <div class="acoes">
+    <div class="acoes acoes-final">
       <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>

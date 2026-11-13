@@ -4,7 +4,7 @@
 </header>
 
 <div class="card">
-  <h3>{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h3>
+  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Nome
       <input formControlName="nome">
@@ -18,7 +18,7 @@
       <input formControlName="cpf" appMascara="cpf" placeholder="000.000.000-00">
       <app-erro-campo [control]="form.controls.cpf" formato="CPF incompleto (000.000.000-00)." />
     </label>
-    <div class="acoes">
+    <div class="acoes acoes-final">
       <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>

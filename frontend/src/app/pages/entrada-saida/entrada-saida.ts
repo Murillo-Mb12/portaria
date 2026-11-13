@@ -60,6 +60,10 @@ export class EntradaSaida implements OnInit {
 
   objetivo = signal<ObjetivoAcesso>('VISITA');
 
+  // Linha recém-registrada em "Presentes agora" (acende e esmaece)
+  recenteId = signal<number | null>(null);
+  private limparRecente?: ReturnType<typeof setTimeout>;
+
   // Atualiza o "tempo no Lar" da lista de presentes a cada 30 segundos
   private agora = signal(Date.now());
 
@@ -168,6 +172,7 @@ export class EntradaSaida implements OnInit {
     this.acessoService.registrarEntrada(entrada).subscribe({
       next: (a) => {
         this.sucesso(`Entrada registrada: ${a.nome}${a.veiculo ? ' com o veículo ' + a.veiculo : ''}.`);
+        this.destacar(a.id);
         this.limparCampos();
         this.agora.set(Date.now());
         this.carregarPresentes();
@@ -185,6 +190,12 @@ export class EntradaSaida implements OnInit {
       },
       error: (e) => this.falha(e),
     });
+  }
+
+  private destacar(id: number): void {
+    clearTimeout(this.limparRecente);
+    this.recenteId.set(id);
+    this.limparRecente = setTimeout(() => this.recenteId.set(null), 4000);
   }
 
   private limparCampos(): void {

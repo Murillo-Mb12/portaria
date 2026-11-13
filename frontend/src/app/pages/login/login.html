@@ -1,12 +1,18 @@
 <div class="pagina-login">
-  <section class="apresentacao">
-    <span class="marca-icone"><app-icone nome="morador" [tamanho]="30" /></span>
-    <h1>Lar São Vicente de Paulo</h1>
-    <p>Controle de entrada e saída da portaria.</p>
-  </section>
-
   <form class="login" [formGroup]="form" (ngSubmit)="entrar()">
-    <h2>Entrar no sistema</h2>
+    <div class="marca">
+      @if (!semLogo()) {
+        <img class="marca-logo" src="logo-lsvp.png" alt="" (error)="semLogo.set(true)">
+      } @else {
+        <span class="marca-simbolo"><app-icone nome="morador" [tamanho]="28" /></span>
+      }
+      <span class="marca-texto">
+        <strong>Lar São Vicente de Paulo</strong>
+        <span>Portaria</span>
+      </span>
+    </div>
+
+    <h1>Entrar no sistema</h1>
     <p class="sub">Use o usuário e a senha fornecidos pela administração.</p>
 
     <label>Usuário
@@ -31,6 +37,6 @@
       <p class="err">{{ erro() }}</p>
     }
 
-    <small class="demo">Demonstração: porteiro / 1234 ou admin / admin123</small>
+    <p class="demo">Demonstração: porteiro / 1234 ou admin / admin123</p>
   </form>
 </div>
