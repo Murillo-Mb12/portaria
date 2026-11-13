@@ -1,9 +1,9 @@
-.caixa { border: 1.5px solid var(--linha-campo); border-radius: var(--raio-campo); padding: 12px; background: var(--superficie); }
+.caixa { border: 1px solid var(--linha-campo); border-radius: var(--raio); padding: 10px; background: var(--superficie); }
 .caixa.invalida { border-color: var(--erro); }
 
-/* ---------- Busca com lupa ---------- */
+/* ---------- Busca ---------- */
 .busca { position: relative; margin-bottom: 8px; }
-.busca input { width: 100%; padding-left: 36px; padding-right: 34px; }
+.busca input { width: 100%; padding-left: 36px; padding-right: 36px; }
 .busca input::-webkit-search-cancel-button { display: none; }
 .lupa {
   position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
@@ -11,38 +11,40 @@
   pointer-events: none;
 }
 .limpar {
-  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-  width: 30px; height: 30px; min-height: 30px; padding: 0; border-radius: 50%; border: none;
-  background: transparent; color: var(--tinta-2); font-size: 18px; line-height: 1;
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  width: 32px; min-height: 32px; padding: 0; border: 1px solid transparent; border-radius: var(--raio);
+  background: transparent; color: var(--tinta-2);
 }
-.limpar:hover { background: #f1f5fa; color: var(--tinta); }
+.limpar:hover { background: var(--hover); color: var(--tinta); border-color: var(--linha); }
 
 /* ---------- Selecionados ---------- */
 .selecionados { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
-.rotulo-selecionados { font-size: 12px; color: var(--tinta-2); }
+.rotulo-selecionados { font-size: 13px; font-weight: 600; color: var(--tinta-2); }
 .chip {
-  display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 12px;
-  background: var(--marca-suave); color: var(--marca-forte); border-radius: 999px; font-size: 14px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 2px 2px 8px;
+  background: var(--marca-suave); color: var(--marca); border: 1px solid var(--marca-borda); border-radius: 3px;
+  font-size: 13px; font-weight: 600;
 }
 .chip button {
-  width: 24px; height: 24px; min-height: 24px; padding: 0; border-radius: 50%; border: none;
-  background: transparent; color: var(--marca-forte); font-size: 15px; line-height: 1;
+  width: 24px; min-height: 24px; padding: 0; border: 0; border-radius: 3px;
+  background: transparent; color: var(--marca);
 }
-.chip button:hover { background: #cddcf0; }
+.chip button:hover { background: #cfe0f4; }
 
 /* ---------- Lista ---------- */
-.lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+.lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 8px; }
 .opcao {
-  flex-direction: row; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px;
-  cursor: pointer; font-size: 15px; font-weight: 400; border: 1.5px solid transparent;
+  flex-direction: row; align-items: center; gap: 10px; padding: 7px 8px; border-radius: var(--raio);
+  cursor: pointer; font-size: 15px; font-weight: 400; border: 1px solid transparent;
 }
-.opcao:hover { background: #f1f5fa; }
-.opcao.marcada { background: var(--marca-suave); border-color: #b9cdea; }
+.opcao:hover { background: var(--hover); }
+.opcao.marcada { background: var(--marca-suave); border-color: var(--marca-borda); }
 .opcao input { height: 18px; width: 18px; margin: 0; accent-color: var(--marca); }
-.opcao small { display: block; color: var(--tinta-2); font-size: 12px; }
-.vazio { color: var(--tinta-2); font-size: 13px; padding: 4px; }
+.opcao small { display: block; color: var(--tinta-2); font-size: 13px; }
+.vazio { color: var(--tinta-2); font-size: 14px; padding: 4px; }
 
 .ver-mais {
-  margin-top: 8px; min-height: 34px; background: transparent; color: var(--marca); padding: 0 10px; font-size: 14px; border: none;
+  margin-top: 6px; min-height: 32px; padding: 0 8px; font-size: 14px;
+  background: transparent; color: var(--marca); border-color: transparent;
 }
-.ver-mais:hover { background: #f1f5fa; }
+.ver-mais:hover { background: var(--marca-suave); border-color: var(--marca-borda); }

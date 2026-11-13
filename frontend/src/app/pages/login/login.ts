@@ -3,13 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../core/services/auth.service';
-import { Icone } from '../../shared/components/icone/icone';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
 
 // RF01 - Login
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, Icone],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -21,8 +20,6 @@ export class Login {
   erro = signal('');
   carregando = signal(false);
   mostrarSenha = signal(false);
-  // Logotipo do LSVP: se public/logo-lsvp.png não existir, mostra o símbolo reserva
-  semLogo = signal(false);
 
   form = this.fb.nonNullable.group({
     usuario: ['', Validators.required],

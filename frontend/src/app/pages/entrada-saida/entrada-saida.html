@@ -1,31 +1,39 @@
-<header class="cabecalho-pagina cabecalho-com-resumo">
-  <div>
-    <h1>Registro de entrada e saída</h1>
-    <p>Registre quem chega ao Lar e marque a saída quando a pessoa for embora.</p>
-  </div>
-  <span class="contador" [class.vazio]="!presentes().length" role="status">
-    <span class="ponto" aria-hidden="true"></span>{{ textoContador() }}
-  </span>
+<header class="cabecalho-pagina">
+  <h1>Entrada e saída</h1>
 </header>
 
-<div class="card">
-  <h2 class="titulo-cartao">Registrar entrada</h2>
-
-  <span class="titulo-campo">Qual o objetivo no Lar?</span>
-  <div class="objetivos">
-    @for (o of objetivos; track o.valor) {
-      <button type="button" class="objetivo" [class.ativo]="objetivo() === o.valor"
-              [attr.aria-pressed]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
-        <span class="objetivo-icone"><app-icone [nome]="o.icone" [tamanho]="22" /></span>
-        <span class="objetivo-texto">
-          <strong>{{ o.titulo }}</strong>
-          <small>{{ o.descricao }}</small>
-        </span>
-      </button>
-    }
+<!-- Situação do dia -->
+<section class="situacao" aria-label="Situação da portaria">
+  <div class="indicador">
+    <span class="indicador-rotulo"><span class="ponto" [class.vazio]="!presentes().length" aria-hidden="true"></span>No Lar agora</span>
+    <strong role="status">{{ presentes().length }}</strong>
   </div>
+  <div class="indicador">
+    <span class="indicador-rotulo">Entradas hoje</span>
+    <strong>{{ entradasHoje() }}</strong>
+  </div>
+  <div class="indicador">
+    <span class="indicador-rotulo">Saídas hoje</span>
+    <strong>{{ saidasHoje() }}</strong>
+  </div>
+</section>
 
-  <form class="grid" [formGroup]="form" (ngSubmit)="registrar()">
+<div class="console">
+  <section class="card registro">
+    <h2 class="titulo-cartao">Registrar entrada</h2>
+
+    <span class="titulo-campo" id="rotulo-objetivo">Objetivo no Lar</span>
+    <div class="segmentado" role="radiogroup" aria-labelledby="rotulo-objetivo">
+      @for (o of objetivos; track o.valor) {
+        <button type="button" role="radio" class="segmento" [class.ativo]="objetivo() === o.valor"
+                [attr.aria-checked]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
+          <app-icone [nome]="o.icone" [tamanho]="18" />{{ o.titulo }}
+        </button>
+      }
+    </div>
+    <p class="segmento-ajuda">{{ ajudaObjetivo() }}</p>
+
+    <form class="campos" [formGroup]="form" (ngSubmit)="registrar()">
     @switch (objetivo()) {
       @case ('VISITA') {
         <label>Visitante
@@ -92,40 +100,37 @@
       </label>
     }
 
-    <div class="acoes acoes-final">
-      <button type="submit">Registrar entrada</button>
-    </div>
-  </form>
+      <button type="submit" class="registrar">
+        <app-icone nome="entrada" [tamanho]="18" />Registrar entrada
+      </button>
+    </form>
 
-  @if (objetivo() === 'VISITA' && form.controls.visitanteId.value && !veiculosDisponiveis().length) {
-    <p class="dica">Este visitante não tem veículo vinculado. Se ele chegou de carro, cadastre o veículo em "Veículos".</p>
-  }
-  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+    @if (objetivo() === 'VISITA' && form.controls.visitanteId.value && !veiculosDisponiveis().length) {
+      <p class="dica">Este visitante não tem veículo vinculado. Se ele chegou de carro, cadastre o veículo em "Veículos".</p>
+    }
+    @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
+    @if (erro()) { <p class="err">{{ erro() }}</p> }
+  </section>
 
-<div class="card tabela-scroll">
-  <div class="presentes-topo">
-    <h2 class="titulo-cartao">Presentes agora</h2>
-  </div>
-  <table>
-    <thead>
-      <tr><th>Nome</th><th>Objetivo</th><th>Detalhe</th><th>Veículo</th><th>Entrada</th><th>Tempo no Lar</th><th></th></tr>
-    </thead>
-    <tbody>
-      @for (a of presentes(); track a.id) {
-        <tr [class.recente]="a.id === recenteId()">
-          <td>{{ a.nome }}</td>
-          <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
-          <td>{{ a.detalhe }}</td>
-          <td>{{ a.veiculo ?? '—' }}</td>
-          <td class="nowrap">{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
-          <td class="tempo">{{ tempoNoLar(a.entrada) }}</td>
-          <td class="acoes-linha"><button type="button" class="sm alerta" (click)="registrarSaida(a)">Registrar saída</button></td>
-        </tr>
-      } @empty {
-        <tr><td colspan="7">Ninguém no Lar no momento.</td></tr>
-      }
-    </tbody>
-  </table>
+  <section class="card tabela-scroll presentes">
+    <h2 class="titulo-cartao">Presentes agora <span class="contagem">{{ presentes().length }}</span></h2>
+    <table>
+      <thead>
+        <tr><th>Pessoa</th><th>Objetivo</th><th>Veículo</th><th>Entrada</th><th></th></tr>
+      </thead>
+      <tbody>
+        @for (a of presentes(); track a.id) {
+          <tr [class.recente]="a.id === recenteId()">
+            <td><strong>{{ a.nome }}</strong><span class="secundario">{{ a.detalhe }}</span></td>
+            <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
+            <td class="veiculo">{{ a.veiculo ? placa(a.veiculo) : '—' }}</td>
+            <td class="nowrap">{{ horaEntrada(a.entrada) }}<span class="secundario">{{ tempoNoLar(a.entrada) === 'agora' ? 'agora' : 'há ' + tempoNoLar(a.entrada) }}</span></td>
+            <td class="acoes-linha"><button type="button" class="sm alerta" (click)="registrarSaida(a)">Registrar saída</button></td>
+          </tr>
+        } @empty {
+          <tr><td colspan="5">Ninguém no Lar no momento.</td></tr>
+        }
+      </tbody>
+    </table>
+  </section>
 </div>

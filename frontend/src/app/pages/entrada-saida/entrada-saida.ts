@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -29,10 +28,15 @@ interface OpcaoObjetivo {
   icone: NomeIcone;
 }
 
+/** yyyy-MM-dd no fuso do computador da portaria. */
+function dataLocal(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
 // RF06 a RF09 - Entrada e saída (a pessoa pode ou não estar com um veículo)
 @Component({
   selector: 'app-entrada-saida',
-  imports: [ReactiveFormsModule, DatePipe, Mascara, Icone],
+  imports: [ReactiveFormsModule, Mascara, Icone],
   templateUrl: './entrada-saida.html',
   styleUrl: './entrada-saida.css',
 })
@@ -47,9 +51,9 @@ export class EntradaSaida implements OnInit {
   protected readonly finalidades = Object.keys(FINALIDADE_LABEL) as FinalidadeAcesso[];
   protected readonly descricaoVeiculo = descricaoVeiculo;
   protected readonly objetivos: OpcaoObjetivo[] = [
-    { valor: 'VISITA', titulo: '1. Visitante', descricao: 'Parente, cuidador ou amigo de um morador', icone: 'visita' },
-    { valor: 'DOACAO', titulo: '2. Doação', descricao: 'Entrega de doações para o Lar', icone: 'doacao' },
-    { valor: 'OUTROS', titulo: '3. Outros', descricao: 'Bazar, igreja, reunião, imprensa...', icone: 'outros' },
+    { valor: 'VISITA', titulo: 'Visitante', descricao: 'Parente, cuidador ou amigo de um morador.', icone: 'visita' },
+    { valor: 'DOACAO', titulo: 'Doação', descricao: 'Entrega de doações para o Lar.', icone: 'doacao' },
+    { valor: 'OUTROS', titulo: 'Outros', descricao: 'Bazar, igreja, reunião com a equipe, imprensa.', icone: 'outros' },
   ];
 
   visitantes = signal<VisitanteResponse[]>([]);
@@ -67,10 +71,12 @@ export class EntradaSaida implements OnInit {
   // Atualiza o "tempo no Lar" da lista de presentes a cada 30 segundos
   private agora = signal(Date.now());
 
-  textoContador = computed(() => {
-    const n = this.presentes().length;
-    return n === 0 ? 'Ninguém no Lar' : n === 1 ? '1 pessoa no Lar' : `${n} pessoas no Lar`;
-  });
+  // Movimento do dia (faixa de situação)
+  hoje = signal<AcessoResponse[]>([]);
+  entradasHoje = computed(() => this.hoje().length);
+  saidasHoje = computed(() => this.hoje().filter((a) => a.saida).length);
+
+  ajudaObjetivo = computed(() => this.objetivos.find((o) => o.valor === this.objetivo())?.descricao ?? '');
 
   form = this.fb.group({
     visitanteId: [null as number | null],
@@ -132,6 +138,25 @@ export class EntradaSaida implements OnInit {
       next: (l) => this.presentes.set(l),
       error: (e) => this.falha(e),
     });
+    const dia = dataLocal(new Date());
+    this.acessoService.getAll({ de: dia, ate: dia }).subscribe({
+      next: (l) => this.hoje.set(l),
+      error: (e) => this.falha(e),
+    });
+  }
+
+  /** "14:05" se a entrada foi hoje; "12/11 14:05" se foi em outro dia. */
+  horaEntrada(entrada: string): string {
+    const d = new Date(entrada);
+    const hm = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    return dataLocal(d) === dataLocal(new Date())
+      ? hm
+      : `${d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })} ${hm}`;
+  }
+
+  /** Mostra só a placa na tabela ("FJK2B31 - Fiat Uno (Prata)" -> "FJK2B31"). */
+  placa(veiculo: string): string {
+    return veiculo.split(' - ')[0];
   }
 
   escolherObjetivo(objetivo: ObjetivoAcesso): void {

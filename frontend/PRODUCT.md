@@ -33,20 +33,20 @@ Diferente dos sistemas de portaria para empresas e condomínios, o fluxo é dese
 - Telas: Login; Entrada / Saída (com lista "Presentes agora"); Visitantes; Moradores; Veículos; Funcionários (só administrador); Consulta de acessos; Relatórios (com impressão / PDF).
 - Perfis: ADMINISTRADOR e PORTEIRO. O menu do porteiro não mostra Funcionários.
 - Campos com máscara: CPF (000.000.000-00), telefone/celular e placa (ABC-1234 ou ABC1D23).
-- Stack existente: Angular 21 (standalone, signals, zoneless) consumindo API REST Spring Boot. A fonte Atkinson Hyperlegible já está embutida (funciona sem internet).
+- Stack existente: Angular 21 (standalone, signals, zoneless) consumindo API REST Spring Boot. Interface em fonte do sistema operacional (Segoe UI no Windows da portaria, Roboto no Android), sem depender de internet.
 - Termos do domínio: morador, visitante, vínculo (familiar, cuidador, amigo), objetivo (visita, doação, outros), finalidade, presentes, unidade (ala e quarto).
 
 ## Brand Commitments
 
-- O sistema deve seguir as **cores e o logotipo do Lar São Vicente de Paulo** (confirmado pela equipe).
-- **Pendente:** o arquivo do logotipo e as cores oficiais do LSVP ainda não estão no projeto. Não inventar logotipo nem cores "oficiais"; usar o arquivo e as cores fornecidos pela equipe.
+- Identidade: **emblema da Sociedade de São Vicente de Paulo (SSVP Brasil)**, entregue pela equipe como "ícone do Lar" (arquivos `public/logo-lsvp.png` e `public/logo-lsvp-64.png`). Usar o emblema inteiro, sem recortar nem recolorir.
+- Cores oficiais medidas no emblema: **azul #0053A1** e **vermelho #E20613**. O vermelho é de destaque pontual (como no emblema), nunca cor de fundo de áreas grandes.
 - Nome exibido: "Lar São Vicente de Paulo" / "Portaria".
-- **Direção visual escolhida pela equipe:** o padrão consagrado de sistemas de gestão (menu lateral, cabeçalho, cartões e tabelas), executado com acabamento de primeira linha, sem ironia e sem enfeites temáticos. Não pode parecer "sistema frio de empresa": o tom é acolhedor e próximo, coerente com uma instituição de cuidado.
+- **Direção visual (pedido da equipe, nas palavras dela): "front-end com cara de sistema de portaria profissional".** A versão anterior, em neutros quentes com botões em pílula e cartões amplos, foi rejeitada por "ainda estar com cara de IA". A referência é o software profissional de controle de acesso e portaria: console operacional, informação densa e bem alinhada, componentes sóbrios e cores institucionais.
 
 ## Evidence on Hand
 
 - Dados de exemplo fictícios nas migrações (V2) para demonstração.
-- Não há depoimentos, métricas de uso nem logotipo no repositório; não fabricar.
+- Emblema SSVP Brasil entregue pela equipe. Não há depoimentos nem métricas de uso; não fabricar.
 
 ## Product Principles
 
@@ -54,7 +54,7 @@ Diferente dos sistemas de portaria para empresas e condomínios, o fluxo é dese
 2. **Clareza antes de densidade**: textos grandes, rótulos explícitos e uma ação principal por área, para pessoas mais velhas e pouco acostumadas com computador.
 3. **Erros evitáveis não acontecem**: máscaras, listas filtradas (só moradores do visitante, só veículos do visitante) e mensagens que dizem o que fazer.
 4. **Funciona no balcão em qualquer tela**: computador, tablet ou celular, com alvos de toque confortáveis.
-5. **O sistema é da instituição**: identidade do LSVP, tom acolhedor e respeitoso.
+5. **O sistema é da instituição**: identidade SSVP (azul e vermelho), tom profissional e respeitoso.
 
 ## Accessibility & Inclusion
 

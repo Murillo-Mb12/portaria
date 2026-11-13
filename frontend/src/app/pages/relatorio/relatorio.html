@@ -1,9 +1,9 @@
 <header class="cabecalho-pagina noprint">
   <h1>Relatório de acessos</h1>
-  <p>Escolha um período para ver o total de acessos e imprimir ou salvar em PDF.</p>
 </header>
 
 <div class="card noprint">
+  <h2 class="titulo-cartao">Período</h2>
   <form class="grid" [formGroup]="periodo" (ngSubmit)="gerar()">
     <label>De <input formControlName="de" type="date"></label>
     <label>Até <input formControlName="ate" type="date"></label>
@@ -13,9 +13,12 @@
 </div>
 
 @if (acessos(); as lista) {
-  <div class="card">
+  <div class="card tabela-scroll">
+    <div class="painel-topo">
+      <h2 class="titulo-cartao">Acessos no período <span class="contagem">{{ lista.length }}</span></h2>
+      <button type="button" class="sm noprint" (click)="imprimir()">Imprimir / salvar PDF</button>
+    </div>
     <app-tabela-acessos [acessos]="lista" />
-    <p><strong>Total de acessos: {{ lista.length }}</strong></p>
-    <button type="button" class="noprint" (click)="imprimir()">Imprimir / salvar PDF</button>
+    <p class="total"><strong>Total de acessos: {{ lista.length }}</strong></p>
   </div>
 }

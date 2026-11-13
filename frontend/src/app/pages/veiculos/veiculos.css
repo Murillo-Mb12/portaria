@@ -4,12 +4,12 @@
 .linha-pessoa {
   display: grid; grid-template-columns: 28px minmax(180px, 1fr) minmax(220px, 1.6fr) auto;
   gap: 10px; align-items: start;
-  background: #f8fafd; border: 1px solid var(--linha); border-radius: 12px; padding: 12px 14px;
+  background: var(--cab-painel); border: 1px solid var(--linha); border-radius: var(--raio-painel); padding: 12px 14px;
 }
 .numero {
   margin-top: calc(var(--rotulo) + (var(--campo) - 28px) / 2); height: 28px; width: 28px;
   display: flex; align-items: center; justify-content: center;
-  background: var(--marca); color: #fff; border-radius: 50%; font-size: 13px; font-weight: 600;
+  background: var(--superficie); color: var(--tinta-2); border: 1px solid var(--linha-campo); border-radius: var(--raio); font-size: 13px; font-weight: 600;
 }
 .remover { margin-top: var(--rotulo); height: var(--campo); }
 

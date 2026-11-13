@@ -6,18 +6,18 @@ related_targets: ["src/app/layout/shell/shell.html","src/styles.css"]
 ---
 
 ## Scope
-App da portaria inteiro (modo Operate): shell (menu, cabeçalho), Login, Entrada / Saída, Visitantes, Moradores, Veículos, Funcionários, Consulta e Relatórios. Tela principal: Entrada / Saída.
+Refazer o front-end inteiro (modo Operate): shell, Login, Entrada / Saída, Visitantes, Moradores, Veículos, Funcionários, Consulta e Relatórios. Tela principal: Entrada / Saída.
 
 ## Direction contract
 
-THESIS: O app de portaria no cânone de sistemas de gestão (menu lateral, cabeçalho de página com uma ação principal, cartões e tabelas), com o acabamento de Notion/Trello e gov.br. Recusa o painel corporativo frio: nada de grade cinza densa, cartões de indicadores ou jargão.
+THESIS: Um console de portaria profissional, como os softwares de controle de acesso usados em portarias de verdade: barra institucional azul com o emblema, menu lateral sóbrio, painéis com cabeçalho, tabelas densas e bem alinhadas e componentes retangulares. Recusa o visual "feito por IA": nada de neutros creme, botões em pílula, cartões amplos com ícone em quadradinho, saudações e subtítulos explicativos em toda tela.
 
-OWN-WORLD: Fundos neutros quentes (menu lateral cinza-quente, área de trabalho clara, cartões brancos com borda de 1px), uma cor de marca (a do LSVP; provisória até o logotipo chegar) para ação principal e seleção, etiquetas coloridas no estilo Trello para objetivo e perfil, botões em pílula e campos de 44px no estilo gov.br, foco visível âmbar, fonte Atkinson Hyperlegible.
+OWN-WORLD: Azul institucional SSVP #0053A1 na barra superior e no item ativo; vermelho SSVP #E20613 só como filete sob a barra e no emblema; cinzas frios de software (fundo #EEF1F5, painéis brancos, bordas #D5DBE3); fonte do sistema operacional (Segoe UI/Roboto); botões e campos retangulares de 4px com 40-44px de altura; selos de status retangulares (Visita, Doação, Outros); números tabulares.
 
-STORY: O porteiro vê na hora onde registrar quem chegou, faz isso em poucos cliques guiado pelo formulário e vê quem está no Lar e há quanto tempo. O administrador encontra histórico e relatórios sem procurar.
+STORY: O porteiro abre o console, vê quantas pessoas estão no Lar, quantas entraram e saíram hoje, registra a entrada no painel da esquerda e acompanha os presentes na tabela da direita, sem trocar de tela.
 
-FIRST VIEWPORT: Menu lateral à esquerda (marca no topo, grupos Portaria / Cadastros / Histórico, usuário embaixo); barra superior com saudação, data e relógio; cabeçalho "Entrada e saída" com o contador de presentes; cartão "Registrar entrada" com os três objetivos como opções grandes, os campos e o botão principal em pílula à direita; abaixo, "Presentes agora" com etiquetas, tempo no Lar e "Registrar saída". Momento assinatura: a linha recém-registrada acende na cor da marca e esmaece.
+FIRST VIEWPORT: Barra azul (emblema em selo branco, "Lar São Vicente de Paulo / Sistema de Portaria", relógio, data, usuário e Sair) com filete vermelho; menu lateral branco com item ativo azul; título "Entrada e saída"; faixa de situação com No Lar agora / Entradas hoje / Saídas hoje; console em duas colunas: painel "Registrar entrada" (objetivo em controle segmentado, campos empilhados, botão de largura total) e painel "Presentes agora" (tabela com pessoa e detalhe, selo de objetivo, veículo, hora, tempo e "Registrar saída").
 
-FORM: cânone (saída padrão) escolhido pela equipe; referências de acabamento: Notion/Trello e gov.br; seed:79df19e9f7cca637.
+FORM: seed: none (pinned) — a equipe fixou o mundo e a tela nas próprias palavras: "faça um front-end com cara de sistema de portaria profissional", com "o ícone do lar" (emblema SSVP) e as cores dele.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

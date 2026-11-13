@@ -1,9 +1,9 @@
 <header class="cabecalho-pagina">
   <h1>Consulta de acessos</h1>
-  <p>Pesquise o histórico de entradas e saídas por nome, placa, morador ou período.</p>
 </header>
 
 <div class="card">
+  <h2 class="titulo-cartao">Filtros</h2>
   <form class="grid" [formGroup]="filtro" (ngSubmit)="filtrar()">
     <label>Buscar <input formControlName="busca" placeholder="Nome, placa, morador, doação..."></label>
     <label>De <input formControlName="de" type="date"></label>
@@ -16,6 +16,7 @@
   @if (erro()) { <p class="err">{{ erro() }}</p> }
 </div>
 
-<div class="card">
+<div class="card tabela-scroll">
+  <h2 class="titulo-cartao">Acessos encontrados <span class="contagem">{{ acessos().length }}</span></h2>
   <app-tabela-acessos [acessos]="acessos()" />
 </div>

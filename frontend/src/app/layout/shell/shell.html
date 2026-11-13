@@ -1,80 +1,76 @@
 <div class="layout" [class.menu-aberto]="menuAberto()">
-  <aside class="lateral noprint" id="menu-principal">
-    <div class="marca">
-      @if (!semLogo()) {
-        <img class="marca-logo" src="logo-lsvp.png" alt="" (error)="semLogo.set(true)">
-      } @else {
-        <span class="marca-simbolo"><app-icone nome="morador" [tamanho]="22" /></span>
-      }
+  <header class="barra noprint">
+    <button type="button" class="botao-menu" (click)="menuAberto.set(!menuAberto())"
+            [attr.aria-expanded]="menuAberto()" aria-controls="menu-principal" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+
+    <a class="marca" routerLink="/entrada-saida">
+      <span class="selo"><img src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo"></span>
       <span class="marca-texto">
         <strong>Lar São Vicente de Paulo</strong>
-        <small>Portaria</small>
+        <span>Sistema de Portaria</span>
       </span>
-    </div>
+    </a>
 
-    <nav aria-label="Menu principal">
-      <span class="grupo">Portaria</span>
-      <a routerLink="/entrada-saida" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="entrada" />Entrada / Saída
-      </a>
-
-      <span class="grupo">Cadastros</span>
-      <a routerLink="/visitantes" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="visitante" />Visitantes
-      </a>
-      <a routerLink="/moradores" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="morador" />Moradores
-      </a>
-      <a routerLink="/veiculos" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="veiculo" />Veículos
-      </a>
-      @if (auth.isAdmin()) {
-        <a routerLink="/funcionarios" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="funcionario" />Funcionários
-        </a>
-      }
-
-      <span class="grupo">Histórico</span>
-      <a routerLink="/consulta" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="consulta" />Consulta de acessos
-      </a>
-      <a routerLink="/relatorio" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-        <app-icone nome="relatorio" />Relatórios
-      </a>
-    </nav>
-
-    @if (auth.usuario(); as u) {
-      <div class="usuario">
-        <span class="avatar" aria-hidden="true">{{ iniciais() }}</span>
-        <span class="usuario-info">
-          <strong>{{ u.nome }}</strong>
-          <span>{{ perfilLabel[u.perfil] }}</span>
+    <div class="barra-direita">
+      <span class="relogio" aria-label="Data e hora atuais">
+        <span class="hora">{{ agora() | date: 'HH:mm' }}</span>
+        <span class="data">{{ agora() | date: 'EEE, dd/MM/yyyy' }}</span>
+      </span>
+      @if (auth.usuario(); as u) {
+        <span class="usuario">
+          <app-icone nome="usuario" [tamanho]="18" />
+          <span class="usuario-info">
+            <strong>{{ u.nome }}</strong>
+            <span>{{ perfilLabel[u.perfil] }}</span>
+          </span>
         </span>
         <button type="button" class="sair" (click)="sair()">
-          <app-icone nome="sair" [tamanho]="18" />Sair
+          <app-icone nome="sair" [tamanho]="18" /><span>Sair</span>
         </button>
-      </div>
-    }
-  </aside>
+      }
+    </div>
+  </header>
 
-  <!-- Fundo escurecido atrás da gaveta (celular e tablet) -->
-  <div class="veu noprint" (click)="menuAberto.set(false)" aria-hidden="true"></div>
+  <div class="corpo">
+    <aside class="lateral noprint" id="menu-principal">
+      <nav aria-label="Menu principal">
+        <span class="grupo">Portaria</span>
+        <a routerLink="/entrada-saida" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="entrada" [tamanho]="18" />Entrada e saída
+        </a>
 
-  <div class="principal">
-    <header class="topo noprint">
-      <button type="button" class="botao-menu" (click)="menuAberto.set(!menuAberto())"
-              [attr.aria-expanded]="menuAberto()" aria-controls="menu-principal">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-        Menu
-      </button>
-      <span class="saudacao">{{ saudacao() }}, <strong>{{ primeiroNome() }}</strong></span>
-      <span class="data-hora">
-        <span class="data">{{ agora() | date: "EEEE, d 'de' MMMM" }}</span>
-        <span class="hora"><app-icone nome="relogio" [tamanho]="18" />{{ agora() | date: 'HH:mm' }}</span>
-      </span>
-    </header>
+        <span class="grupo">Cadastros</span>
+        <a routerLink="/visitantes" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="visitante" [tamanho]="18" />Visitantes
+        </a>
+        <a routerLink="/moradores" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="morador" [tamanho]="18" />Moradores
+        </a>
+        <a routerLink="/veiculos" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="veiculo" [tamanho]="18" />Veículos
+        </a>
+        @if (auth.isAdmin()) {
+          <a routerLink="/funcionarios" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+            <app-icone nome="funcionario" [tamanho]="18" />Funcionários
+          </a>
+        }
+
+        <span class="grupo">Histórico</span>
+        <a routerLink="/consulta" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="consulta" [tamanho]="18" />Consulta de acessos
+        </a>
+        <a routerLink="/relatorio" routerLinkActive="ativo" ariaCurrentWhenActive="page">
+          <app-icone nome="relatorio" [tamanho]="18" />Relatórios
+        </a>
+      </nav>
+    </aside>
+
+    <div class="veu noprint" (click)="menuAberto.set(false)" aria-hidden="true"></div>
+
     <main>
       <router-outlet />
     </main>

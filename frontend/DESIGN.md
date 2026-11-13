@@ -1,239 +1,259 @@
 ---
 name: Portaria LSVP
-description: Sistema de portaria do Lar São Vicente de Paulo — registro de entradas e saídas, cadastros e histórico.
+description: Console de portaria do Lar São Vicente de Paulo — registro de entradas e saídas, cadastros e histórico.
 colors:
-  marca: "#1351b4"
-  marca-forte: "#0c3d8c"
-  marca-suave: "#e8effa"
-  marca-borda: "#b9cdee"
-  tinta: "#2b2a26"
-  tinta-2: "#5f5d57"
-  fundo: "#fafaf8"
-  lateral: "#f3f2ee"
+  marca: "#0053a1"
+  marca-forte: "#003f7d"
+  marca-suave: "#e6eef8"
+  marca-borda: "#a9c2e2"
+  ssvp-vermelho: "#e20613"
+  tinta: "#17212b"
+  tinta-2: "#4d5866"
+  placeholder: "#7a8493"
+  fundo: "#eef1f5"
   superficie: "#ffffff"
-  linha: "#e7e5e0"
-  linha-campo: "#8d8a83"
-  hover: "#f1f0ec"
-  visita-fundo: "#e3edfb"
-  visita-texto: "#1351b4"
-  doacao-fundo: "#def3e6"
-  doacao-texto: "#136b3e"
-  outros-fundo: "#fcefd6"
-  outros-texto: "#7f4a00"
-  admin-fundo: "#ece6fb"
-  admin-texto: "#57399f"
-  sucesso: "#136b3e"
-  sucesso-fundo: "#e9f6ee"
-  erro: "#b42318"
-  erro-fundo: "#fdeeec"
-  foco: "#c2850c"
+  cab-painel: "#f6f8fb"
+  linha: "#d5dbe3"
+  linha-campo: "#8a94a3"
+  hover: "#f2f6fb"
+  zebra: "#fafbfd"
+  barra-rolagem: "#b7c0cc"
+  visita-fundo: "#e6eef8"
+  visita-texto: "#0053a1"
+  doacao-fundo: "#e3f3e9"
+  doacao-texto: "#0f6b3a"
+  outros-fundo: "#fdf0d9"
+  outros-texto: "#8a4b00"
+  admin-fundo: "#eee9f8"
+  admin-texto: "#4f3596"
+  sucesso: "#0f6b3a"
+  sucesso-fundo: "#e9f5ee"
+  erro: "#b3121c"
+  erro-fundo: "#fdeced"
+  erro-texto: "#8e0f16"
+  marca-pressionada: "#00336a"
+  selecao-texto: "#cfe0f4"
+  linha-edicao: "#fff8e1"
+  barra-texto-2: "#d6e4f4"
+  linha-recente: "#d7e6f7"
+  ponto-vazio: "#a3acb8"
 typography:
   display:
-    fontFamily: "Atkinson Hyperlegible, system-ui, Segoe UI, Roboto, Arial, sans-serif"
-    fontSize: "30px"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "-0.015em"
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "24px"
+    fontWeight: 600
+    lineHeight: 1.25
   title:
-    fontFamily: "Atkinson Hyperlegible, system-ui, Segoe UI, Roboto, Arial, sans-serif"
-    fontSize: "20px"
-    fontWeight: 700
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "16px"
+    fontWeight: 600
     lineHeight: 1.3
-    letterSpacing: "-0.01em"
   body:
-    fontFamily: "Atkinson Hyperlegible, system-ui, Segoe UI, Roboto, Arial, sans-serif"
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
     fontSize: "16px"
     fontWeight: 400
-    lineHeight: 1.5
-  label:
-    fontFamily: "Atkinson Hyperlegible, system-ui, Segoe UI, Roboto, Arial, sans-serif"
+    lineHeight: 1.45
+  table:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
     fontSize: "15px"
-    fontWeight: 700
-    lineHeight: 1.35
-  small:
-    fontFamily: "Atkinson Hyperlegible, system-ui, Segoe UI, Roboto, Arial, sans-serif"
-    fontSize: "14px"
     fontWeight: 400
-    lineHeight: 1.35
+    lineHeight: 1.45
+    fontFeature: "tnum"
+  label:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "14px"
+    fontWeight: 600
+    lineHeight: 1.3
+  clock:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "20px"
+    fontWeight: 600
+    lineHeight: 1.15
+    fontFeature: "tnum"
+  panel-heading:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "18px"
+    fontWeight: 600
+    lineHeight: 1.3
+  display-mobile:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "21px"
+    fontWeight: 600
+    lineHeight: 1.25
+  caption:
+    fontFamily: "Segoe UI, system-ui, -apple-system, Roboto, Helvetica Neue, Arial, sans-serif"
+    fontSize: "13px"
+    fontWeight: 600
+    lineHeight: 1.3
 rounded:
-  etiqueta: "6px"
-  campo: "8px"
-  item-menu: "10px"
-  cartao: "12px"
-  pilula: "999px"
+  barra-rolagem: "10px"
+  selo: "3px"
+  controle: "4px"
+  painel: "6px"
+  emblema: "50%"
 spacing:
-  campo-altura: "44px"
-  grupo: "18px"
-  cartao: "24px"
-  pagina-x: "40px"
-  pagina-y: "32px"
+  campo-altura: "42px"
+  painel: "20px"
+  grupo: "16px"
+  pagina: "24px"
 components:
   button-primary:
     backgroundColor: "{colors.marca}"
     textColor: "{colors.superficie}"
-    rounded: "{rounded.pilula}"
-    padding: "0 24px"
-    height: "44px"
+    rounded: "{rounded.controle}"
+    padding: "0 18px"
+    height: "42px"
   button-primary-hover:
     backgroundColor: "{colors.marca-forte}"
   button-secondary:
     backgroundColor: "{colors.superficie}"
-    textColor: "{colors.marca}"
-    rounded: "{rounded.pilula}"
-    padding: "0 24px"
-    height: "44px"
+    textColor: "{colors.tinta}"
+    rounded: "{rounded.controle}"
+    padding: "0 18px"
+    height: "42px"
   input:
     backgroundColor: "{colors.superficie}"
     textColor: "{colors.tinta}"
-    rounded: "{rounded.campo}"
-    padding: "0 14px"
-    height: "44px"
-  card:
+    rounded: "{rounded.controle}"
+    padding: "0 12px"
+    height: "42px"
+  panel:
     backgroundColor: "{colors.superficie}"
-    rounded: "{rounded.cartao}"
-    padding: "24px"
-  nav-item-active:
-    backgroundColor: "{colors.superficie}"
+    rounded: "{rounded.painel}"
+    padding: "20px"
+  panel-header:
+    backgroundColor: "{colors.cab-painel}"
     textColor: "{colors.tinta}"
-    rounded: "{rounded.item-menu}"
-  chip-visita:
+    padding: "12px 20px"
+  nav-item-active:
+    backgroundColor: "{colors.marca}"
+    textColor: "{colors.superficie}"
+    rounded: "{rounded.controle}"
+    height: "40px"
+  app-bar:
+    backgroundColor: "{colors.marca}"
+    textColor: "{colors.superficie}"
+    height: "60px"
+  badge-visita:
     backgroundColor: "{colors.visita-fundo}"
     textColor: "{colors.visita-texto}"
-    rounded: "{rounded.etiqueta}"
-    padding: "3px 10px"
-  chip-doacao:
+    rounded: "{rounded.selo}"
+    padding: "2px 8px"
+  badge-doacao:
     backgroundColor: "{colors.doacao-fundo}"
     textColor: "{colors.doacao-texto}"
-    rounded: "{rounded.etiqueta}"
-    padding: "3px 10px"
-  chip-outros:
+    rounded: "{rounded.selo}"
+    padding: "2px 8px"
+  badge-outros:
     backgroundColor: "{colors.outros-fundo}"
     textColor: "{colors.outros-texto}"
-    rounded: "{rounded.etiqueta}"
-    padding: "3px 10px"
+    rounded: "{rounded.selo}"
+    padding: "2px 8px"
 ---
 
 # Design System: Portaria LSVP
 
 ## Overview
 
-**Creative North Star: "O Balcão Acolhedor"** *(proposta; confirmar com a equipe)*
+**Creative North Star: "O Console da Portaria"** *(proposta; confirmar com a equipe)*
 
-Um sistema de gestão no formato que todo mundo já conhece — menu lateral, cabeçalho de página, cartões e tabelas — com o acabamento de Notion/Trello e a acessibilidade do gov.br. A diferença está no tom: fundos neutros levemente quentes no lugar do cinza corporativo, letra grande e muito legível, botões em pílula e etiquetas coloridas que dizem o objetivo de cada acesso de relance. O usuário é o porteiro de uma instituição de cuidado, muitas vezes com a pessoa esperando no balcão; nada pode parecer frio, denso ou difícil.
+Um software profissional de portaria, no padrão dos sistemas de controle de acesso usados em portarias de verdade. No topo, uma barra institucional azul com o emblema da Sociedade de São Vicente de Paulo e um filete vermelho; à esquerda, um menu sóbrio; no centro, painéis com cabeçalho, tabelas densas e componentes retangulares. A tela principal é um console: a situação do dia em cima, o registro à esquerda e os presentes à direita, sem trocar de tela.
 
-A densidade é confortável: campos e botões com 44 px, uma ação principal por área, textos de apoio curtos explicando cada tela. A cor da marca é reservada para ação e seleção; o resto da tela é neutro.
+A versão anterior (neutros quentes, botões em pílula, cartões amplos com ícones, saudações e subtítulos em toda tela) foi rejeitada pela equipe por "ainda estar com cara de IA". O sistema recusa esse vocabulário de propósito.
 
 **Key Characteristics:**
-- Cânone de sistemas de gestão, sem ironia e sem enfeites temáticos.
-- Neutros quentes (fundo #fafaf8, menu #f3f2ee) e cartões brancos com borda de 1px.
-- Fonte única Atkinson Hyperlegible, de alta legibilidade.
-- Botões em pílula, campos de 44 px e foco âmbar bem visível (padrão gov.br).
-- Etiquetas coloridas por objetivo (Visita, Doação, Outros) e por perfil.
+- Barra institucional azul SSVP com emblema em selo branco e filete vermelho de 3 px.
+- Fonte do sistema operacional: aparência de programa instalado.
+- Painéis brancos com faixa de cabeçalho cinza, cantos de 6 px.
+- Botões, campos e selos retangulares (4 px e 3 px).
+- Tabelas densas, com zebra discreta e números tabulares.
 
 ## Colors
 
-Neutros quentes com uma única cor de marca para ação e seleção, mais um conjunto pequeno de cores semânticas para etiquetas e mensagens.
+Cinzas frios de software com as duas cores do emblema SSVP: o azul domina a identidade, o vermelho aparece só como filete.
 
 ### Primary
-- **Azul de Marca — provisório** (#1351b4): botões principais, item ativo do menu (ícone), opção selecionada, seleção de texto. **Provisório:** será substituído pela cor principal do logotipo do LSVP quando o arquivo for entregue.
-- **Azul de Marca Profundo** (#0c3d8c): hover do botão principal e texto sobre fundo de marca suave.
-- **Azul de Marca Suave** (#e8effa): fundo da opção selecionada, linha recém-registrada, halo de foco dos campos.
+- **Azul SSVP** (#0053a1): barra superior, item ativo do menu, botão principal, segmento selecionado, foco. Medido no emblema.
+- **Azul SSVP Profundo** (#003f7d): hover do botão principal.
+- **Azul de Seleção** (#e6eef8): selo Visita, hover de botões pequenos, linha recém-registrada (#d7e6f7 no pico).
+
+### Secondary
+- **Vermelho SSVP** (#e20613): filete sob a barra superior e no topo do login. Medido no emblema.
 
 ### Neutral
-- **Tinta Quente** (#2b2a26): texto principal.
-- **Tinta de Apoio** (#5f5d57): descrições, rótulos secundários, cabeçalhos de tabela (≥4,5:1).
-- **Fundo de Trabalho** (#fafaf8): área principal das páginas.
-- **Menu Lateral** (#f3f2ee): menu, cabeçalho de tabela, página de login.
-- **Superfície** (#ffffff): cartões, campos, item ativo do menu.
-- **Divisória** (#e7e5e0): bordas de cartão e linhas de tabela.
-- **Borda de Campo** (#8d8a83): contorno de campos (≥3:1 contra o branco).
-
-### Semânticas
-- **Visita** (#e3edfb / #1351b4), **Doação** (#def3e6 / #136b3e), **Outros** (#fcefd6 / #7f4a00), **Administrador** (#ece6fb / #57399f): etiquetas.
-- **Sucesso** (#136b3e sobre #e9f6ee), **Erro** (#b42318 sobre #fdeeec): mensagens e validação.
-- **Foco** (#c2850c): contorno de foco do teclado.
+- **Tinta** (#17212b): texto principal.
+- **Tinta de Apoio** (#4d5866): rótulos, cabeçalhos de tabela, textos secundários (7:1).
+- **Fundo do Console** (#eef1f5): área de trabalho.
+- **Painel** (#ffffff) e **Cabeçalho de Painel** (#f6f8fb).
+- **Divisória** (#d5dbe3) e **Borda de Campo** (#8a94a3, 3:1).
 
 ### Named Rules
-**A Regra da Cor que Age.** A cor de marca aparece só onde há ação ou seleção (botão principal, opção marcada, item ativo). Fundos e textos são neutros.
+**A Regra do Filete.** O vermelho SSVP nunca preenche áreas: é filete e emblema.
 
-**A Regra da Etiqueta.** Objetivo e perfil são sempre etiquetas coloridas de fundo suave e texto escuro da mesma família, nunca texto colorido solto.
+**A Regra do Azul que Comanda.** O azul marca onde se está (menu, barra) e o que fazer (botão principal, segmento ativo). Nada mais é azul preenchido.
 
 ## Typography
 
-**Display Font:** Atkinson Hyperlegible (com system-ui, Segoe UI, Roboto, Arial)
-**Body Font:** Atkinson Hyperlegible
-**Character:** Uma única família, criada pelo Braille Institute para leitura fácil; distingue 0/O e 1/l/I, o que importa em placas e CPFs. Embutida no projeto, funciona sem internet.
+**Display / Body:** Segoe UI no Windows (Roboto no Android, San Francisco no iOS), via `system-ui`.
+**Character:** A fonte do próprio sistema operacional faz o console parecer um programa instalado, e não um site; não depende de internet.
 
 ### Hierarchy
-- **Display** (700, 30px, 1.2; 26px no celular): título da página (h1).
-- **Title** (700, 20px, 1.3): título de cartão (h2).
-- **Body** (400, 16px, 1.5): texto e campos; descrições limitadas a ~68ch.
-- **Label** (700, 15px, 1.35): rótulos de campo e de grupo.
-- **Small** (400, 14px): ajuda, cabeçalhos de tabela, etiquetas.
-
-### Named Rules
-**A Regra do Mínimo de 14.** Nenhum texto da interface fica abaixo de 14 px.
+- **Display** (600, 24px; 21px no celular): título da página.
+- **Title** (600, 16px): título de painel.
+- **Body** (400, 16px, 1.45): campos e texto.
+- **Table** (400, 15px, números tabulares): tabelas.
+- **Label** (600, 14px): rótulos de campo e grupos do menu.
+- **Caption** (600, 13px): cabeçalho de tabela e selos.
+- **Clock** (600, 20px, tabular): relógio da barra superior; **Panel heading** (600, 18px): título do login e destaque de painel.
 
 ## Layout
 
-Menu lateral fixo de 264 px à esquerda; barra superior fixa com saudação, data e relógio; conteúdo com largura máxima de 1240 px e respiro de 32/40 px. Formulários em grade automática (colunas de no mínimo 220 px, espaços de 18/20 px); a ação de envio fica numa linha própria no fim do formulário, alinhada à direita. Abaixo de 960 px o menu vira gaveta aberta pelo botão "Menu"; abaixo de 600 px os botões de envio ocupam a largura toda e as tabelas rolam para o lado com a coluna de ações fixa à direita.
+Barra superior fixa de 60 px; menu lateral fixo de 248 px; conteúdo até 1400 px com 24 px de margem. Na Entrada e saída, a partir de 1280 px, o console usa duas colunas (360 px de registro + tabela). Abaixo de 960 px o menu vira gaveta (botão na barra) e as tabelas rolam com a coluna de ações fixa à direita; abaixo de 600 px os botões ocupam a largura toda e a faixa de situação fica em três colunas compactas.
 
 ## Elevation & Depth
 
-Quase plano: profundidade por camadas de tom (menu, fundo, cartão branco) e bordas de 1 px. Sombras suaves, sempre com deslocamento e desfoque.
+Plano, com bordas de 1 px e uma sombra mínima nos painéis. Sombras maiores só em elementos sobrepostos.
 
 ### Shadow Vocabulary
-- **Cartão** (`box-shadow: 0 1px 2px rgba(43,42,38,.05), 0 2px 8px rgba(43,42,38,.04)`): cartões de conteúdo.
-- **Item ativo** (`box-shadow: 0 1px 2px rgba(43,42,38,.08), 0 0 0 1px #e7e5e0`): item selecionado do menu.
-- **Gaveta / Login** (`box-shadow: 0 10px 40px rgba(43,42,38,.18)` / `0 12px 32px rgba(43,42,38,.08)`): menu em gaveta e cartão de login.
+- **Painel** (`box-shadow: 0 1px 2px rgba(23,33,43,.06)`).
+- **Gaveta** (`box-shadow: 0 10px 30px rgba(23,33,43,.2)`).
+- **Login** (`box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 16px 40px rgba(0,20,50,.3)`).
 
 ## Shapes
 
-Cantos suaves e consistentes: etiquetas 6 px, campos 8 px, itens de menu 10 px, cartões 12 px, botões e contadores em pílula (999 px). Bordas de 1 px; nenhuma faixa colorida lateral.
+Formas retas de software: selos 3 px, controles 4 px, painéis 6 px. O único círculo é o selo branco do emblema.
 
 ## Components
 
 ### Buttons
-- **Shape:** pílula (999px), altura 44 px (36 px no tamanho pequeno).
-- **Primary:** fundo #1351b4, texto branco, 0 24px, negrito 16 px.
-- **Hover / Focus:** fundo #0c3d8c; foco com contorno âmbar #c2850c de 3 px.
-- **Secondary:** fundo branco, texto e borda na cor de marca; hover com fundo #e8effa.
-- **Perigo (Excluir/Remover):** texto vermelho sem borda; hover com fundo #fdeeec.
+- **Primary:** azul SSVP, texto branco, 42 px, 4 px, peso 600.
+- **Secondary:** branco com borda #8a94a3 e texto escuro.
+- **Pequeno (ações de linha):** 34 px; azul com borda clara, ou vermelho com borda clara para Excluir.
 
-### Chips (etiquetas)
-- **Style:** fundo suave + texto escuro da mesma família, 14 px negrito, cantos de 6 px.
-- **Contador "pessoas no Lar":** pílula verde com ponto; cinza quando ninguém está no Lar.
+### Selos (Visita, Doação, Outros, perfis)
+Retângulos de 3 px com fundo claro, borda da mesma família e texto escuro, 13 px.
 
-### Cards / Containers
-- **Corner Style:** 12 px. **Background:** branco. **Border:** 1 px #e7e5e0. **Internal Padding:** 24 px (20/16 px no celular).
+### Painéis
+Branco, borda #d5dbe3, cantos de 6 px; faixa de cabeçalho #f6f8fb com título de 16 px e contagem em caixinha. Tabelas encostam nas bordas do painel.
 
-### Inputs / Fields
-- **Style:** borda 1 px #8d8a83, fundo branco, cantos de 8 px, altura 44 px, texto 16 px.
-- **Focus:** borda na cor de marca + halo #e8effa de 3 px.
-- **Error:** borda #b42318 e mensagem em negrito logo abaixo.
+### Inputs
+Borda #8a94a3, 42 px, 4 px; foco com borda azul e halo `rgba(0,83,161,.2)`.
 
 ### Navigation
-- Itens de 46 px com ícone de traço, agrupados em Portaria / Cadastros / Histórico.
-- Ativo: fundo branco, negrito, ícone na cor de marca, sombra leve. Hover: #e9e7e1.
-- Celular e tablet: gaveta deslizante com véu escuro.
+Itens de 40 px com ícone de 18 px; grupos Portaria / Cadastros / Histórico; ativo em azul SSVP preenchido com texto branco.
 
-### Opções de objetivo (assinatura)
-Três opções grandes (80 px) com ícone em quadro de 44 px; a marcada ganha borda e fundo de marca suave e o ícone passa a branco sobre a cor de marca.
-
-### Linha recém-registrada (assinatura)
-A pessoa que acabou de entrar acende em #e8effa em "Presentes agora" e esmaece em 3,2 s (desligado com movimento reduzido).
+### Console de Entrada e saída (assinatura)
+Faixa de situação (No Lar agora / Entradas hoje / Saídas hoje), objetivo em controle segmentado de três partes e tabela de presentes com pessoa e detalhe, selo, placa, hora e tempo, e "Registrar saída". A linha recém-registrada acende em azul e esmaece em 3 s.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** usar a cor de marca só em ação e seleção (A Regra da Cor que Age).
-- **Do** manter campos e botões com 44 px de altura e texto de no mínimo 14 px.
-- **Do** colocar a ação de envio no fim do formulário, à direita.
-- **Do** mostrar objetivo e perfil como etiquetas coloridas.
-- **Do** trocar `--marca`, `--marca-forte`, `--marca-suave` e `--marca-borda` pela cor do logotipo do LSVP quando ele chegar.
+- **Do** usar o emblema SSVP inteiro, sem recortar nem recolorir.
+- **Do** colocar cada bloco de conteúdo num painel com faixa de cabeçalho.
+- **Do** manter controles com 40-44 px e texto de no mínimo 13 px (14 px em rótulos).
 
 ### Don't:
-- **Don't** fazer a interface parecer "sistema frio de empresa" (pedido da equipe): nada de cinza azulado, grade densa ou cartões de indicadores.
-- **Don't** usar faixas coloridas laterais em itens, cartões ou mensagens.
+- **Don't** usar botões em pílula, neutros creme ou cartões amplos com ícone em quadradinho: foi o que fez a versão anterior "parecer IA".
+- **Don't** colocar subtítulo explicativo sob o título de cada página nem saudações.
+- **Don't** preencher áreas com o vermelho SSVP.
 - **Don't** usar caracteres de texto ou emoji como ícones; os ícones são SVG de traço.
-- **Don't** inventar logotipo ou cores "oficiais" do LSVP.

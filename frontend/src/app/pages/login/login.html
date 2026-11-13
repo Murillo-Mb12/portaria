@@ -1,42 +1,37 @@
 <div class="pagina-login">
-  <form class="login" [formGroup]="form" (ngSubmit)="entrar()">
-    <div class="marca">
-      @if (!semLogo()) {
-        <img class="marca-logo" src="logo-lsvp.png" alt="" (error)="semLogo.set(true)">
-      } @else {
-        <span class="marca-simbolo"><app-icone nome="morador" [tamanho]="28" /></span>
-      }
-      <span class="marca-texto">
-        <strong>Lar São Vicente de Paulo</strong>
-        <span>Portaria</span>
-      </span>
+  <div class="painel-login">
+    <div class="identidade">
+      <img class="emblema" src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo">
+      <strong>Lar São Vicente de Paulo</strong>
+      <span>Sistema de Portaria</span>
     </div>
 
-    <h1>Entrar no sistema</h1>
-    <p class="sub">Use o usuário e a senha fornecidos pela administração.</p>
+    <form class="login" [formGroup]="form" (ngSubmit)="entrar()">
+      <h1>Acesso ao sistema</h1>
 
-    <label>Usuário
-      <input formControlName="usuario" autocomplete="username" autofocus>
-    </label>
+      <label>Usuário
+        <input formControlName="usuario" autocomplete="username" autofocus>
+      </label>
 
-    <label>Senha
-      <span class="campo-senha">
-        <input formControlName="senha" [type]="mostrarSenha() ? 'text' : 'password'" autocomplete="current-password">
-        <button type="button" class="mostrar" (click)="mostrarSenha.set(!mostrarSenha())"
-                [attr.aria-pressed]="mostrarSenha()">
-          {{ mostrarSenha() ? 'Ocultar' : 'Mostrar' }}
-        </button>
-      </span>
-    </label>
+      <label>Senha
+        <span class="campo-senha">
+          <input formControlName="senha" [type]="mostrarSenha() ? 'text' : 'password'" autocomplete="current-password">
+          <button type="button" class="mostrar" (click)="mostrarSenha.set(!mostrarSenha())"
+                  [attr.aria-pressed]="mostrarSenha()">
+            {{ mostrarSenha() ? 'Ocultar' : 'Mostrar' }}
+          </button>
+        </span>
+      </label>
 
-    <button type="submit" class="entrar" [disabled]="carregando()">
-      <app-icone nome="entrada" [tamanho]="18" />{{ carregando() ? 'Entrando...' : 'Entrar' }}
-    </button>
+      <button type="submit" class="entrar" [disabled]="carregando()">
+        {{ carregando() ? 'Entrando...' : 'Entrar' }}
+      </button>
 
-    @if (erro()) {
-      <p class="err">{{ erro() }}</p>
-    }
+      @if (erro()) {
+        <p class="err">{{ erro() }}</p>
+      }
+    </form>
 
-    <p class="demo">Demonstração: porteiro / 1234 ou admin / admin123</p>
-  </form>
+    <p class="rodape">Acesso restrito a funcionários autorizados.<br>Demonstração: porteiro / 1234 ou admin / admin123</p>
+  </div>
 </div>

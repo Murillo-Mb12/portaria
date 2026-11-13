@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
@@ -25,21 +25,6 @@ export class Shell {
 
   // Menu em gaveta (celular e tablet)
   protected menuAberto = signal(false);
-
-  // Logotipo do LSVP: se o arquivo public/logo-lsvp.png não existir, mostra o símbolo reserva
-  protected semLogo = signal(false);
-
-  protected saudacao = computed(() => {
-    const hora = this.agora().getHours();
-    return hora < 12 ? 'Bom dia' : hora < 18 ? 'Boa tarde' : 'Boa noite';
-  });
-
-  protected primeiroNome = computed(() => this.auth.usuario()?.nome.split(' ')[0] ?? '');
-
-  protected iniciais = computed(() => {
-    const partes = (this.auth.usuario()?.nome ?? '').trim().split(/\s+/);
-    return ((partes[0]?.[0] ?? '') + (partes.length > 1 ? partes[partes.length - 1][0] : '')).toUpperCase();
-  });
 
   constructor() {
     // Atualiza o relógio a cada 10 s e para o timer quando o layout é destruído (logout)
