@@ -1,0 +1,7 @@
+# Não vão para a imagem: o build do Maven acontece dentro dela
+target
+.mvn
+mvnw
+mvnw.cmd
+.vscode
+.idea

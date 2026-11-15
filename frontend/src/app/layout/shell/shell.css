@@ -1,91 +1,129 @@
 .layout { min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ---------- Barra institucional ---------- */
+.pular {
+  position: fixed; z-index: 70; left: 12px; top: -60px;
+  padding: 10px 14px; border-radius: var(--raio);
+  background: var(--superficie); color: var(--marca-texto); font-weight: 600;
+}
+.pular:focus { top: 12px; }
+main:focus { outline: none; }
+
+/* ---------- Barra: clara, emblema e nome do Lar em azul SSVP, filete vermelho ---------- */
 .barra {
   position: sticky; top: 0; z-index: 40;
   display: flex; align-items: center; gap: 16px;
-  height: 60px; padding: 0 20px 0 16px;
-  background: var(--marca); color: #fff;
-  border-bottom: 3px solid var(--ssvp-vermelho);
+  height: 64px; padding: 0 20px 0 18px;
+  background: var(--superficie); color: var(--tinta);
+  box-shadow: 0 1px 0 var(--divisoria);
 }
-.marca { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; min-width: 0; }
+/* O filete vermelho do emblema, curto, sob o nome do Lar */
+.barra::after {
+  content: ""; position: absolute; left: 18px; bottom: 0; width: 64px; height: 3px;
+  border-radius: 3px 3px 0 0; background: var(--ssvp-vermelho);
+}
+.marca { display: flex; align-items: center; gap: 12px; color: var(--tinta); text-decoration: none; min-width: 0; }
 .selo {
-  display: grid; place-items: center; width: 46px; height: 46px; flex-shrink: 0;
-  border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgba(255, 255, 255, .35);
+  display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--linha);
 }
-.selo img { width: 42px; height: 42px; object-fit: contain; }
-.marca-texto { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
-.marca-texto strong { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.marca-texto span { font-size: 13px; color: #d6e4f4; }
+.selo img { width: 39px; height: 39px; object-fit: contain; }
+.marca-texto { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.marca-texto strong {
+  font-size: 18px; font-weight: 700; color: var(--nome-lar);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.marca-texto span { font-size: 14px; color: var(--tinta-2); }
 
-.barra-direita { display: flex; align-items: center; gap: 18px; margin-left: auto; }
-.relogio { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; font-variant-numeric: tabular-nums; }
-.hora { font-size: 20px; font-weight: 600; }
-.data { font-size: 13px; color: #d6e4f4; text-transform: capitalize; }
+.barra-direita { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.data { text-align: right; font-size: 14px; line-height: 1.2; color: var(--tinta-2); margin-right: 2px; }
+.data::first-line { color: var(--tinta); text-transform: capitalize; }
+.relogio { font-size: 24px; font-weight: 600; line-height: 1; color: var(--tinta); }
 .usuario {
-  display: flex; align-items: center; gap: 8px;
-  padding-left: 18px; border-left: 1px solid rgba(255, 255, 255, .3);
+  display: flex; flex-direction: column; line-height: 1.2;
+  padding-left: 14px; margin-left: 6px; border-left: 1px solid var(--divisoria);
 }
-.usuario-info { display: flex; flex-direction: column; line-height: 1.2; }
-.usuario-info strong { font-size: 14px; font-weight: 600; }
-.usuario-info span { font-size: 13px; color: #d6e4f4; }
-.sair {
-  min-height: 34px; padding: 0 12px; font-size: 14px;
-  background: transparent; color: #fff; border-color: rgba(255, 255, 255, .55);
-}
-.sair:hover { background: rgba(255, 255, 255, .12); border-color: #fff; }
-.botao-menu { display: none; }
+.usuario strong { font-size: 15px; font-weight: 600; }
+.usuario span { font-size: 14px; color: var(--tinta-2); }
 
-/* ---------- Corpo: menu lateral + conteúdo ---------- */
+button.na-barra { color: var(--tinta-2); min-height: 44px; }
+button.na-barra:hover { color: var(--tinta); }
+.tema { width: 44px; padding: 0; }
+.sair { padding: 0 12px; }
+.botao-menu { display: none; width: 44px; padding: 0; }
+
+/* ---------- Corpo: menu claro com o filete de madeira + conteúdo ---------- */
 .corpo { flex: 1; display: flex; min-height: 0; }
 
 .lateral {
-  width: 248px; flex-shrink: 0;
-  position: sticky; top: 63px; height: calc(100vh - 63px); overflow-y: auto;
-  background: var(--superficie); border-right: 1px solid var(--linha);
+  width: 236px; flex-shrink: 0; display: flex; flex-direction: column;
+  position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
+  background: var(--lateral); color: var(--tinta);
+  border-right: 4px solid var(--madeira);
 }
-nav { display: flex; flex-direction: column; gap: 2px; padding: 8px 10px 16px; }
-.grupo { margin: 14px 10px 4px; font-size: 13px; font-weight: 600; color: var(--tinta-2); }
+nav { display: flex; flex-direction: column; gap: 2px; padding: 12px 12px 18px; }
+.grupo { margin: 16px 12px 4px; font-size: 13.5px; font-weight: 600; color: var(--tinta-2); }
 nav a {
-  display: flex; align-items: center; gap: 10px;
-  min-height: 40px; padding: 0 10px; border-radius: var(--raio);
-  color: var(--tinta); text-decoration: none; font-size: 15px; white-space: nowrap;
-  transition: background-color .12s ease-out;
+  display: flex; align-items: center; gap: 11px;
+  min-height: 44px; padding: 0 12px; border-radius: 10px;
+  color: var(--tinta); text-decoration: none; font-size: 16.5px; white-space: nowrap;
+  transition: background-color .12s ease-out, color .12s ease-out;
 }
 nav a app-icone { color: var(--tinta-2); }
-nav a:hover { background: var(--hover); }
-nav a.ativo { background: var(--marca); color: #fff; font-weight: 600; }
-nav a.ativo app-icone { color: #fff; }
+nav a:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+nav a:focus-visible { outline-offset: -2px; }
+/* Onde você está: mariano suave */
+nav a.ativo { background: var(--marca-suave); color: var(--marca-texto); font-weight: 600; }
+nav a.ativo app-icone { color: var(--marca-texto); }
+.usuario-menu { display: none; }
 
-main { flex: 1; min-width: 0; padding: 22px 24px 40px; max-width: 1400px; }
+main { flex: 1; min-width: 0; padding: 28px 32px 48px; max-width: 1440px; }
 .veu { display: none; }
+
+/* ---------- Telas médias ---------- */
+@media (max-width: 1180px) {
+  .data { display: none; }
+}
 
 /* ---------- Tablet e celular: menu em gaveta ---------- */
 @media (max-width: 960px) {
-  .botao-menu {
-    display: inline-flex; min-height: 40px; width: 40px; padding: 0;
-    background: transparent; border-color: rgba(255, 255, 255, .55); color: #fff;
-  }
-  .botao-menu:hover { background: rgba(255, 255, 255, .12); }
+  .barra { height: 60px; gap: 10px; padding: 0 12px; }
+  .barra::after { left: 66px; width: 40px; }
+  .botao-menu { display: inline-flex; }
+  .usuario { display: none; }
   .lateral {
-    position: fixed; z-index: 30; left: 0; top: 63px; bottom: 0; height: auto;
+    position: fixed; z-index: 30; left: 0; top: 60px; bottom: 0; height: auto;
     transform: translateX(-100%); visibility: hidden;
     transition: transform .22s cubic-bezier(.2, .8, .2, 1), visibility .22s;
-    box-shadow: 0 10px 30px rgba(23, 33, 43, .2);
+    box-shadow: var(--sombra-alta);
   }
   .menu-aberto .lateral { transform: none; visibility: visible; }
-  .veu { display: block; position: fixed; inset: 63px 0 0; z-index: 20; background: rgba(23, 33, 43, .35); opacity: 0; pointer-events: none; transition: opacity .22s; }
+  .usuario-menu {
+    display: flex; align-items: center; gap: 8px; margin: auto 0 0; padding: 14px 22px;
+    border-top: 1px solid var(--divisoria); font-size: 14.5px; color: var(--tinta-2);
+  }
+  .veu { display: block; position: fixed; inset: 60px 0 0; z-index: 20; background: rgba(0, 0, 0, .4); opacity: 0; pointer-events: none; transition: opacity .22s; }
   .menu-aberto .veu { opacity: 1; pointer-events: auto; }
-  .usuario { display: none; }
-  main { padding: 18px 16px 32px; }
+  main { padding: 18px 16px 36px; }
 }
 @media (max-width: 600px) {
-  .barra { gap: 10px; padding: 0 10px; }
-  .marca-texto span, .data { display: none; }
-  .marca-texto strong { font-size: 15px; }
+  .marca-texto span { display: none; }
+  .marca-texto strong { font-size: 16px; white-space: normal; line-height: 1.1; }
   .selo { width: 40px; height: 40px; }
-  .selo img { width: 36px; height: 36px; }
-  .hora { font-size: 18px; }
+  .selo img { width: 35px; height: 35px; }
+  .relogio { font-size: 21px; }
   .sair span { display: none; }
-  .sair { width: 38px; padding: 0; }
+  .sair { width: 44px; padding: 0; }
+  .barra-direita { gap: 6px; }
+}
+/* Celular estreito: o emblema identifica o Lar; o relógio continua visível */
+@media (max-width: 420px) {
+  .marca-texto { display: none; }
+}
+
+/* À noite o disco branco do emblema não deve ofuscar */
+:root[data-tema="escuro"] .selo img { opacity: .9; }
+:root[data-tema="escuro"] .selo { background: #dfe4ea; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) .selo img { opacity: .9; }
+  :root:not([data-tema="claro"]) .selo { background: #dfe4ea; }
 }

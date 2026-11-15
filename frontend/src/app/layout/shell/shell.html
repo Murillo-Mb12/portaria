@@ -1,34 +1,39 @@
 <div class="layout" [class.menu-aberto]="menuAberto()">
+  <!-- Atalho de teclado: pula a barra e o menu e vai direto para a tela -->
+  <a class="pular noprint" href="#conteudo" (click)="$event.preventDefault(); conteudo.focus()">Ir para o conteúdo</a>
+
   <header class="barra noprint">
-    <button type="button" class="botao-menu" (click)="menuAberto.set(!menuAberto())"
-            [attr.aria-expanded]="menuAberto()" aria-controls="menu-principal" aria-label="Abrir menu">
-      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M4 7h16M4 12h16M4 17h16" />
-      </svg>
+    <button type="button" class="leve na-barra botao-menu" (click)="menuAberto.set(!menuAberto())"
+            [attr.aria-expanded]="menuAberto()" aria-controls="menu-principal"
+            [attr.aria-label]="menuAberto() ? 'Fechar menu' : 'Abrir menu'">
+      <app-icone [nome]="menuAberto() ? 'fechar' : 'menu'" [tamanho]="22" />
     </button>
 
     <a class="marca" routerLink="/entrada-saida">
-      <span class="selo"><img src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo"></span>
+      <span class="selo"><img src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo" width="44" height="44"></span>
       <span class="marca-texto">
         <strong>Lar São Vicente de Paulo</strong>
-        <span>Sistema de Portaria</span>
+        <span>Portaria · Sorocaba</span>
       </span>
     </a>
 
     <div class="barra-direita">
-      <span class="relogio" aria-label="Data e hora atuais">
-        <span class="hora">{{ agora() | date: 'HH:mm' }}</span>
-        <span class="data">{{ agora() | date: 'EEE, dd/MM/yyyy' }}</span>
-      </span>
+      <span class="data">{{ agora() | date: 'EEEE' }}<br>{{ agora() | date: 'dd/MM/yyyy' }}</span>
+      <time class="relogio" [attr.datetime]="agora().toISOString()" aria-label="Hora atual">{{ agora() | date: 'HH:mm' }}</time>
+
       @if (auth.usuario(); as u) {
         <span class="usuario">
-          <app-icone nome="usuario" [tamanho]="18" />
-          <span class="usuario-info">
-            <strong>{{ u.nome }}</strong>
-            <span>{{ perfilLabel[u.perfil] }}</span>
-          </span>
+          <strong>{{ u.nome }}</strong>
+          <span>{{ perfilLabel[u.perfil] }}</span>
         </span>
-        <button type="button" class="sair" (click)="sair()">
+      }
+      <button type="button" class="leve na-barra tema" (click)="tema.alternar()"
+              [attr.aria-label]="tema.escuro() ? 'Usar tema claro (dia)' : 'Usar tema escuro (noite)'"
+              [title]="tema.escuro() ? 'Tema claro' : 'Tema escuro'">
+        <app-icone [nome]="tema.escuro() ? 'sol' : 'lua'" [tamanho]="20" />
+      </button>
+      @if (auth.usuario()) {
+        <button type="button" class="leve na-barra sair" (click)="sair()">
           <app-icone nome="sair" [tamanho]="18" /><span>Sair</span>
         </button>
       }
@@ -40,39 +45,47 @@
       <nav aria-label="Menu principal">
         <span class="grupo">Portaria</span>
         <a routerLink="/entrada-saida" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="entrada" [tamanho]="18" />Entrada e saída
+          <app-icone nome="entrada" [tamanho]="19" />Entrada e saída
         </a>
 
         <span class="grupo">Cadastros</span>
         <a routerLink="/visitantes" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="visitante" [tamanho]="18" />Visitantes
+          <app-icone nome="visitante" [tamanho]="19" />Visitantes
         </a>
         <a routerLink="/moradores" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="morador" [tamanho]="18" />Moradores
+          <app-icone nome="morador" [tamanho]="19" />Moradores
         </a>
         <a routerLink="/veiculos" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="veiculo" [tamanho]="18" />Veículos
+          <app-icone nome="veiculo" [tamanho]="19" />Veículos
         </a>
         @if (auth.isAdmin()) {
           <a routerLink="/funcionarios" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-            <app-icone nome="funcionario" [tamanho]="18" />Funcionários
+            <app-icone nome="funcionario" [tamanho]="19" />Funcionários
           </a>
         }
 
         <span class="grupo">Histórico</span>
         <a routerLink="/consulta" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="consulta" [tamanho]="18" />Consulta de acessos
+          <app-icone nome="consulta" [tamanho]="19" />Consulta de acessos
         </a>
         <a routerLink="/relatorio" routerLinkActive="ativo" ariaCurrentWhenActive="page">
-          <app-icone nome="relatorio" [tamanho]="18" />Relatórios
+          <app-icone nome="relatorio" [tamanho]="19" />Relatórios
         </a>
       </nav>
+
+      @if (auth.usuario(); as u) {
+        <!-- No celular e tablet a barra não tem espaço: o usuário aparece no fim do menu -->
+        <p class="usuario-menu"><app-icone nome="usuario" [tamanho]="18" />{{ u.nome }} · {{ perfilLabel[u.perfil] }}</p>
+      }
     </aside>
 
     <div class="veu noprint" (click)="menuAberto.set(false)" aria-hidden="true"></div>
 
-    <main>
+    <main #conteudo id="conteudo" tabindex="-1">
       <router-outlet />
     </main>
   </div>
+
+  <app-avisos />
+  <app-dialogo-confirmacao />
 </div>

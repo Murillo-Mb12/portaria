@@ -33,15 +33,15 @@ Diferente dos sistemas de portaria para empresas e condomínios, o fluxo é dese
 - Telas: Login; Entrada / Saída (com lista "Presentes agora"); Visitantes; Moradores; Veículos; Funcionários (só administrador); Consulta de acessos; Relatórios (com impressão / PDF).
 - Perfis: ADMINISTRADOR e PORTEIRO. O menu do porteiro não mostra Funcionários.
 - Campos com máscara: CPF (000.000.000-00), telefone/celular e placa (ABC-1234 ou ABC1D23).
-- Stack existente: Angular 21 (standalone, signals, zoneless) consumindo API REST Spring Boot. Interface em fonte do sistema operacional (Segoe UI no Windows da portaria, Roboto no Android), sem depender de internet.
+- Stack existente: Angular 21 (standalone, signals, zoneless) consumindo API REST Spring Boot. Fonte Source Sans 3 embutida no próprio sistema (pacote @fontsource), sem depender de internet. Tema claro e escuro: a portaria funciona dia e noite, em vários turnos (confirmado).
 - Termos do domínio: morador, visitante, vínculo (familiar, cuidador, amigo), objetivo (visita, doação, outros), finalidade, presentes, unidade (ala e quarto).
 
 ## Brand Commitments
 
 - Identidade: **emblema da Sociedade de São Vicente de Paulo (SSVP Brasil)**, entregue pela equipe como "ícone do Lar" (arquivos `public/logo-lsvp.png` e `public/logo-lsvp-64.png`). Usar o emblema inteiro, sem recortar nem recolorir.
-- Cores oficiais medidas no emblema: **azul #0053A1** e **vermelho #E20613**. O vermelho é de destaque pontual (como no emblema), nunca cor de fundo de áreas grandes.
+- Cores oficiais medidas no emblema: **azul #0053A1** e **vermelho #E20613**. O vermelho é de destaque pontual (como no emblema), nunca cor de fundo de áreas grandes. A equipe liberou **cores de apoio** que conversem com as duas (confirmado).
 - Nome exibido: "Lar São Vicente de Paulo" / "Portaria".
-- **Direção visual (pedido da equipe, nas palavras dela): "front-end com cara de sistema de portaria profissional".** A versão anterior, em neutros quentes com botões em pílula e cartões amplos, foi rejeitada por "ainda estar com cara de IA". A referência é o software profissional de controle de acesso e portaria: console operacional, informação densa e bem alinhada, componentes sóbrios e cores institucionais.
+- **Direção visual: "Capela Caiada"** (escolhida numa nova rodada de direções do Impeccable, pedindo um visual mais suave). A calma da capela do Lar: fundo branco de cal, cartões brancos sem borda com sombra levíssima, azul mariano suave nas ações e no item ativo, filete de madeira clara no menu, pontos coloridos para o objetivo (azul visita, verde doação, ocre outros). Barra clara com o emblema, o nome do Lar em azul SSVP e um filete vermelho curto. Histórico: neutros quentes com pílulas (rejeitado: "cara de IA"); console de portaria (rejeitado: "painel genérico"); Placa Esmaltada (aprovada, depois considerada pesada pelo grupo: "muitos quadrados com bordas grandes").
 
 ## Evidence on Hand
 

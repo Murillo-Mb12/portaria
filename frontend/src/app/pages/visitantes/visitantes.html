@@ -2,11 +2,11 @@
   <h1>Visitantes</h1>
 </header>
 
-<div class="card">
-  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar visitante' : 'Cadastrar visitante' }}</h2>
+<section #painelFormulario class="card painel-formulario" aria-labelledby="titulo-formulario">
+  <h2 class="titulo-cartao" id="titulo-formulario">{{ editandoId() ? 'Editar visitante' : 'Cadastrar visitante' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Nome
-      <input formControlName="nome">
+      <input formControlName="nome" maxlength="100" autocomplete="off">
       <app-erro-campo [control]="form.controls.nome" />
     </label>
     <label>CPF
@@ -32,39 +32,53 @@
                             vazio="Cadastre um morador primeiro." />
     </div>
 
+    @if (erro()) { <p class="err largura-total" role="alert">{{ erro() }}</p> }
     <div class="acoes acoes-final">
-      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
       }
+      <button type="submit" [disabled]="salvando()" [attr.aria-busy]="salvando()">
+        {{ salvando() ? 'Salvando...' : editandoId() ? 'Salvar alterações' : 'Cadastrar visitante' }}
+      </button>
     </div>
   </form>
-  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+</section>
 
-<div class="card tabela-scroll">
-  <h2 class="titulo-cartao">Visitantes cadastrados <span class="contagem">{{ visitantes().length }}</span></h2>
+<section class="card tabela-scroll" aria-labelledby="titulo-lista">
+  <div class="painel-topo">
+    <h2 class="titulo-cartao" id="titulo-lista">Visitantes cadastrados <span class="contagem">{{ visitantes().length }}</span></h2>
+    <div class="busca-tabela">
+      <app-icone nome="consulta" [tamanho]="16" />
+      <input type="search" [value]="filtro()" (input)="filtro.set($any($event.target).value)"
+             placeholder="Buscar nome, CPF ou morador" aria-label="Buscar visitante">
+    </div>
+  </div>
   <table>
     <thead>
-      <tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Vínculo</th><th>Moradores</th><th></th></tr>
+      <tr><th scope="col">Nome</th><th scope="col">CPF</th><th scope="col">Telefone</th><th scope="col">Vínculo</th><th scope="col">Moradores que visita</th><th scope="col"><span class="sr-only">Ações</span></th></tr>
     </thead>
     <tbody>
-      @for (v of visitantes(); track v.id) {
+      @for (v of filtrados(); track v.id) {
         <tr [class.editando]="v.id === editandoId()">
           <td>{{ v.nome }}</td>
-          <td>{{ v.documento }}</td>
-          <td>{{ v.telefone }}</td>
+          <td class="nowrap">{{ v.documento }}</td>
+          <td class="nowrap">{{ v.telefone }}</td>
           <td>{{ vinculoLabel[v.vinculo] }}</td>
           <td>{{ nomesMoradores(v) }}</td>
           <td class="acoes-linha">
-            <button type="button" class="sm" (click)="editar(v)">Editar</button>
-            <button type="button" class="sm perigo" (click)="excluir(v)">Excluir</button>
+            <button type="button" class="sm" (click)="editar(v)" [attr.aria-label]="'Editar ' + v.nome">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(v)" [attr.aria-label]="'Excluir ' + v.nome">Excluir</button>
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum visitante cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
+        @if (carregando()) {
+          <tr><td colspan="6" class="carregando"><span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span></td></tr>
+        } @else if (visitantes().length) {
+          <tr><td colspan="6">Nenhum visitante encontrado para "{{ filtro() }}". <button type="button" class="sm" (click)="filtro.set('')">Limpar busca</button></td></tr>
+        } @else {
+          <tr><td colspan="6">Nenhum visitante cadastrado ainda. Use o formulário acima para cadastrar o primeiro.</td></tr>
+        }
       }
     </tbody>
   </table>
-</div>
+</section>

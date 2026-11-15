@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,6 +48,7 @@ public class Veiculo {
 
     // Pessoas que usam o carro (ex.: vários membros da mesma família)
     @ManyToMany
+    @OrderBy("nome ASC")
     @JoinTable(name = "TBL_VEICULO_VISITANTE",
             joinColumns = @JoinColumn(name = "VEICULO_ID"),
             inverseJoinColumns = @JoinColumn(name = "VISITANTE_ID"))

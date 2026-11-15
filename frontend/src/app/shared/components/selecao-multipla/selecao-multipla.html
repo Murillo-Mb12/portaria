@@ -11,7 +11,7 @@
            (keydown.enter)="$event.preventDefault()"
            aria-label="Pesquisar">
     @if (busca()) {
-      <button type="button" class="limpar" (click)="limparBusca()" aria-label="Limpar pesquisa"><app-icone nome="fechar" [tamanho]="16" /></button>
+      <button type="button" class="leve limpar" (click)="limparBusca()" aria-label="Limpar pesquisa"><app-icone nome="fechar" [tamanho]="16" /></button>
     }
   </div>
 
@@ -20,9 +20,9 @@
     <div class="selecionados">
       <span class="rotulo-selecionados">Selecionados ({{ selecionados().length }}):</span>
       @for (s of selecionados(); track s.id) {
-        <span class="chip">
+        <span class="placa chip">
           {{ s.rotulo }}
-          <button type="button" (click)="alternar(s.id, false)" [attr.aria-label]="'Remover ' + s.rotulo"><app-icone nome="fechar" [tamanho]="14" /></button>
+          <button type="button" class="leve" (click)="alternar(s.id, false)" [attr.aria-label]="'Remover ' + s.rotulo"><app-icone nome="fechar" [tamanho]="14" /></button>
         </span>
       }
     </div>
@@ -46,7 +46,7 @@
   </div>
 
   @if (filtradas().length > limite()) {
-    <button type="button" class="ver-mais" (click)="alternarExpandido()">
+    <button type="button" class="leve ver-mais" (click)="alternarExpandido()">
       {{ expandido() ? 'Ver menos' : 'Ver mais (' + escondidas() + ')' }}
     </button>
   }

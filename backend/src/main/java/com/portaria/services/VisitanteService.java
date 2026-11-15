@@ -37,7 +37,7 @@ public class VisitanteService {
 
     @Transactional(readOnly = true)
     public List<VisitanteResponse> getVisitantes() {
-        return repository.findAll()
+        return repository.findAllByOrderByNomeAsc()
                 .stream()
                 .map(VisitanteMapper::toDTO)
                 .toList();

@@ -30,4 +30,9 @@ export class AcessoService {
   registrarSaida(id: number): Observable<AcessoResponse> {
     return this.http.put<AcessoResponse>(`${this.url}/${id}/saida`, {});
   }
+
+  /** Desfaz uma saída registrada por engano (só nos primeiros minutos). */
+  desfazerSaida(id: number): Observable<AcessoResponse> {
+    return this.http.delete<AcessoResponse>(`${this.url}/${id}/saida`);
+  }
 }

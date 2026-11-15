@@ -25,7 +25,7 @@ public class Funcionario {
     @Column(nullable = false, unique = true, length = 50)
     private String usuario;
 
-    // Protótipo: senha em texto puro. Em produção use Spring Security + BCrypt.
+    // Hash BCrypt da senha (nunca o texto puro). Ver PasswordConfig e FuncionarioService.
     @Column(nullable = false, length = 100)
     private String senha;
 

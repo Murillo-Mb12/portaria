@@ -1,2 +1,5 @@
 # Configurações locais de cada integrante (senha do banco etc.)
 .env
+
+# Configuração local da ferramenta de desenvolvimento (Claude Code): não vai para o repositório
+.claude/

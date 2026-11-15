@@ -2,8 +2,8 @@
   <h1>Veículos</h1>
 </header>
 
-<div class="card">
-  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h2>
+<section #painelFormulario class="card painel-formulario" aria-labelledby="titulo-formulario">
+  <h2 class="titulo-cartao" id="titulo-formulario">{{ editandoId() ? 'Editar veículo' : 'Cadastrar veículo' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Placa
       <input formControlName="placa" appMascara="placa" placeholder="ABC1D23 ou ABC-1234">
@@ -56,7 +56,8 @@
                 </select>
                 <app-erro-campo [control]="linha.controls.visitanteId" />
               </label>
-              <button type="button" class="sm perigo remover" (click)="removerPessoa(i)">Remover</button>
+              <button type="button" class="sm perigo remover" (click)="removerPessoa(i)"
+                      [attr.aria-label]="'Remover a pessoa ' + (i + 1)">Remover</button>
             </div>
           }
         </div>
@@ -75,39 +76,53 @@
       </label>
     }
 
+    @if (erro()) { <p class="err largura-total" role="alert">{{ erro() }}</p> }
     <div class="acoes acoes-final">
-      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
       }
+      <button type="submit" [disabled]="salvando()" [attr.aria-busy]="salvando()">
+        {{ salvando() ? 'Salvando...' : editandoId() ? 'Salvar alterações' : 'Cadastrar veículo' }}
+      </button>
     </div>
   </form>
-  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+</section>
 
-<div class="card tabela-scroll">
-  <h2 class="titulo-cartao">Veículos cadastrados <span class="contagem">{{ veiculos().length }}</span></h2>
+<section class="card tabela-scroll" aria-labelledby="titulo-lista">
+  <div class="painel-topo">
+    <h2 class="titulo-cartao" id="titulo-lista">Veículos cadastrados <span class="contagem">{{ veiculos().length }}</span></h2>
+    <div class="busca-tabela">
+      <app-icone nome="consulta" [tamanho]="16" />
+      <input type="search" [value]="filtro()" (input)="filtro.set($any($event.target).value)"
+             placeholder="Buscar placa, modelo ou pessoa" aria-label="Buscar veículo">
+    </div>
+  </div>
   <table>
     <thead>
-      <tr><th>Placa</th><th>Veículo</th><th>Cor</th><th>Tipo</th><th>Quem usa / Responsável</th><th></th></tr>
+      <tr><th scope="col">Placa</th><th scope="col">Veículo</th><th scope="col">Cor</th><th scope="col">Tipo</th><th scope="col">Quem usa / Responsável</th><th scope="col"><span class="sr-only">Ações</span></th></tr>
     </thead>
     <tbody>
-      @for (v of veiculos(); track v.id) {
+      @for (v of filtrados(); track v.id) {
         <tr [class.editando]="v.id === editandoId()">
-          <td>{{ v.placa }}</td>
+          <td><span class="placa-carro">{{ formatarPlaca(v.placa) }}</span></td>
           <td>{{ v.marca }} {{ v.modelo }}</td>
           <td>{{ v.cor }}</td>
           <td>{{ tipoLabel[v.tipo] }}</td>
           <td>{{ quemUsa(v) }}</td>
           <td class="acoes-linha">
-            <button type="button" class="sm" (click)="editar(v)">Editar</button>
-            <button type="button" class="sm perigo" (click)="excluir(v)">Excluir</button>
+            <button type="button" class="sm" (click)="editar(v)" [attr.aria-label]="'Editar o veículo ' + v.placa">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(v)" [attr.aria-label]="'Excluir o veículo ' + v.placa">Excluir</button>
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum veículo cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
+        @if (carregando()) {
+          <tr><td colspan="6" class="carregando"><span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span></td></tr>
+        } @else if (veiculos().length) {
+          <tr><td colspan="6">Nenhum veículo encontrado para "{{ filtro() }}". <button type="button" class="sm" (click)="filtro.set('')">Limpar busca</button></td></tr>
+        } @else {
+          <tr><td colspan="6">Nenhum veículo cadastrado ainda. Use o formulário acima para cadastrar o primeiro.</td></tr>
+        }
       }
     </tbody>
   </table>
-</div>
+</section>

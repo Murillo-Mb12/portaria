@@ -1,37 +1,39 @@
 <div class="pagina-login">
-  <div class="painel-login">
-    <div class="identidade">
-      <img class="emblema" src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo">
-      <strong>Lar São Vicente de Paulo</strong>
-      <span>Sistema de Portaria</span>
-    </div>
+  <div class="coluna">
+    <!-- A porta do Lar: quem chega sabe onde está -->
+    <header class="placa-porta">
+      <span class="selo"><img src="logo-lsvp.png" alt="Emblema da Sociedade de São Vicente de Paulo" width="88" height="88"></span>
+      <span class="nome-lar">Lar São Vicente<br>de Paulo</span>
+      <span class="filete" aria-hidden="true"></span>
+      <span class="setor">Portaria</span>
+    </header>
 
     <form class="login" [formGroup]="form" (ngSubmit)="entrar()">
-      <h1>Acesso ao sistema</h1>
+      <h1>Entrar no sistema</h1>
 
       <label>Usuário
-        <input formControlName="usuario" autocomplete="username" autofocus>
+        <input #campoUsuario formControlName="usuario" autocomplete="username" autocapitalize="off" spellcheck="false">
       </label>
 
       <label>Senha
         <span class="campo-senha">
           <input formControlName="senha" [type]="mostrarSenha() ? 'text' : 'password'" autocomplete="current-password">
-          <button type="button" class="mostrar" (click)="mostrarSenha.set(!mostrarSenha())"
-                  [attr.aria-pressed]="mostrarSenha()">
+          <button type="button" class="leve mostrar" (click)="mostrarSenha.set(!mostrarSenha())"
+                  [attr.aria-pressed]="mostrarSenha()" aria-label="Mostrar a senha digitada">
             {{ mostrarSenha() ? 'Ocultar' : 'Mostrar' }}
           </button>
         </span>
       </label>
 
-      <button type="submit" class="entrar" [disabled]="carregando()">
+      @if (erro()) {
+        <p class="err" role="alert">{{ erro() }}</p>
+      }
+
+      <button type="submit" class="entrar" [disabled]="carregando()" [attr.aria-busy]="carregando()">
         {{ carregando() ? 'Entrando...' : 'Entrar' }}
       </button>
 
-      @if (erro()) {
-        <p class="err">{{ erro() }}</p>
-      }
+      <p class="rodape">Acesso restrito a funcionários autorizados.@if (demonstracao) {<br>Demonstração: {{ demonstracao }}}</p>
     </form>
-
-    <p class="rodape">Acesso restrito a funcionários autorizados.<br>Demonstração: porteiro / 1234 ou admin / admin123</p>
   </div>
 </div>

@@ -2,12 +2,13 @@
   <table>
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Objetivo</th>
-        <th>Detalhe</th>
-        <th>Veículo</th>
-        <th>Entrada</th>
-        <th>Saída</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Objetivo</th>
+        <th scope="col">Detalhe</th>
+        <th scope="col">Veículo</th>
+        <th scope="col">Entrada</th>
+        <th scope="col">Saída</th>
+        <th scope="col">Permanência</th>
       </tr>
     </thead>
     <tbody>
@@ -16,12 +17,27 @@
           <td>{{ a.nome }}</td>
           <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
           <td>{{ a.detalhe }}</td>
-          <td>{{ a.veiculo ?? '—' }}</td>
-          <td class="nowrap">{{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}</td>
-          <td class="nowrap">{{ a.saida ? (a.saida | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+          <td class="nowrap">
+            @if (a.veiculo) { <span class="placa-carro">{{ placa(a.veiculo) }}</span><span class="secundario">{{ modelo(a.veiculo) }}</span> } @else { <span class="secundario">a pé</span> }
+          </td>
+          <td class="nowrap">
+            {{ a.entrada | date: 'dd/MM/yyyy HH:mm' }}
+            @if (a.entradaPor) { <span class="secundario">por {{ a.entradaPor }}</span> }
+          </td>
+          <td class="nowrap">
+            @if (a.saida) {
+              {{ a.saida | date: 'dd/MM/yyyy HH:mm' }}
+              @if (a.saidaPor) { <span class="secundario">por {{ a.saidaPor }}</span> }
+            } @else { <span class="etiqueta presente">No Lar</span> }
+          </td>
+          <td class="nowrap">{{ permanencia(a) }}</td>
         </tr>
       } @empty {
-        <tr><td colspan="6">Nenhum acesso encontrado.</td></tr>
+        @if (carregando()) {
+          <tr><td colspan="7" class="carregando"><span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span></td></tr>
+        } @else {
+          <tr><td colspan="7">{{ vazio() }}</td></tr>
+        }
       }
     </tbody>
   </table>

@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 /** Parente, cuidador ou amigo que visita um ou mais moradores. */
@@ -42,6 +43,7 @@ public class Visitante {
     // Moradores que este visitante pode visitar.
     // Na entrada, só esses moradores aparecem para ele.
     @ManyToMany
+    @OrderBy("nome ASC")
     @JoinTable(name = "TBL_VISITANTE_MORADOR",
             joinColumns = @JoinColumn(name = "VISITANTE_ID"),
             inverseJoinColumns = @JoinColumn(name = "MORADOR_ID"))

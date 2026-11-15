@@ -2,7 +2,8 @@ import { Component, input } from '@angular/core';
 
 export type NomeIcone =
   | 'entrada' | 'visitante' | 'morador' | 'veiculo' | 'funcionario' | 'consulta' | 'relatorio'
-  | 'sair' | 'visita' | 'doacao' | 'outros' | 'relogio' | 'usuario' | 'cadeado' | 'mais' | 'fechar';
+  | 'sair' | 'visita' | 'doacao' | 'outros' | 'relogio' | 'usuario' | 'cadeado' | 'mais' | 'fechar'
+  | 'check' | 'alerta' | 'imprimir' | 'baixar' | 'sol' | 'lua' | 'menu';
 
 /**
  * Ícones desenhados em SVG (traço de 2px, estilo linha).
@@ -60,6 +61,27 @@ export type NomeIcone =
         }
         @case ('fechar') {
           <path d="M6 6l12 12M18 6L6 18" />
+        }
+        @case ('check') {
+          <circle cx="12" cy="12" r="9" /><path d="M8 12.5l2.5 2.5L16 9.5" />
+        }
+        @case ('alerta') {
+          <circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5" /><path d="M12 16.5v.01" />
+        }
+        @case ('imprimir') {
+          <path d="M7 8V3h10v5" /><rect x="3" y="8" width="18" height="9" rx="2" /><path d="M7 14h10v7H7z" />
+        }
+        @case ('baixar') {
+          <path d="M12 3v12" /><path d="M7 10l5 5 5-5" /><path d="M4 20h16" />
+        }
+        @case ('sol') {
+          <circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4" />
+        }
+        @case ('lua') {
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+        }
+        @case ('menu') {
+          <path d="M4 7h16M4 12h16M4 17h16" />
         }
         @case ('cadeado') {
           <rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" />

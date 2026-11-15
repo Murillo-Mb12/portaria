@@ -1,0 +1,37 @@
+<div class="campo-busca">
+  <app-icone class="lupa" nome="consulta" [tamanho]="18" />
+
+  <input #campo type="text" role="combobox" autocomplete="off" autocapitalize="off" spellcheck="false"
+         [id]="inputId()" [value]="texto()" [placeholder]="placeholder()" [disabled]="desabilitado()"
+         aria-autocomplete="list" [attr.aria-expanded]="aberto()" [attr.aria-controls]="inputId() + '-lista'"
+         [attr.aria-activedescendant]="aberto() && visiveis().length ? inputId() + '-op-' + ativo() : null"
+         (input)="aoDigitar(campo.value)" (click)="abrir()" (keydown)="aoTeclar($event)" (blur)="aoSair()">
+
+  @if (valor() !== null && !desabilitado()) {
+    <!-- mousedown.preventDefault: o clique não tira o foco do campo -->
+    <button type="button" class="leve limpar" tabindex="-1" aria-label="Limpar escolha"
+            (mousedown)="$event.preventDefault()" (click)="limpar()">
+      <app-icone nome="fechar" [tamanho]="16" />
+    </button>
+  }
+
+  @if (aberto()) {
+    <ul #lista class="lista" role="listbox" [id]="inputId() + '-lista'">
+      @for (o of visiveis(); track o.id; let i = $index) {
+        <li role="option" [id]="inputId() + '-op-' + i" [class.ativa]="i === ativo()"
+            [attr.aria-selected]="o.id === valor()"
+            (mousedown)="$event.preventDefault()" (click)="escolher(o)">
+          <span class="rotulo">{{ o.rotulo }}</span>
+          @if (o.detalhe) { <span class="detalhe">{{ o.detalhe }}</span> }
+        </li>
+      } @empty {
+        <li class="nada" role="presentation">
+          {{ opcoes().length ? 'Nenhum resultado para "' + texto() + '".' : vazio() }}
+        </li>
+      }
+      @if (ocultas()) {
+        <li class="nada" role="presentation">Há mais {{ ocultas() }}. Continue digitando para encontrar.</li>
+      }
+    </ul>
+  }
+</div>

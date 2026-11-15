@@ -11,7 +11,7 @@ import { Shell } from './layout/shell/shell';
 export const routes: Routes = [
   {
     path: 'login',
-    title: 'Login - Portaria',
+    title: 'Entrar',
     loadComponent: () => import('./pages/login/login').then((m) => m.Login),
   },
   {
@@ -23,7 +23,7 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'entrada-saida' },
       {
         path: 'entrada-saida',
-        title: 'Entrada / Saída',
+        title: 'Entrada e saída',
         loadComponent: () => import('./pages/entrada-saida/entrada-saida').then((m) => m.EntradaSaida),
       },
       {

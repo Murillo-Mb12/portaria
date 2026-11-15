@@ -31,9 +31,12 @@ export interface AcessoResponse {
   objetivo: ObjetivoAcesso;
   nome: string;            // pessoa que entrou
   detalhe: string;         // "Visita a ...", itens doados, finalidade...
+  unidade: string | null;  // ala e quarto do morador visitado (só na visita)
   veiculo: string | null;  // "placa - marca modelo (cor)" ou null (a pé)
   entrada: string;
   saida: string | null;
+  entradaPor: string | null; // funcionário que registrou a entrada (null nos registros antigos)
+  saidaPor: string | null;   // funcionário que registrou a saída
 }
 
 export interface FiltroAcesso {

@@ -2,52 +2,66 @@
   <h1>Moradores</h1>
 </header>
 
-<div class="card">
-  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h2>
+<section #painelFormulario class="card painel-formulario" aria-labelledby="titulo-formulario">
+  <h2 class="titulo-cartao" id="titulo-formulario">{{ editandoId() ? 'Editar morador' : 'Cadastrar morador' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Nome
-      <input formControlName="nome">
+      <input formControlName="nome" maxlength="100" autocomplete="off">
       <app-erro-campo [control]="form.controls.nome" />
     </label>
     <label>Unidade
-      <input formControlName="unidade" placeholder="Ala São José - Quarto 04">
+      <input formControlName="unidade" maxlength="50" autocomplete="off" placeholder="Ala São José - Quarto 04">
       <app-erro-campo [control]="form.controls.unidade" />
     </label>
     <label>CPF
       <input formControlName="cpf" appMascara="cpf" placeholder="000.000.000-00">
       <app-erro-campo [control]="form.controls.cpf" formato="CPF incompleto (000.000.000-00)." />
     </label>
+    @if (erro()) { <p class="err largura-total" role="alert">{{ erro() }}</p> }
     <div class="acoes acoes-final">
-      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
       }
+      <button type="submit" [disabled]="salvando()" [attr.aria-busy]="salvando()">
+        {{ salvando() ? 'Salvando...' : editandoId() ? 'Salvar alterações' : 'Cadastrar morador' }}
+      </button>
     </div>
   </form>
-  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+</section>
 
-<div class="card tabela-scroll">
-  <h2 class="titulo-cartao">Moradores cadastrados <span class="contagem">{{ moradores().length }}</span></h2>
+<section class="card tabela-scroll" aria-labelledby="titulo-lista">
+  <div class="painel-topo">
+    <h2 class="titulo-cartao" id="titulo-lista">Moradores cadastrados <span class="contagem">{{ moradores().length }}</span></h2>
+    <div class="busca-tabela">
+      <app-icone nome="consulta" [tamanho]="16" />
+      <input type="search" [value]="filtro()" (input)="filtro.set($any($event.target).value)"
+             placeholder="Buscar nome, ala, quarto ou CPF" aria-label="Buscar morador">
+    </div>
+  </div>
   <table>
     <thead>
-      <tr><th>Nome</th><th>Unidade</th><th>CPF</th><th></th></tr>
+      <tr><th scope="col">Nome</th><th scope="col">Unidade</th><th scope="col">CPF</th><th scope="col"><span class="sr-only">Ações</span></th></tr>
     </thead>
     <tbody>
-      @for (m of moradores(); track m.id) {
+      @for (m of filtrados(); track m.id) {
         <tr [class.editando]="m.id === editandoId()">
           <td>{{ m.nome }}</td>
-          <td>{{ m.unidade }}</td>
-          <td>{{ m.cpf ?? '—' }}</td>
+          <td><span class="etiqueta ala">{{ m.unidade }}</span></td>
+          <td class="nowrap">{{ m.cpf ?? '—' }}</td>
           <td class="acoes-linha">
-            <button type="button" class="sm" (click)="editar(m)">Editar</button>
-            <button type="button" class="sm perigo" (click)="excluir(m)">Excluir</button>
+            <button type="button" class="sm" (click)="editar(m)" [attr.aria-label]="'Editar ' + m.nome">Editar</button>
+            <button type="button" class="sm perigo" (click)="excluir(m)" [attr.aria-label]="'Excluir ' + m.nome">Excluir</button>
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="4">Nenhum morador cadastrado ainda. Use o formulário acima para cadastrar.</td></tr>
+        @if (carregando()) {
+          <tr><td colspan="4" class="carregando"><span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span></td></tr>
+        } @else if (moradores().length) {
+          <tr><td colspan="4">Nenhum morador encontrado para "{{ filtro() }}". <button type="button" class="sm" (click)="filtro.set('')">Limpar busca</button></td></tr>
+        } @else {
+          <tr><td colspan="4">Nenhum morador cadastrado ainda. Use o formulário acima para cadastrar o primeiro.</td></tr>
+        }
       }
     </tbody>
   </table>
-</div>
+</section>

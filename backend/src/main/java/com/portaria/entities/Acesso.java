@@ -24,6 +24,7 @@ import jakarta.persistence.Table;
  *           OUTROS  -> nome + finalidade (bazar, igreja, reunião, imprensa...)
  * veiculo   opcional: preenchido quando a pessoa chega com um veículo
  * saida     nula enquanto a pessoa estiver no Lar
+ * entradaPor / saidaPor  nome do funcionário que registrou a entrada / a saída
  */
 @Entity
 @Table(name = "TBL_ACESSO")
@@ -68,6 +69,13 @@ public class Acesso {
 
     private LocalDateTime saida;
 
+    // Nome do funcionário que registrou a entrada / a saída (para saber quem fez o quê)
+    @Column(name = "ENTRADA_POR", length = 100)
+    private String entradaPor;
+
+    @Column(name = "SAIDA_POR", length = 100)
+    private String saidaPor;
+
     public Acesso() {
     }
 
@@ -103,4 +111,10 @@ public class Acesso {
 
     public LocalDateTime getSaida() { return saida; }
     public void setSaida(LocalDateTime saida) { this.saida = saida; }
+
+    public String getEntradaPor() { return entradaPor; }
+    public void setEntradaPor(String entradaPor) { this.entradaPor = entradaPor; }
+
+    public String getSaidaPor() { return saidaPor; }
+    public void setSaidaPor(String saidaPor) { this.saidaPor = saidaPor; }
 }

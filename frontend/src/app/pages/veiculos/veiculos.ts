@@ -1,7 +1,7 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, computed, inject, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 import {
   MoradorResponse,
@@ -11,14 +11,17 @@ import {
   VeiculoResponse,
   VisitanteResponse,
 } from '../../core/models';
+import { AvisosService } from '../../core/services/avisos.service';
+import { ConfirmacaoService } from '../../core/services/confirmacao.service';
 import { MoradorService } from '../../core/services/morador.service';
 import { VeiculoService } from '../../core/services/veiculo.service';
 import { VisitanteService } from '../../core/services/visitante.service';
 import { mensagemErro } from '../../core/utils/mensagem-erro';
+import { contem } from '../../core/utils/texto';
 import { PLACA_REGEX } from '../../core/utils/validadores';
 import { ErroCampo } from '../../shared/components/erro-campo/erro-campo';
 import { Icone } from '../../shared/components/icone/icone';
-import { Mascara } from '../../shared/directives/mascara';
+import { Mascara, formatarPlaca } from '../../shared/directives/mascara';
 
 /** Uma linha de "pessoa que usa o veículo": filtro por morador + visitante escolhido. */
 type LinhaPessoa = FormGroup<{
@@ -42,17 +45,29 @@ export class Veiculos implements OnInit {
   private service = inject(VeiculoService);
   private visitanteService = inject(VisitanteService);
   private moradorService = inject(MoradorService);
+  private avisos = inject(AvisosService);
+  private confirmacao = inject(ConfirmacaoService);
   private fb = inject(FormBuilder);
+
+  private painelFormulario = viewChild.required<ElementRef<HTMLElement>>('painelFormulario');
 
   protected readonly tipoLabel = TIPO_VEICULO_LABEL;
   protected readonly tipos = Object.keys(TIPO_VEICULO_LABEL) as TipoVeiculo[];
+  protected readonly formatarPlaca = formatarPlaca;
 
   veiculos = signal<VeiculoResponse[]>([]);
   visitantes = signal<VisitanteResponse[]>([]);
   moradores = signal<MoradorResponse[]>([]);
+  carregando = signal(true);
+  salvando = signal(false);
   editandoId = signal<number | null>(null);
-  mensagem = signal('');
   erro = signal('');
+
+  // Busca na tabela (placa, marca, modelo, cor ou quem usa)
+  filtro = signal('');
+  filtrados = computed(() =>
+    this.veiculos().filter((v) => contem(this.filtro(), v.placa, v.marca, v.modelo, v.cor, this.quemUsa(v))),
+  );
 
   form = this.fb.group({
     placa: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(PLACA_REGEX)]),
@@ -84,10 +99,13 @@ export class Veiculos implements OnInit {
   }
 
   carregar(): void {
-    this.service.getAll().subscribe({
-      next: (lista) => this.veiculos.set(lista),
-      error: (e) => this.falha(e),
-    });
+    this.service
+      .getAll()
+      .pipe(finalize(() => this.carregando.set(false)))
+      .subscribe({
+        next: (lista) => this.veiculos.set(lista),
+        error: (e) => this.falha(e),
+      });
   }
 
   // ---------- Pessoas do veículo ----------
@@ -147,6 +165,7 @@ export class Veiculos implements OnInit {
   }
 
   salvar(): void {
+    if (this.salvando()) return;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -165,9 +184,10 @@ export class Veiculos implements OnInit {
     const id = this.editandoId();
     const requisicao: Observable<unknown> = id ? this.service.update(id, dados) : this.service.save(dados);
 
-    requisicao.subscribe({
+    this.salvando.set(true);
+    requisicao.pipe(finalize(() => this.salvando.set(false))).subscribe({
       next: () => {
-        this.sucesso(id ? 'Veículo atualizado!' : 'Veículo cadastrado!');
+        this.avisos.sucesso(id ? `Veículo ${dados.placa} atualizado.` : `Veículo ${dados.placa} cadastrado.`);
         this.cancelar();
         this.carregar();
       },
@@ -187,23 +207,35 @@ export class Veiculos implements OnInit {
       responsavel: v.responsavel ?? '',
     });
     v.pessoas.forEach((p) => this.adicionarPessoa(p.id));
-    this.mensagem.set('');
+
+    // O formulário fica no topo: a tela sobe até ele e o cursor vai para a placa
+    const painel = this.painelFormulario().nativeElement;
+    painel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    painel.querySelector<HTMLElement>('input')?.focus({ preventScroll: true });
   }
 
-  excluir(v: VeiculoResponse): void {
-    if (!confirm(`Excluir o veículo ${v.placa}?`)) return;
+  async excluir(v: VeiculoResponse): Promise<void> {
+    const confirmou = await this.confirmacao.perguntar({
+      titulo: `Excluir o veículo ${formatarPlaca(v.placa)}?`,
+      texto: `${v.marca} ${v.modelo} (${v.cor}). O cadastro será apagado e não dá para desfazer.`,
+      confirmar: 'Excluir',
+      perigo: true,
+    });
+    if (!confirmou) return;
+
     this.service.delete(v.id).subscribe({
       next: () => {
-        this.sucesso('Veículo excluído.');
+        this.avisos.sucesso(`Veículo ${formatarPlaca(v.placa)} excluído.`);
         if (this.editandoId() === v.id) this.cancelar();
         this.carregar();
       },
-      error: (e) => this.falha(e),
+      error: (e) => this.avisos.erro(mensagemErro(e)),
     });
   }
 
   cancelar(): void {
     this.editandoId.set(null);
+    this.erro.set('');
     this.pessoas.clear();
     this.form.reset();
     this.ajustarPorTipo();
@@ -225,13 +257,7 @@ export class Veiculos implements OnInit {
     responsavel.updateValueAndValidity({ emitEvent: false });
   }
 
-  private sucesso(msg: string): void {
-    this.mensagem.set(msg);
-    this.erro.set('');
-  }
-
   private falha(e: unknown): void {
     this.erro.set(mensagemErro(e));
-    this.mensagem.set('');
   }
 }

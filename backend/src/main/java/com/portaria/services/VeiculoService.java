@@ -35,7 +35,7 @@ public class VeiculoService {
 
     @Transactional(readOnly = true)
     public List<VeiculoResponse> getVeiculos() {
-        return repository.findAll()
+        return repository.findAllByOrderByPlacaAsc()
                 .stream()
                 .map(VeiculoMapper::toDTO)
                 .toList();

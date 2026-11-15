@@ -25,7 +25,19 @@ export class AuthService {
     );
   }
 
+  /** Sair: avisa o servidor (o token deixa de valer) e limpa a sessão do navegador. */
   logout(): void {
+    const token = this.usuario()?.token;
+    if (token) {
+      this.http
+        .post(`${environment.apiUrl}/logout`, null, { headers: { Authorization: `Bearer ${token}` } })
+        .subscribe({ error: () => undefined }); // se o servidor não responder, a sessão expira sozinha
+    }
+    this.encerrarLocal();
+  }
+
+  /** Limpa a sessão só no navegador (usado quando o servidor diz que ela expirou). */
+  encerrarLocal(): void {
     sessionStorage.removeItem(CHAVE_SESSAO);
     this.usuario.set(null);
   }
@@ -33,7 +45,9 @@ export class AuthService {
   private lerSessao(): UsuarioLogado | null {
     try {
       const salvo = sessionStorage.getItem(CHAVE_SESSAO);
-      return salvo ? (JSON.parse(salvo) as UsuarioLogado) : null;
+      const usuario = salvo ? (JSON.parse(salvo) as UsuarioLogado) : null;
+      // Sessão salva por uma versão antiga do sistema (sem token): pede login de novo
+      return usuario?.token ? usuario : null;
     } catch {
       return null;
     }

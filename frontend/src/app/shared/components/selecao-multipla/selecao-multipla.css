@@ -1,50 +1,36 @@
-.caixa { border: 1px solid var(--linha-campo); border-radius: var(--raio); padding: 10px; background: var(--superficie); }
-.caixa.invalida { border-color: var(--erro); }
+.caixa { border: 0; border-radius: var(--raio); padding: 10px; background: var(--cab-painel); }
+.caixa .busca input { background: var(--superficie); }
+.caixa.invalida { box-shadow: inset 0 0 0 1px var(--erro); }
 
 /* ---------- Busca ---------- */
 .busca { position: relative; margin-bottom: 8px; }
-.busca input { width: 100%; padding-left: 36px; padding-right: 36px; }
+.busca input { width: 100%; padding-left: 36px; padding-right: 40px; }
 .busca input::-webkit-search-cancel-button { display: none; }
 .lupa {
   position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
   width: 17px; height: 17px; fill: none; stroke: var(--tinta-2); stroke-width: 2.2; stroke-linecap: round;
   pointer-events: none;
 }
-.limpar {
-  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
-  width: 32px; min-height: 32px; padding: 0; border: 1px solid transparent; border-radius: var(--raio);
-  background: transparent; color: var(--tinta-2);
-}
-.limpar:hover { background: var(--hover); color: var(--tinta); border-color: var(--linha); }
+.limpar { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); width: 34px; min-height: 34px; padding: 0; }
 
-/* ---------- Selecionados ---------- */
+/* ---------- Selecionados: cada morador marcado vira uma pílula mariana ---------- */
 .selecionados { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
-.rotulo-selecionados { font-size: 13px; font-weight: 600; color: var(--tinta-2); }
-.chip {
-  display: inline-flex; align-items: center; gap: 4px; padding: 2px 2px 2px 8px;
-  background: var(--marca-suave); color: var(--marca); border: 1px solid var(--marca-borda); border-radius: 3px;
-  font-size: 13px; font-weight: 600;
-}
-.chip button {
-  width: 24px; min-height: 24px; padding: 0; border: 0; border-radius: 3px;
-  background: transparent; color: var(--marca);
-}
-.chip button:hover { background: #cfe0f4; }
+.rotulo-selecionados { font-size: 13.5px; font-weight: 600; color: var(--tinta-2); }
+.chip { gap: 4px; padding: 3px 3px 3px 12px; font-size: 14.5px; }
+.chip button { width: 26px; min-height: 26px; padding: 0; background: transparent; color: var(--marca-texto); border-radius: 50%; }
+.chip button:hover { background: color-mix(in srgb, var(--marca) 20%, transparent); color: var(--marca-texto); }
 
 /* ---------- Lista ---------- */
 .lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 8px; }
 .opcao {
-  flex-direction: row; align-items: center; gap: 10px; padding: 7px 8px; border-radius: var(--raio);
-  cursor: pointer; font-size: 15px; font-weight: 400; border: 1px solid transparent;
+  flex-direction: row; align-items: center; gap: 10px; padding: 8px; border-radius: var(--raio);
+  cursor: pointer; font-size: 16px; font-weight: 400; border: 1px solid transparent;
 }
 .opcao:hover { background: var(--hover); }
-.opcao.marcada { background: var(--marca-suave); border-color: var(--marca-borda); }
+.opcao.marcada { background: var(--marca-suave); }
 .opcao input { height: 18px; width: 18px; margin: 0; accent-color: var(--marca); }
-.opcao small { display: block; color: var(--tinta-2); font-size: 13px; }
-.vazio { color: var(--tinta-2); font-size: 14px; padding: 4px; }
+.opcao small { display: block; color: var(--tinta-2); font-size: 13.5px; }
+.vazio { color: var(--tinta-2); font-size: 14.5px; padding: 4px; }
 
-.ver-mais {
-  margin-top: 6px; min-height: 32px; padding: 0 8px; font-size: 14px;
-  background: transparent; color: var(--marca); border-color: transparent;
-}
-.ver-mais:hover { background: var(--marca-suave); border-color: var(--marca-borda); }
+.ver-mais { margin-top: 6px; min-height: 36px; padding: 0 10px; font-size: 15px; color: var(--marca-texto); }
+.ver-mais:hover { background: var(--marca-suave); color: var(--marca-texto); border-color: var(--marca-borda); }

@@ -1,0 +1,7 @@
+# Não vão para a imagem: são recriados dentro dela ou não são usados no build
+node_modules
+dist
+.angular
+.vscode
+.impeccable
+*.md

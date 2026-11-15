@@ -8,7 +8,7 @@ export const PERFIL_LABEL: Record<Perfil, string> = {
 export interface FuncionarioRequest {
   nome: string;
   usuario: string;
-  senha: string;
+  senha: string | null;  // obrigatória no cadastro; null na edição = manter a senha atual
   perfil: Perfil;
 }
 
@@ -29,4 +29,6 @@ export interface UsuarioLogado {
   id: number;
   nome: string;
   perfil: Perfil;
+  /** Enviado em toda chamada à API (Authorization: Bearer ...) */
+  token: string;
 }

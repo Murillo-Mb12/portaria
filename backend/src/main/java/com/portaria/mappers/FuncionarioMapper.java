@@ -25,10 +25,11 @@ public class FuncionarioMapper {
                 funcionario.getPerfil());
     }
 
-    public static LoginResponse toLoginDTO(Funcionario funcionario) {
+    public static LoginResponse toLoginDTO(Funcionario funcionario, String token) {
         return new LoginResponse(
                 funcionario.getId(),
                 funcionario.getNome(),
-                funcionario.getPerfil());
+                funcionario.getPerfil(),
+                token);
     }
 }

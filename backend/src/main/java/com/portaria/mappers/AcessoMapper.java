@@ -15,6 +15,8 @@ public class AcessoMapper {
                     + (acesso.getDescricao() != null ? ": " + acesso.getDescricao() : "");
         };
 
+        String unidade = acesso.getMorador() != null ? acesso.getMorador().getUnidade() : null;
+
         String veiculo = acesso.getVeiculo() != null ? VeiculoMapper.descricaoCurta(acesso.getVeiculo()) : null;
 
         return new AcessoResponse(
@@ -22,8 +24,11 @@ public class AcessoMapper {
                 acesso.getObjetivo(),
                 nome,
                 detalhe,
+                unidade,
                 veiculo,
                 acesso.getEntrada(),
-                acesso.getSaida());
+                acesso.getSaida(),
+                acesso.getEntradaPor(),
+                acesso.getSaidaPor());
     }
 }

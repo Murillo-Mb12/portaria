@@ -1,190 +1,74 @@
 {
  "schemaVersion": 2,
- "generatedAt": "2026-11-13T12:51:08.932795+00:00",
+ "generatedAt": "2026-11-15T12:00:00.000Z",
  "title": "Design System: Portaria LSVP",
  "extensions": {
   "colorMeta": {
-   "marca": {
-    "role": "primary",
-    "displayName": "Azul SSVP",
-    "canonical": "#0053a1",
-    "tonalRamp": [
-     "#083058",
-     "#053d72",
-     "#024a8d",
-     "#0053a1",
-     "#4c87bd",
-     "#8cb2d5",
-     "#ccddec",
-     "#edf3f8"
-    ]
-   },
-   "ssvp-vermelho": {
-    "role": "secondary",
-    "displayName": "Vermelho SSVP",
-    "canonical": "#e20613",
-    "tonalRamp": [
-     "#6d0e18",
-     "#980b16",
-     "#c20814",
-     "#e20613",
-     "#eb515a",
-     "#f28f95",
-     "#f9cdd0",
-     "#fdeeee"
-    ]
-   },
-   "tinta": {
-    "role": "neutral",
-    "displayName": "Tinta",
-    "canonical": "#17212b",
-    "tonalRamp": [
-     "#121a23",
-     "#141c26",
-     "#161f29",
-     "#17212b",
-     "#5d646b",
-     "#979ba0",
-     "#d1d3d5",
-     "#efeff0"
-    ]
-   },
-   "fundo": {
-    "role": "neutral",
-    "displayName": "Fundo do Console",
-    "canonical": "#eef1f5",
-    "tonalRamp": [
-     "#73777e",
-     "#a0a4a9",
-     "#ccd0d4",
-     "#eef1f5",
-     "#f3f5f8",
-     "#f7f9fa",
-     "#fcfcfd",
-     "#fefefe"
-    ]
-   },
-   "linha": {
-    "role": "neutral",
-    "displayName": "Divisória",
-    "canonical": "#d5dbe3",
-    "tonalRamp": [
-     "#686e76",
-     "#8f959d",
-     "#b7bdc5",
-     "#d5dbe3",
-     "#e2e6eb",
-     "#eceff2",
-     "#f7f8f9",
-     "#fcfcfd"
-    ]
-   },
-   "sucesso": {
-    "role": "semantic",
-    "displayName": "Verde Doação",
-    "canonical": "#0f6b3a",
-    "tonalRamp": [
-     "#0e3b2a",
-     "#0f4d30",
-     "#0f5e36",
-     "#0f6b3a",
-     "#579775",
-     "#93bca6",
-     "#cfe1d8",
-     "#eef5f1"
-    ]
-   },
-   "outros-texto": {
-    "role": "semantic",
-    "displayName": "Âmbar Outros",
-    "canonical": "#8a4b00",
-    "tonalRamp": [
-     "#462d0f",
-     "#5f380a",
-     "#774304",
-     "#8a4b00",
-     "#ad814c",
-     "#caae8c",
-     "#e8dbcc",
-     "#f7f2ed"
-    ]
-   },
-   "erro": {
-    "role": "semantic",
-    "displayName": "Vermelho Erro",
-    "canonical": "#b3121c",
-    "tonalRamp": [
-     "#58131c",
-     "#79131c",
-     "#9a121c",
-     "#b3121c",
-     "#ca5960",
-     "#dd9499",
-     "#f0d0d2",
-     "#faeeef"
-    ]
-   }
+   "marca": { "role": "primary", "displayName": "Azul Mariano", "canonical": "#3e6fb0", "tonalRamp": ["#000926", "#06264d", "#1e4578", "#3e6fb0", "#5e8bc7", "#89b0e6", "#b1d4ff", "#e5effe"] },
+   "marca-forte": { "role": "primary", "displayName": "Mariano Profundo", "canonical": "#2f5a93", "tonalRamp": ["#000927", "#06254d", "#1f4577", "#2f5a93", "#678bbd", "#90b0dc", "#b8d3f8", "#e7effa"] },
+   "marca-texto": { "role": "primary", "displayName": "Mariano de Texto", "canonical": "#345f9c", "tonalRamp": ["#000827", "#07254e", "#1f4479", "#345f9c", "#658bc1", "#8fb0df", "#b7d3fc", "#e7effb"] },
+   "marca-texto-noite": { "role": "primary", "displayName": "Mariano de Texto (plantão noturno)", "canonical": "#8ab0e0", "tonalRamp": ["#040b17", "#192739", "#33465f", "#4e6888", "#6c8cb4", "#8ab0e0", "#b2d4ff", "#e5f0fe"] },
+   "marca-suave": { "role": "primary", "displayName": "Mariano Suave", "canonical": "#dce6f2", "tonalRamp": ["#0a0b0c", "#252729", "#424549", "#62676c", "#848a91", "#a7afb8", "#c9d2dd", "#dce6f2"] },
+   "ponto-doacao": { "role": "secondary", "displayName": "Verde Doação", "canonical": "#4e9a6f", "tonalRamp": ["#001104", "#032f1a", "#1b5134", "#357551", "#4e9a6f", "#7fbf98", "#a9e0be", "#e3f3e8"] },
+   "ponto-outros": { "role": "secondary", "displayName": "Ocre Outros", "canonical": "#c9993a", "tonalRamp": ["#150800", "#362200", "#5b4001", "#825f16", "#ac812c", "#c9993a", "#f4ca80", "#faedd7"] },
+   "ssvp-azul": { "role": "tertiary", "displayName": "Azul SSVP", "canonical": "#0053a1", "tonalRamp": ["#000432", "#00235c", "#0053a1", "#2666b0", "#568ccd", "#84b1ea", "#aed4ff", "#e5f0fe"] },
+   "ssvp-vermelho": { "role": "tertiary", "displayName": "Vermelho SSVP", "canonical": "#e20613", "tonalRamp": ["#2e0000", "#5d0000", "#8f0000", "#c40002", "#e20613", "#ff7667", "#ffa595", "#ffe3dd"] },
+   "madeira": { "role": "neutral", "displayName": "Madeira Clara", "canonical": "#c9b79c", "tonalRamp": ["#0e0b06", "#2b251c", "#4c4437", "#706453", "#958772", "#c9b79c", "#dfceb5", "#f3eee6"] },
+   "fundo": { "role": "neutral", "displayName": "Cal", "canonical": "#f7f8f7", "tonalRamp": ["#0b0b0b", "#262626", "#454545", "#666666", "#898989", "#adaead", "#d0d1d0", "#f7f8f7"] },
+   "fundo-noite": { "role": "neutral", "displayName": "Cal (plantão noturno)", "canonical": "#14181d", "tonalRamp": ["#14181d", "#23272c", "#42454a", "#63666b", "#87898d", "#acaeb1", "#cfd1d3", "#eeeeef"] },
+   "superficie-noite": { "role": "neutral", "displayName": "Superfície (plantão noturno)", "canonical": "#1c2128", "tonalRamp": ["#080b11", "#1c2128", "#41454c", "#62666c", "#86898f", "#abaeb2", "#cfd1d4", "#eeeeef"] },
+   "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#2b3440", "tonalRamp": ["#060b14", "#2b3440", "#3d4651", "#5f6772", "#838a93", "#a9aeb6", "#cdd1d8", "#edeef0"] },
+   "tinta-2": { "role": "neutral", "displayName": "Tinta de Apoio", "canonical": "#5d6773", "tonalRamp": ["#070c11", "#21272f", "#3e4650", "#5d6773", "#818a95", "#a7afb9", "#cbd2da", "#eceff1"] },
+   "sucesso": { "role": "semantic", "displayName": "Sucesso", "canonical": "#2e7a52", "tonalRamp": ["#001203", "#003018", "#0f5232", "#2e7a52", "#5a9974", "#87bd9c", "#b0dec1", "#e5f2ea"] },
+   "erro": { "role": "semantic", "displayName": "Vermelho de Erro", "canonical": "#b3261e", "tonalRamp": ["#2b0000", "#560000", "#850505", "#b3261e", "#d65f51", "#f58c7e", "#ffb6a9", "#ffe7e3"] }
   },
   "typographyMeta": {
-   "display": {
-    "displayName": "Título da página",
-    "purpose": "h1."
-   },
-   "title": {
-    "displayName": "Título de painel",
-    "purpose": "Faixa de cabeçalho dos painéis."
-   },
-   "table": {
-    "displayName": "Tabela",
-    "purpose": "Linhas de tabela, números tabulares."
-   },
-   "label": {
-    "displayName": "Rótulo",
-    "purpose": "Rótulos de campo e grupos do menu."
-   }
+   "numeral": { "displayName": "Número do Lar", "purpose": "Só a pílula \"pessoas no Lar agora\" (32px no celular). O maior texto da tela." },
+   "indicador": { "displayName": "Indicador", "purpose": "Números do resumo do relatório (24px no celular)." },
+   "nome-lar-login": { "displayName": "Nome do Lar no login", "purpose": "Nome do Lar em azul SSVP na porta do login (25px no celular)." },
+   "display": { "displayName": "Título da página", "purpose": "h1, caixa normal (24px no celular)." },
+   "relogio": { "displayName": "Relógio", "purpose": "Hora na barra (21px no celular)." },
+   "headline": { "displayName": "Destaque", "purpose": "Título do cartão de login e o total do dia." },
+   "hora": { "displayName": "Hora da linha", "purpose": "Horário à direita em cada linha de presente (16px em \"Saíram hoje\")." },
+   "nome": { "displayName": "Nome do presente", "purpose": "Nome na lista de presentes (16px em \"Saíram hoje\"); título da janela de confirmação." },
+   "nome-lar": { "displayName": "Nome do Lar na barra", "purpose": "Em azul SSVP (16px no celular)." },
+   "body": { "displayName": "Texto", "purpose": "Texto e campos; números tabulares em toda a interface." },
+   "button": { "displayName": "Botão", "purpose": "Todos os botões (15px nos pequenos); itens do menu no mesmo tamanho em 400." },
+   "title": { "displayName": "Título de cartão", "purpose": "Em Tinta de Apoio, com a contagem ao lado." },
+   "body-tabela": { "displayName": "Tabela", "purpose": "Células de tabela." },
+   "etiqueta": { "displayName": "Etiqueta", "purpose": "Etiqueta com ponto (objetivo, perfil, \"No Lar\")." },
+   "detalhe": { "displayName": "Detalhe", "purpose": "Linha de apoio sob o nome: objetivo, morador visitado, ala." },
+   "label": { "displayName": "Rótulo", "purpose": "Rótulos de campo e erro do campo." },
+   "cabecalho-tabela": { "displayName": "Cabeçalho de tabela", "purpose": "Em Tinta de Apoio, caixa normal." },
+   "grupo": { "displayName": "Grupo do menu", "purpose": "Portaria, Cadastros, Histórico; menor tamanho do sistema." }
   },
   "shadows": [
-   {
-    "name": "painel",
-    "value": "0 1px 2px rgba(23,33,43,.06)",
-    "purpose": "Painéis."
-   },
-   {
-    "name": "gaveta",
-    "value": "0 10px 30px rgba(23,33,43,.2)",
-    "purpose": "Menu em gaveta."
-   }
+   { "name": "sombra", "value": "0 1px 2px rgb(0 0 0 / .05), 0 8px 24px -16px rgb(43 52 64 / .2)", "purpose": "Pouso: cartões, resumo, cartão de login, disco do emblema no login. À noite: 0 1px 2px rgb(0 0 0 / .3)." },
+   { "name": "sombra-alta", "value": "0 4px 10px rgb(0 0 0 / .06), 0 20px 40px -18px rgb(43 52 64 / .35)", "purpose": "O que flutua: gaveta do menu, lista suspensa, aviso, janela. À noite: 0 20px 40px -12px rgb(0 0 0 / .6)." },
+   { "name": "segmento-ativo", "value": "0 1px 3px rgb(0 0 0 / .12)", "purpose": "Levanta o segmento escolhido dentro do trilho." },
+   { "name": "barra", "value": "0 1px 0 var(--divisoria)", "purpose": "Divisória de 1 px sob a barra superior." },
+   { "name": "coluna-presa", "value": "-8px 0 12px -10px rgb(0 0 0 / .3)", "purpose": "Coluna de ações fixa em tabelas que rolam (até 960px)." },
+   { "name": "foco-campo", "value": "0 0 0 3px rgb(62 111 176 / .3)", "purpose": "Halo do campo em foco (rgb(138 176 224 / .35) à noite)." }
   ],
   "motion": [
-   {
-    "name": "estado",
-    "value": "120ms ease-out",
-    "purpose": "Hover e foco."
-   },
-   {
-    "name": "gaveta",
-    "value": "220ms cubic-bezier(.2,.8,.2,1)",
-    "purpose": "Abrir o menu."
-   },
-   {
-    "name": "acender",
-    "value": "3s cubic-bezier(.16,1,.3,1)",
-    "purpose": "Linha recém-registrada."
-   }
+   { "name": "estado", "value": ".12s ease-out", "purpose": "Hover e foco de botões, campos, linhas e itens do menu." },
+   { "name": "gaveta", "value": ".22s cubic-bezier(.2, .8, .2, 1)", "purpose": "Abrir e fechar o menu em gaveta e o véu." },
+   { "name": "chegar", "value": ".35s cubic-bezier(.25, 1, .5, 1)", "purpose": "O nome da pessoa recém-registrada entra deslizando 8px." },
+   { "name": "acender", "value": "2.4s cubic-bezier(.25, 1, .5, 1)", "purpose": "A linha recém-registrada acende em Mariano Suave e esmaece." },
+   { "name": "aviso", "value": ".22s cubic-bezier(.16, 1, .3, 1)", "purpose": "Aviso sobe 10px ao aparecer; a janela de confirmação abre em .18s subindo 8px." },
+   { "name": "esqueleto", "value": "1.3s linear infinite, atraso de .3s", "purpose": "Barras de espera só aparecem se a resposta demorar mais de 0,3s." },
+   { "name": "reduzir", "value": "prefers-reduced-motion: reduce", "purpose": "Todas as transições e animações são desligadas." }
   ],
   "breakpoints": [
-   {
-    "name": "celular",
-    "value": "600px"
-   },
-   {
-    "name": "gaveta",
-    "value": "960px"
-   },
-   {
-    "name": "console",
-    "value": "1280px"
-   }
+   { "name": "celular-estreito", "value": "420px" },
+   { "name": "celular", "value": "600px" },
+   { "name": "linha-presente", "value": "760px" },
+   { "name": "gaveta", "value": "960px" },
+   { "name": "titulo-linha-inteira", "value": "1100px" },
+   { "name": "sem-data", "value": "1180px" },
+   { "name": "console-duas-colunas", "value": "1280px" },
+   { "name": "registro-fixo", "value": "1280px e altura 900px" },
+   { "name": "toque", "value": "pointer: coarse" }
   ]
  },
  "components": [
@@ -192,91 +76,122 @@
    "name": "Botão principal",
    "kind": "button",
    "refersTo": "button-primary",
-   "description": "Registrar entrada, Salvar.",
-   "html": "<button class=\"ds-btn\">Registrar entrada</button>",
-   "css": ".ds-btn{font:600 15px 'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;min-height:42px;padding:0 18px;border:1px solid #0053a1;border-radius:4px;background:#0053a1;color:#fff;cursor:pointer}.ds-btn:hover{background:#003f7d;border-color:#003f7d}.ds-btn:focus-visible{outline:2px solid #0053a1;outline-offset:2px}"
+   "description": "Azul mariano, um por área, para a ação principal (Registrar entrada, Entrar, Salvar).",
+   "html": "<button class=\"ds-btn-principal\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4\"/><path d=\"M10 17l5-5-5-5\"/><path d=\"M15 12H3\"/></svg>Registrar entrada</button>",
+   "css": ".ds-btn-principal { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border: 0; border-radius: 12px; background: var(--marca, #3e6fb0); color: #fff; font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); font-size: 16.5px; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color .12s ease-out; } .ds-btn-principal:hover { background: var(--marca-forte, #2f5a93); } .ds-btn-principal:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; } .ds-btn-principal:active { transform: translateY(1px); }"
   },
   {
    "name": "Botão secundário",
    "kind": "button",
    "refersTo": "button-secondary",
-   "description": "Cancelar, Limpar, Adicionar pessoa.",
-   "html": "<button class=\"ds-btn2\">Cancelar</button>",
-   "css": ".ds-btn2{font:600 15px 'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;min-height:42px;padding:0 18px;border:1px solid #8a94a3;border-radius:4px;background:#fff;color:#17212b;cursor:pointer}.ds-btn2:hover{background:#f2f6fb;border-color:#4d5866}"
+   "description": "Tom suave sem borda: Cancelar, Limpar, ações que não são a principal.",
+   "html": "<button class=\"ds-btn-sec\">Cancelar</button>",
+   "css": ".ds-btn-sec { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border: 0; border-radius: 12px; background: var(--cab-painel, #f2f4f3); color: var(--tinta, #2b3440); font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); font-size: 16.5px; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color .12s ease-out; } .ds-btn-sec:hover { background: color-mix(in srgb, var(--tinta, #2b3440) 10%, var(--cab-painel, #f2f4f3)); } .ds-btn-sec:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; } .ds-btn-sec:active { transform: translateY(1px); }"
+  },
+  {
+   "name": "Botão pequeno (Registrar saída)",
+   "kind": "button",
+   "refersTo": "button-sm",
+   "description": "Mariano suave de 44px em cada linha de presente e nas ações de tabela.",
+   "html": "<button class=\"ds-btn-sm\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><path d=\"M16 17l5-5-5-5\"/><path d=\"M21 12H9\"/></svg>Registrar saída</button>",
+   "css": ".ds-btn-sm { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--marca-suave, #dce6f2); color: var(--marca-texto, #345f9c); font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); font-size: 15px; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color .12s ease-out; } .ds-btn-sm:hover { background: color-mix(in srgb, var(--marca, #3e6fb0) 22%, var(--marca-suave, #dce6f2)); } .ds-btn-sm:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; } .ds-btn-sm:active { transform: translateY(1px); }"
   },
   {
    "name": "Campo",
    "kind": "input",
    "refersTo": "input",
-   "description": "Rótulo acima, 42 px.",
-   "html": "<label class=\"ds-l\">CPF<input class=\"ds-i\" placeholder=\"000.000.000-00\"></label>",
-   "css": ".ds-l{display:flex;flex-direction:column;gap:6px;font:600 14px 'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:#17212b}.ds-i{height:42px;padding:0 12px;border:1px solid #8a94a3;border-radius:4px;font:400 16px 'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif}.ds-i:focus{outline:none;border-color:#0053a1;box-shadow:0 0 0 3px rgba(0,83,161,.2)}"
+   "description": "Campo preenchido de 46px com rótulo em cima; em foco fica branco, com borda mariana e halo.",
+   "html": "<label class=\"ds-campo\">Nome de quem traz a doação<input placeholder=\"Ex.: Supermercado Bom Preço\"></label>",
+   "css": ".ds-campo { display: flex; flex-direction: column; gap: 6px; font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); font-size: 14.5px; font-weight: 600; line-height: 1.3; color: var(--tinta, #2b3440); } .ds-campo input { height: 46px; padding: 0 14px; font: inherit; font-size: 17px; font-weight: 400; color: var(--tinta, #2b3440); background: var(--campo-fundo, #f2f4f3); border: 1px solid var(--campo-borda, #8a929c); border-radius: 12px; transition: border-color .12s ease-out, box-shadow .12s ease-out, background-color .12s ease-out; } .ds-campo input::placeholder { color: var(--placeholder, #747d88); } .ds-campo input:focus { outline: none; background: var(--superficie, #fff); border-color: var(--marca-texto, #345f9c); box-shadow: 0 0 0 3px var(--foco, rgb(62 111 176 / .3)); }"
   },
   {
-   "name": "Selos",
-   "kind": "chip",
-   "refersTo": "badge-visita",
-   "description": "Objetivo do acesso.",
-   "html": "<span class=\"ds-b ds-v\">Visita</span> <span class=\"ds-b ds-d\">Doação</span> <span class=\"ds-b ds-o\">Outros</span>",
-   "css": ".ds-b{display:inline-flex;padding:2px 8px;border-radius:3px;border:1px solid;font:600 13px 'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif}.ds-v{background:#e6eef8;color:#0053a1;border-color:#a9c2e2}.ds-d{background:#e3f3e9;color:#0f6b3a;border-color:#a6d5b8}.ds-o{background:#fdf0d9;color:#8a4b00;border-color:#e9c88f}"
-  },
-  {
-   "name": "Painel",
-   "kind": "card",
-   "refersTo": "panel",
-   "description": "Painel com faixa de cabeçalho.",
-   "html": "<section class=\"ds-p\"><h2 class=\"ds-ph\">Presentes agora <span class=\"ds-c\">2</span></h2><div class=\"ds-pb\">Conteúdo</div></section>",
-   "css": ".ds-p{background:#fff;border:1px solid #d5dbe3;border-radius:6px;box-shadow:0 1px 2px rgba(23,33,43,.06);font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;color:#17212b}.ds-ph{margin:0;padding:12px 20px;background:#f6f8fb;border-bottom:1px solid #d5dbe3;border-radius:6px 6px 0 0;font-size:16px;font-weight:600}.ds-c{margin-left:8px;padding:1px 8px;border:1px solid #d5dbe3;border-radius:3px;background:#fff;font-size:14px;color:#4d5866}.ds-pb{padding:20px}"
-  },
-  {
-   "name": "Barra institucional",
-   "kind": "nav",
-   "refersTo": "app-bar",
-   "description": "Barra azul com emblema e filete vermelho.",
-   "html": "<header class=\"ds-bar\"><span class=\"ds-selo\"></span><span><strong>Lar São Vicente de Paulo</strong><br><small>Sistema de Portaria</small></span><span class=\"ds-hora\">12:47</span></header>",
-   "css": ".ds-bar{display:flex;align-items:center;gap:12px;height:60px;padding:0 16px;background:#0053a1;color:#fff;border-bottom:3px solid #e20613;font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif}.ds-bar small{color:#d6e4f4}.ds-selo{width:46px;height:46px;border-radius:50%;background:#fff}.ds-hora{margin-left:auto;font-size:20px;font-weight:600}"
+   "name": "Controle segmentado",
+   "kind": "custom",
+   "refersTo": "segmentado",
+   "description": "Objetivo da entrada (Visita, Doação, Outros) e período da consulta; o escolhido fica branco tingido de mariano.",
+   "html": "<div class=\"ds-segmentado\" role=\"radiogroup\"><button class=\"ds-segmento ds-seg-ativo\" role=\"radio\" aria-checked=\"true\">Visita</button><button class=\"ds-segmento\" role=\"radio\" aria-checked=\"false\">Doação</button><button class=\"ds-segmento\" role=\"radio\" aria-checked=\"false\">Outros</button></div>",
+   "css": ".ds-segmentado { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 4px; border-radius: 12px; background: var(--cab-painel, #f2f4f3); max-width: 360px; font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); } .ds-segmento { min-height: 44px; padding: 0 10px; border: 0; border-radius: 9px; background: transparent; color: var(--tinta-2, #5d6773); font: inherit; font-size: 16.5px; font-weight: 600; cursor: pointer; transition: background-color .12s ease-out, color .12s ease-out; } .ds-segmento:hover { background: color-mix(in srgb, var(--superficie, #fff) 60%, transparent); color: var(--tinta, #2b3440); } .ds-segmento:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: -3px; } .ds-seg-ativo, .ds-seg-ativo:hover { background: color-mix(in srgb, var(--marca, #3e6fb0) 10%, var(--superficie, #fff)); color: var(--marca-texto, #345f9c); box-shadow: 0 1px 3px rgb(0 0 0 / .12); }"
   },
   {
    "name": "Menu lateral",
    "kind": "nav",
-   "refersTo": "nav-item-active",
-   "description": "Item ativo em azul preenchido.",
-   "html": "<nav class=\"ds-n\"><a class=\"ds-a ds-on\" href=\"#\">Entrada e saída</a><a class=\"ds-a\" href=\"#\">Visitantes</a></nav>",
-   "css": ".ds-n{display:flex;flex-direction:column;gap:2px;padding:8px 10px;width:228px;background:#fff;border-right:1px solid #d5dbe3;font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif}.ds-a{display:flex;align-items:center;min-height:40px;padding:0 10px;border-radius:4px;color:#17212b;text-decoration:none;font-size:15px}.ds-a:hover{background:#f2f6fb}.ds-on{background:#0053a1;color:#fff;font-weight:600}"
+   "refersTo": "nav-item-ativo",
+   "description": "Menu claro com filete de madeira à direita; o item ativo em mariano suave.",
+   "html": "<nav class=\"ds-lateral\"><span class=\"ds-grupo\">Portaria</span><a class=\"ds-item ds-ativo\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4\"/><path d=\"M10 17l5-5-5-5\"/><path d=\"M15 12H3\"/></svg>Entrada e saída</a><span class=\"ds-grupo\">Cadastros</span><a class=\"ds-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 10.5 12 3l9 7.5\"/><path d=\"M5 9v11h14V9\"/><path d=\"M10 20v-5h4v5\"/></svg>Moradores</a></nav>",
+   "css": ".ds-lateral { display: flex; flex-direction: column; gap: 2px; width: 236px; padding: 12px 12px 18px; background: var(--lateral, #eef0ee); border-right: 4px solid var(--madeira, #c9b79c); font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); } .ds-grupo { margin: 16px 12px 4px; font-size: 13.5px; font-weight: 600; color: var(--tinta-2, #5d6773); } .ds-item { display: flex; align-items: center; gap: 11px; min-height: 44px; padding: 0 12px; border-radius: 10px; color: var(--tinta, #2b3440); text-decoration: none; font-size: 16.5px; white-space: nowrap; transition: background-color .12s ease-out, color .12s ease-out; } .ds-item svg { color: var(--tinta-2, #5d6773); } .ds-item:hover { background: color-mix(in srgb, var(--tinta, #2b3440) 6%, transparent); } .ds-item:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: -2px; } .ds-ativo, .ds-ativo:hover { background: var(--marca-suave, #dce6f2); color: var(--marca-texto, #345f9c); font-weight: 600; } .ds-ativo svg { color: var(--marca-texto, #345f9c); }"
+  },
+  {
+   "name": "Barra superior",
+   "kind": "nav",
+   "refersTo": "barra",
+   "description": "Barra clara de 64px: emblema num disco branco, nome do Lar em azul SSVP e o filete vermelho curto.",
+   "html": "<header class=\"ds-barra\"><span class=\"ds-selo\"></span><span class=\"ds-marca\"><strong>Lar São Vicente de Paulo</strong><span>Portaria · Sorocaba</span></span><time class=\"ds-relogio\">14:36</time><button class=\"ds-leve\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"/><path d=\"M16 17l5-5-5-5\"/><path d=\"M21 12H9\"/></svg>Sair</button></header>",
+   "css": ".ds-barra { position: relative; display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 20px 0 18px; background: var(--superficie, #fff); color: var(--tinta, #2b3440); box-shadow: 0 1px 0 var(--divisoria, #eceeed); font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); } .ds-barra::after { content: ''; position: absolute; left: 18px; bottom: 0; width: 64px; height: 3px; border-radius: 3px 3px 0 0; background: var(--ssvp-vermelho, #e20613); } .ds-selo { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--linha, #dfe3e1); } .ds-marca { display: flex; flex-direction: column; line-height: 1.2; margin-right: auto; } .ds-marca strong { font-size: 18px; font-weight: 700; color: var(--nome-lar, #0053a1); } .ds-marca span { font-size: 14px; color: var(--tinta-2, #5d6773); } .ds-relogio { font-size: 24px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; } .ds-leve { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 12px; background: transparent; color: var(--tinta-2, #5d6773); font: inherit; font-size: 16.5px; font-weight: 600; cursor: pointer; transition: background-color .12s ease-out, color .12s ease-out; } .ds-leve:hover { background: var(--hover, #f0f3f6); color: var(--tinta, #2b3440); } .ds-leve:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; }"
+  },
+  {
+   "name": "Linha de presente",
+   "kind": "custom",
+   "refersTo": "ponto-visita",
+   "description": "Ponto do objetivo, nome, detalhe, placa do carro, hora à direita e Registrar saída; quem saiu fica em cinza.",
+   "html": "<ul class=\"ds-pessoas\"><li class=\"ds-linha\"><span class=\"ds-quem\"><span class=\"ds-nome\"><span class=\"ds-ponto\"></span>Ricardo Pereira</span><span class=\"ds-detalhe\">Visita a Dona Maria · Ala São José, quarto 07</span></span><span class=\"ds-carro\">FJK·2B31</span><span class=\"ds-hora\"><strong>14:02</strong><small>há 34 min</small></span><button class=\"ds-sm\">Registrar saída</button></li><li class=\"ds-linha\"><span class=\"ds-quem\"><span class=\"ds-nome\"><span class=\"ds-ponto ds-doacao\"></span>Supermercado Bom Preço</span><span class=\"ds-detalhe\"><b>Doação</b> · alimentos</span></span><span class=\"ds-a-pe\">a pé</span><span class=\"ds-hora\"><strong>13:40</strong><small>há 56 min</small></span><button class=\"ds-sm\">Registrar saída</button></li><li class=\"ds-linha ds-saiu\"><span class=\"ds-quem\"><span class=\"ds-nome\"><span class=\"ds-ponto ds-apagado\"></span>Marcos Rosa</span><span class=\"ds-detalhe\"><b>Outros</b> · reunião</span></span><span></span><span class=\"ds-hora\"><strong>11:15</strong></span><button class=\"ds-sm\">Desfazer</button></li></ul>",
+   "css": ".ds-pessoas { list-style: none; margin: 0; padding: 0 22px; background: var(--superficie, #fff); border-radius: 16px; box-shadow: var(--sombra, 0 1px 2px rgb(0 0 0 / .05), 0 8px 24px -16px rgb(43 52 64 / .2)); font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); color: var(--tinta, #2b3440); font-variant-numeric: tabular-nums; } .ds-linha { display: grid; align-items: center; gap: 16px; grid-template-columns: minmax(0, 1fr) 96px 84px auto; padding: 13px 0; } .ds-linha + .ds-linha { border-top: 1px solid var(--divisoria, #eceeed); } .ds-quem { display: flex; flex-direction: column; gap: 2px; min-width: 0; } .ds-nome { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 600; line-height: 1.3; } .ds-ponto { width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: var(--ponto-visita, #3e6fb0); } .ds-doacao { background: var(--ponto-doacao, #4e9a6f); } .ds-apagado { background: var(--linha-campo, #8a929c); opacity: .6; } .ds-detalhe { padding-left: 20px; font-size: 15px; line-height: 1.35; color: var(--tinta-2, #5d6773); } .ds-detalhe b { color: var(--tinta, #2b3440); font-weight: 600; } .ds-carro { font-size: 15px; font-weight: 600; letter-spacing: .08em; color: var(--tinta-2, #5d6773); white-space: nowrap; } .ds-a-pe { font-size: 15px; color: var(--tinta-2, #5d6773); } .ds-hora { display: flex; flex-direction: column; align-items: flex-end; line-height: 1.15; } .ds-hora strong { font-size: 19px; font-weight: 600; } .ds-hora small { font-size: 13.5px; color: var(--tinta-2, #5d6773); } .ds-sm { min-height: 44px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--marca-suave, #dce6f2); color: var(--marca-texto, #345f9c); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; } .ds-sm:hover { background: color-mix(in srgb, var(--marca, #3e6fb0) 22%, var(--marca-suave, #dce6f2)); } .ds-sm:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; } .ds-saiu { padding: 9px 0; } .ds-saiu .ds-nome { font-size: 16px; color: var(--apagada, #6f7782); } .ds-saiu .ds-detalhe, .ds-saiu .ds-detalhe b { color: var(--apagada, #6f7782); } .ds-saiu .ds-hora strong { font-size: 16px; color: var(--tinta-2, #5d6773); }"
+  },
+  {
+   "name": "Pílula \"no Lar agora\" e etiquetas",
+   "kind": "chip",
+   "refersTo": "pilula-agora",
+   "description": "O número do Lar em mariano suave; etiquetas com ponto para objetivo e perfil; pílula de morador escolhido.",
+   "html": "<div class=\"ds-chips\"><div class=\"ds-agora\"><strong>5</strong><span>pessoas no Lar agora</span></div><span class=\"ds-etq\">Visita</span><span class=\"ds-etq ds-etq-doacao\">Doação</span><span class=\"ds-etq ds-etq-outros\">Outros</span><span class=\"ds-etq ds-etq-admin\">Administrador</span><span class=\"ds-pilula\">Dona Maria Aparecida<button aria-label=\"Remover\">×</button></span></div>",
+   "css": ".ds-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); font-variant-numeric: tabular-nums; } .ds-agora { display: inline-flex; align-items: center; gap: 12px; padding: 8px 20px 8px 16px; border-radius: 16px; background: var(--marca-suave, #dce6f2); color: var(--marca-texto, #345f9c); } .ds-agora strong { font-size: 40px; font-weight: 700; line-height: 1; } .ds-agora span { font-size: 16px; font-weight: 600; } .ds-etq { --cor: var(--ponto-visita, #3e6fb0); display: inline-flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 600; color: var(--tinta, #2b3440); white-space: nowrap; } .ds-etq::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--cor); } .ds-etq-doacao { --cor: var(--ponto-doacao, #4e9a6f); } .ds-etq-outros { --cor: var(--ponto-outros, #c9993a); } .ds-etq-admin { --cor: var(--ponto-admin, #2b3440); } .ds-pilula { display: inline-flex; align-items: center; gap: 4px; padding: 3px 3px 3px 12px; border-radius: 999px; background: var(--marca-suave, #dce6f2); color: var(--marca-texto, #345f9c); font-size: 14.5px; font-weight: 600; } .ds-pilula button { width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; font: inherit; cursor: pointer; } .ds-pilula button:hover { background: color-mix(in srgb, var(--marca, #3e6fb0) 20%, transparent); } .ds-pilula button:focus-visible { outline: 3px solid var(--marca-texto, #345f9c); outline-offset: 2px; }"
+  },
+  {
+   "name": "Cartão",
+   "kind": "card",
+   "refersTo": "card",
+   "description": "Branco pousado sobre a cal, sem borda, 16px de canto e sombra levíssima.",
+   "html": "<section class=\"ds-card\"><h2>Registrar entrada</h2><p>Escolha o objetivo, quem chega e, se houver, o veículo.</p></section>",
+   "css": ".ds-card { background: var(--superficie, #fff); border-radius: 16px; box-shadow: var(--sombra, 0 1px 2px rgb(0 0 0 / .05), 0 8px 24px -16px rgb(43 52 64 / .2)); padding: 20px 22px; max-width: 360px; font-family: var(--fonte, 'Source Sans 3', 'Segoe UI', system-ui, sans-serif); color: var(--tinta, #2b3440); } .ds-card h2 { margin: 0 0 14px; font-size: 16px; font-weight: 600; line-height: 1.3; color: var(--tinta-2, #5d6773); } .ds-card p { margin: 0; font-size: 17px; line-height: 1.45; }"
   }
  ],
  "narrative": {
-  "northStar": "O Console da Portaria",
-  "overview": "Software profissional de portaria no padrão dos sistemas de controle de acesso: barra institucional azul com o emblema SSVP, menu sóbrio, painéis com cabeçalho, tabelas densas e componentes retangulares.",
+  "northStar": "A Capela Caiada",
+  "overview": "A portaria tem a calma da capela do Lar: parede caiada, madeira clara e o azul de Maria em tom suave. Nada de caixas com borda. As superfícies brancas pousam sobre a cal com uma sombra levíssima, e a separação entre as coisas vem do espaço, do tamanho da letra e de divisórias quase invisíveis. Quem trabalha na portaria são porteiros de todas as idades, de dia e no plantão noturno, então a letra é grande, os alvos são largos e cada cor tem um motivo.\n\nA cor aparece só onde significa alguma coisa: o ponto do objetivo ao lado de cada nome (azul visita, verde doação, ocre outros), o item ativo do menu e o botão principal em azul mariano. A identidade SSVP fica no topo, numa barra clara: o emblema num disco branco, o nome do Lar em azul SSVP e um filete vermelho curto sob ele. O menu lateral é um pouco mais escuro que a cal e termina, à direita, num filete de madeira. Quem já saiu hoje continua na lista, em cinza, até o fim do dia.\n\nO sistema tem dois temas. O claro (dia) é a cal; o escuro (plantão noturno) troca cal, superfícies, linhas e texto por cinzas-azulados profundos e clareia o azul usado como texto, mas mantém o mesmo azul mariano no preenchimento do botão principal. Recusas confirmadas: o painel administrativo genérico e o esmalte pesado da direção anterior (\"Placa Esmaltada\"), que o grupo achou carregado.",
   "keyCharacteristics": [
-   "Barra azul SSVP com emblema e filete vermelho.",
-   "Fonte do sistema operacional.",
-   "Painéis com faixa de cabeçalho.",
-   "Componentes retangulares.",
-   "Tabelas densas com números tabulares."
+   "Cartões brancos sem borda, cantos de 16 px e sombra levíssima, sobre a cal (#f7f8f7).",
+   "Barra superior clara de 64 px: emblema, nome do Lar em azul SSVP, filete vermelho curto de 3 px.",
+   "Menu lateral claro com filete de madeira de 4 px na borda direita; item ativo em mariano suave.",
+   "Cor só no que tem significado: ponto do objetivo, item ativo, botão principal.",
+   "Uma só família, Source Sans 3 (400/600/700), embutida; números tabulares em toda a interface.",
+   "Campos preenchidos em vez de contornados; alvos de toque de pelo menos 44 px.",
+   "Dois temas (dia e plantão noturno), ambos com contraste WCAG AA no texto."
   ],
   "rules": [
-   {
-    "name": "A Regra do Filete",
-    "body": "O vermelho SSVP nunca preenche áreas: é filete e emblema.",
-    "section": "colors"
-   },
-   {
-    "name": "A Regra do Azul que Comanda",
-    "body": "O azul marca onde se está e o que fazer; nada mais é azul preenchido.",
-    "section": "colors"
-   }
+   { "name": "A Regra da Cor com Motivo", "body": "Cor só onde ela quer dizer algo: o ponto do objetivo, o item ativo, o botão principal, o estado de sucesso ou erro. Todo o resto é cal, branco e tinta.", "section": "colors" },
+   { "name": "A Regra do Filete", "body": "O vermelho SSVP nunca preenche área: é filete, curto, sob o nome do Lar. O único vermelho preenchido do sistema é o botão de exclusão confirmada, e ele usa o vermelho de erro (#b3261e), que é outro papel.", "section": "colors" },
+   { "name": "A Regra do Azul da Casa", "body": "O azul SSVP é do emblema e do nome do Lar; o azul mariano é da interface. Botão, menu e links nunca usam o azul SSVP.", "section": "colors" },
+   { "name": "A Regra da Voz Única", "body": "Uma família, três pesos, caixa normal. Hierarquia é tamanho e peso; caixa alta e espaçamento largo entre letras ficam fora (a única exceção é a placa de carro, com 0.08em).", "section": "typography" },
+   { "name": "A Regra do Número Único", "body": "Só o número \"no Lar agora\" chega a 40px. Os outros números são menores e não competem com ele.", "section": "typography" },
+   { "name": "A Regra Sem Moldura", "body": "Superfície se destaca por tom e sombra, nunca por borda. Divisória de 1 px só separa conteúdo dentro de uma superfície; caixa com borda não existe no sistema.", "section": "elevation" }
   ],
   "dos": [
-   "Do usar o emblema SSVP inteiro, sem recortar nem recolorir.",
-   "Do colocar cada bloco de conteúdo num painel com faixa de cabeçalho.",
-   "Do manter controles com 40-44 px e texto de no mínimo 13 px (14 px em rótulos)."
+   "Do separar superfícies por tom e pela sombra de pouso (--sombra); usar divisória de 1 px só entre itens dentro de um cartão.",
+   "Do usar cor só onde ela quer dizer algo: ponto do objetivo (azul visita, verde doação, ocre outros), item ativo, botão principal, sucesso e erro.",
+   "Do manter quem já saiu na lista, em Apagada (#6f7782), até o fim do dia.",
+   "Do alinhar horários à direita, com números tabulares.",
+   "Do manter alvos de toque de pelo menos 44 px: campos de 46 px (48 px no toque), botões pequenos, itens do menu e segmentos de 44 px.",
+   "Do garantir contraste WCAG AA (4.5:1 no texto) nos dois temas; o azul como texto é sempre o Mariano de Texto, nunca o Azul Mariano de preenchimento.",
+   "Do conferir cada tela de dia e no plantão noturno.",
+   "Do usar o emblema SSVP inteiro, num disco branco circular, sem recortar nem recolorir."
   ],
   "donts": [
-   "Don't usar botões em pílula, neutros creme ou cartões amplos com ícone em quadradinho.",
-   "Don't colocar subtítulo explicativo sob o título de cada página nem saudações.",
-   "Don't preencher áreas com o vermelho SSVP.",
-   "Don't usar caracteres de texto ou emoji como ícones."
+   "Don't desenhar caixas com borda em volta de cartões, campos agrupados, avisos ou listas; o sistema não tem moldura.",
+   "Don't preencher área com o vermelho SSVP; ele é só o filete curto sob o nome do Lar.",
+   "Don't usar o azul SSVP (#0053a1) em botões, menu ou links; ele é do emblema e do nome do Lar.",
+   "Don't pintar algo de cor por enfeite; se a cor não diz objetivo, estado ou \"você está aqui\", ela é cinza.",
+   "Don't usar caixa alta, letra condensada ou uma segunda família para criar hierarquia; é tamanho e peso.",
+   "Don't voltar ao painel administrativo genérico nem ao esmalte pesado da Placa Esmaltada: as duas direções foram recusadas pelo grupo.",
+   "Don't usar caracteres de texto ou emoji como ícone; os ícones são SVG de traço de 2 px que herdam a cor do texto.",
+   "Don't confiar só na cor do ponto: o objetivo também tem que estar escrito em algum lugar da linha ou da tabela."
   ]
  }
 }

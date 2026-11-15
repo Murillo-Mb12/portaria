@@ -1,0 +1,2 @@
+# Scripts que rodam dentro do Linux (Docker) precisam de quebra de linha LF, mesmo vindo do Windows
+*.sh text eol=lf

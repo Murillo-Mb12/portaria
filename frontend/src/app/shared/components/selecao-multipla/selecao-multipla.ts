@@ -1,17 +1,13 @@
 import { Component, computed, input, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+import { contem } from '../../../core/utils/texto';
 import { Icone } from '../icone/icone';
 
 export interface OpcaoSelecao {
   id: number;
   rotulo: string;
   detalhe?: string;
-}
-
-/** Remove acentos e deixa minúsculo: "Graças" -> "gracas" */
-function normalizar(texto: string): string {
-  return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
 /**
@@ -41,9 +37,7 @@ export class SelecaoMultipla {
 
   /** Opções que batem com o texto pesquisado */
   filtradas = computed(() => {
-    const termo = normalizar(this.busca());
-    if (!termo) return this.opcoes();
-    return this.opcoes().filter((o) => normalizar(`${o.rotulo} ${o.detalhe ?? ''}`).includes(termo));
+    return this.opcoes().filter((o) => contem(this.busca(), o.rotulo, o.detalhe));
   });
 
   /** O que aparece na tela: as primeiras N ou todas (depois do "Ver mais") */

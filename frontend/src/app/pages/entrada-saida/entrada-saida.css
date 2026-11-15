@@ -1,63 +1,101 @@
-/* ---------- Faixa de situação ---------- */
-.situacao {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 18px;
-  background: var(--superficie); border: 1px solid var(--linha); border-radius: var(--raio-painel);
-  box-shadow: 0 1px 2px rgba(23, 33, 43, .06);
+/* ---------- Topo: título, a pílula mariana do número e o movimento do dia ---------- */
+.topo { align-items: center; justify-content: flex-start; gap: 16px 28px; }
+.topo h1 { margin-right: auto; }
+.mostradores { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.agora {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 8px 20px 8px 16px; border-radius: 16px;
+  background: var(--marca-suave); color: var(--marca-texto);
 }
-.indicador { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; }
-.indicador + .indicador { border-left: 1px solid var(--linha); }
-.indicador-rotulo { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--tinta-2); }
-.indicador strong { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.ponto { width: 9px; height: 9px; border-radius: 50%; background: var(--sucesso); }
-.ponto.vazio { background: #a3acb8; }
+.agora strong { font-size: 40px; font-weight: 700; line-height: 1; }
+.agora span { font-size: 16px; font-weight: 600; }
+.agora.vazio-agora { background: var(--cab-painel); color: var(--tinta-2); }
+.dia { margin: 0; font-size: 15.5px; color: var(--tinta-2); }
+.dia strong { font-size: 20px; font-weight: 600; color: var(--tinta); }
+.dia span { margin: 0 6px; }
 
-/* ---------- Console: registro à esquerda, presentes à direita ---------- */
-.console { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
-@media (min-width: 1280px) {
-  .console { grid-template-columns: 360px 1fr; }
-  .registro { position: sticky; top: 85px; }
-}
+/* ---------- Registro à esquerda, presentes à direita ---------- */
+.console { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: start; }
+@media (min-width: 1280px) { .console { grid-template-columns: 360px 1fr; } }
+@media (min-width: 1280px) and (min-height: 900px) { .registro { position: sticky; top: 92px; } }
 .console > .card { margin-bottom: 0; }
 
-/* Objetivo: controle segmentado */
 .titulo-campo { display: block; margin-bottom: 6px; }
-.segmentado {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--linha-campo); border-radius: var(--raio); overflow: hidden;
+.segmento-ajuda { margin: 8px 0 16px; font-size: 14.5px; color: var(--tinta-2); }
+.campos { display: flex; flex-direction: column; gap: 15px; }
+.apoio { align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; margin: -8px 0 -10px; font-size: 14.5px; font-weight: 600; }
+.campos p.err { margin: 2px 0 0; }
+.registrar { width: 100%; margin-top: 4px; min-height: 50px; font-size: 17px; }
+
+/* ---------- Lista de presentes: ponto, nome, detalhe, veículo, hora e saída ---------- */
+.presentes { padding: 0; }
+.presentes > .painel-topo { margin: 0; padding: 18px 22px 4px; }
+.pessoas { list-style: none; margin: 0; padding: 0 22px 8px; }
+.linha {
+  display: grid; align-items: center; gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 96px 84px auto;
+  padding: 13px 0;
 }
-.segmento {
-  min-height: 42px; padding: 0 8px; gap: 6px; border: 0; border-radius: 0;
-  background: var(--superficie); color: var(--tinta); font-weight: 600;
+.linha + .linha { border-top: 1px solid var(--divisoria); }
+.quem { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nome {
+  display: flex; align-items: center; gap: 10px; min-width: 0;
+  font-size: 18px; font-weight: 600; line-height: 1.3;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
-.segmento + .segmento { border-left: 1px solid var(--linha-campo); }
-.segmento:hover { background: var(--hover); }
-.segmento app-icone { color: var(--tinta-2); }
-.segmento.ativo { background: var(--marca); color: #fff; }
-.segmento.ativo app-icone { color: #fff; }
-.segmento:focus-visible { outline-offset: -3px; outline-color: #fff; box-shadow: inset 0 0 0 3px var(--marca-forte); }
-.segmento-ajuda { margin: 6px 0 16px; font-size: 14px; color: var(--tinta-2); }
+.detalhe { min-width: 0; padding-left: 20px; font-size: 15px; line-height: 1.35; color: var(--tinta-2); }
+.objetivo { color: var(--tinta); font-weight: 600; }
+.detalhe .ala { display: inline-block; }
+.detalhe .ala::before { content: '·'; margin: 0 6px; width: auto; height: auto; background: none; border-radius: 0; }
+.carro { text-align: left; }
+.a-pe { font-size: 15px; color: var(--tinta-2); }
+.hora { display: flex; flex-direction: column; align-items: flex-end; text-align: right; line-height: 1.15; }
+.hora strong { font-size: 19px; font-weight: 600; }
+.hora small { font-size: 13.5px; color: var(--tinta-2); white-space: nowrap; }
+.vazio { padding: 28px 0; text-align: center; color: var(--tinta-2); }
+.vazio .esqueleto { margin: 14px 0; height: 30px; border-radius: 10px; }
+.lista-erro { margin: 12px 22px 0; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.lista-erro span { flex: 1; min-width: 200px; }
 
-/* Campos empilhados */
-.campos { display: flex; flex-direction: column; gap: 14px; }
-.campos .largura-total { grid-column: auto; }
-.registrar { width: 100%; margin-top: 4px; min-height: 44px; font-size: 16px; }
-
-.dica { color: var(--tinta-2); font-size: 14px; margin: 14px 0 0; }
-
-/* Tabela de presentes */
-.presentes td strong { font-weight: 600; }
-.veiculo { white-space: nowrap; font-weight: 600; letter-spacing: .02em; }
-
-/* A pessoa que acabou de entrar acende em azul e esmaece */
-tr.recente td { animation: acender 3s cubic-bezier(.16, 1, .3, 1); }
-@keyframes acender {
-  0%, 25% { background: #d7e6f7; }
-  100% { background: transparent; }
+/* Quem já saiu hoje: a mesma linha, em cinza, num grupo mais compacto */
+.separador {
+  display: flex; align-items: center; gap: 4px; margin: 4px 22px 0; padding: 14px 0 2px;
+  border-top: 1px solid var(--divisoria);
+  font-size: 15px; font-weight: 600; color: var(--tinta-2);
 }
+.saidos { padding-bottom: 12px; }
+.saidos .linha { padding: 9px 0; grid-template-columns: minmax(0, 1fr) 96px minmax(84px, max-content) auto; }
+.saidos .nome { font-size: 16px; font-weight: 600; color: var(--apagada); }
+.saidos .detalhe, .saidos .placa-carro { color: var(--apagada); }
+.saidos .hora strong { font-size: 16px; color: var(--tinta-2); }
+.mais-saidos { margin: 0; padding: 0 22px 16px; font-size: 15px; }
 
+/* A pessoa que acabou de entrar: a linha acende de leve em mariano */
+.linha.recente { animation: acender 2.4s cubic-bezier(.25, 1, .5, 1); }
+.linha.recente .nome { animation: chegar .35s cubic-bezier(.25, 1, .5, 1); }
+@keyframes acender { 0%, 20% { background: var(--marca-suave); } 100% { background: transparent; } }
+@keyframes chegar { from { transform: translateX(-8px); opacity: 0; } }
+
+/* ---------- Telas médias e celular ---------- */
+@media (max-width: 1100px) {
+  .topo h1 { flex-basis: 100%; }
+}
+@media (max-width: 760px) {
+  .linha { grid-template-columns: minmax(0, 1fr) auto; gap: 10px 12px; padding: 14px 0; }
+  .saidos .linha { grid-template-columns: minmax(0, 1fr) auto; }
+  .quem { grid-column: 1 / -1; }
+  .hora { grid-column: 1; grid-row: 2; flex-direction: row; align-items: baseline; gap: 8px; padding-left: 20px; }
+  .carro { grid-column: 2; grid-row: 2; }
+  .linha > button { grid-column: 1 / -1; width: 100%; }
+}
 @media (max-width: 600px) {
-  .indicador { flex-direction: column-reverse; align-items: flex-start; gap: 0; padding: 8px 12px; }
-  .indicador-rotulo { font-size: 13px; }
-  .indicador strong { font-size: 21px; }
+  .mostradores { gap: 10px 16px; }
+  .agora { padding: 6px 14px 6px 12px; gap: 10px; }
+  .agora strong { font-size: 32px; }
+  .agora span { font-size: 15px; }
+  .pessoas { padding: 0 16px 8px; }
+  .presentes > .painel-topo { padding: 14px 16px 4px; }
+  .separador { margin: 4px 16px 0; }
+  .lista-erro { margin: 12px 16px 0; }
+  .mais-saidos { padding: 0 16px 16px; }
 }

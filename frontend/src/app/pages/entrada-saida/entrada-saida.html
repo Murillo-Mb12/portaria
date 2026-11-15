@@ -1,49 +1,46 @@
-<header class="cabecalho-pagina">
+<header class="cabecalho-pagina topo">
   <h1>Entrada e saída</h1>
+
+  <!-- O número que importa: quantas pessoas estão no Lar agora -->
+  <section class="mostradores" aria-label="Situação da portaria">
+    <div class="agora" [class.vazio-agora]="!presentes().length">
+      <strong>{{ presentes().length }}</strong>
+      <span>{{ presentes().length === 1 ? "pessoa" : "pessoas" }} no Lar agora</span>
+    </div>
+    <p class="dia">
+      <strong>{{ entradasHoje() }}</strong> {{ entradasHoje() === 1 ? "entrada" : "entradas" }}
+      <span aria-hidden="true">·</span>
+      <strong>{{ saidasHoje() }}</strong> {{ saidasHoje() === 1 ? "saída" : "saídas" }} hoje
+    </p>
+  </section>
 </header>
 
-<!-- Situação do dia -->
-<section class="situacao" aria-label="Situação da portaria">
-  <div class="indicador">
-    <span class="indicador-rotulo"><span class="ponto" [class.vazio]="!presentes().length" aria-hidden="true"></span>No Lar agora</span>
-    <strong role="status">{{ presentes().length }}</strong>
-  </div>
-  <div class="indicador">
-    <span class="indicador-rotulo">Entradas hoje</span>
-    <strong>{{ entradasHoje() }}</strong>
-  </div>
-  <div class="indicador">
-    <span class="indicador-rotulo">Saídas hoje</span>
-    <strong>{{ saidasHoje() }}</strong>
-  </div>
-</section>
-
 <div class="console">
-  <section class="card registro">
-    <h2 class="titulo-cartao">Registrar entrada</h2>
+  <section class="card registro" aria-labelledby="titulo-registro">
+    <h2 class="titulo-cartao" id="titulo-registro">Registrar entrada</h2>
 
     <span class="titulo-campo" id="rotulo-objetivo">Objetivo no Lar</span>
-    <div class="segmentado" role="radiogroup" aria-labelledby="rotulo-objetivo">
+    <div class="segmentado" role="radiogroup" aria-labelledby="rotulo-objetivo" (keydown)="aoTeclarObjetivo($event)">
       @for (o of objetivos; track o.valor) {
         <button type="button" role="radio" class="segmento" [class.ativo]="objetivo() === o.valor"
-                [attr.aria-checked]="objetivo() === o.valor" (click)="escolherObjetivo(o.valor)">
+                [attr.aria-checked]="objetivo() === o.valor" [attr.tabindex]="objetivo() === o.valor ? 0 : -1"
+                (click)="escolherObjetivo(o.valor)">
           <app-icone [nome]="o.icone" [tamanho]="18" />{{ o.titulo }}
         </button>
       }
     </div>
     <p class="segmento-ajuda">{{ ajudaObjetivo() }}</p>
 
-    <form class="campos" [formGroup]="form" (ngSubmit)="registrar()">
+    <form #formulario class="campos" [formGroup]="form" (ngSubmit)="registrar()">
     @switch (objetivo()) {
       @case ('VISITA') {
-        <label>Visitante
-          <select formControlName="visitanteId">
-            <option [ngValue]="null" disabled>Selecione...</option>
-            @for (p of visitantes(); track p.id) {
-              <option [ngValue]="p.id">{{ p.nome }}</option>
-            }
-          </select>
-        </label>
+        <div class="campo">
+          <label for="visitante">Visitante</label>
+          <app-campo-busca inputId="visitante" formControlName="visitanteId" [opcoes]="opcoesVisitantes()"
+                           placeholder="Nome, CPF ou morador visitado"
+                           vazio="Nenhum visitante cadastrado ainda." />
+          <a class="apoio" routerLink="/visitantes">Visitante novo? Cadastrar</a>
+        </div>
         <label>Morador visitado
           <select formControlName="moradorId">
             <option [ngValue]="null" disabled>{{ form.controls.visitanteId.value ? 'Selecione...' : 'Escolha o visitante primeiro' }}</option>
@@ -55,7 +52,7 @@
       }
       @case ('DOACAO') {
         <label>Nome de quem traz a doação
-          <input formControlName="nome" maxlength="100">
+          <input formControlName="nome" maxlength="100" autocomplete="off">
         </label>
         <label>CPF (opcional)
           <input formControlName="documento" appMascara="cpf" placeholder="000.000.000-00">
@@ -63,7 +60,7 @@
       }
       @case ('OUTROS') {
         <label>Nome
-          <input formControlName="nome" maxlength="100">
+          <input formControlName="nome" maxlength="100" autocomplete="off">
         </label>
         <label>CPF (opcional)
           <input formControlName="documento" appMascara="cpf" placeholder="000.000.000-00">
@@ -87,50 +84,100 @@
           <option [ngValue]="v.id">{{ descricaoVeiculo(v) }}</option>
         }
       </select>
+      @if (objetivo() === 'VISITA' && form.controls.visitanteId.value && !veiculosDisponiveis().length) {
+        <small>Este visitante não tem veículo vinculado. Se veio de carro, cadastre em <a routerLink="/veiculos">Veículos</a>.</small>
+      }
     </label>
 
     @if (objetivo() === 'DOACAO') {
-      <label class="largura-total">Itens doados
+      <label>Itens doados
         <textarea formControlName="descricao" maxlength="255" placeholder="Ex.: 10 cestas básicas, 5 pacotes de fraldas geriátricas"></textarea>
       </label>
     }
     @if (objetivo() === 'OUTROS') {
-      <label class="largura-total">Observação (opcional)
+      <label>Observação (opcional)
         <input formControlName="descricao" maxlength="255" placeholder="Ex.: reunião com a assistente social">
       </label>
     }
 
-      <button type="submit" class="registrar">
-        <app-icone nome="entrada" [tamanho]="18" />Registrar entrada
+      @if (erro()) { <p class="err" role="alert">{{ erro() }}</p> }
+
+      <button type="submit" class="registrar" [disabled]="enviando()" [attr.aria-busy]="enviando()">
+        <app-icone nome="entrada" [tamanho]="20" />{{ enviando() ? 'Registrando...' : 'Registrar entrada' }}
       </button>
     </form>
-
-    @if (objetivo() === 'VISITA' && form.controls.visitanteId.value && !veiculosDisponiveis().length) {
-      <p class="dica">Este visitante não tem veículo vinculado. Se ele chegou de carro, cadastre o veículo em "Veículos".</p>
-    }
-    @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-    @if (erro()) { <p class="err">{{ erro() }}</p> }
   </section>
 
-  <section class="card tabela-scroll presentes">
-    <h2 class="titulo-cartao">Presentes agora <span class="contagem">{{ presentes().length }}</span></h2>
-    <table>
-      <thead>
-        <tr><th>Pessoa</th><th>Objetivo</th><th>Veículo</th><th>Entrada</th><th></th></tr>
-      </thead>
-      <tbody>
-        @for (a of presentes(); track a.id) {
-          <tr [class.recente]="a.id === recenteId()">
-            <td><strong>{{ a.nome }}</strong><span class="secundario">{{ a.detalhe }}</span></td>
-            <td><span [class]="'etiqueta ' + a.objetivo">{{ objetivoLabel[a.objetivo] }}</span></td>
-            <td class="veiculo">{{ a.veiculo ? placa(a.veiculo) : '—' }}</td>
-            <td class="nowrap">{{ horaEntrada(a.entrada) }}<span class="secundario">{{ tempoNoLar(a.entrada) === 'agora' ? 'agora' : 'há ' + tempoNoLar(a.entrada) }}</span></td>
-            <td class="acoes-linha"><button type="button" class="sm alerta" (click)="registrarSaida(a)">Registrar saída</button></td>
-          </tr>
-        } @empty {
-          <tr><td colspan="5">Ninguém no Lar no momento.</td></tr>
+  <section class="card presentes" aria-labelledby="titulo-presentes">
+    <div class="painel-topo">
+      <h2 class="titulo-cartao" id="titulo-presentes">Presentes agora <span class="contagem">{{ presentes().length }}</span></h2>
+      @if (presentes().length > 5) {
+        <div class="busca-tabela">
+          <app-icone nome="consulta" [tamanho]="16" />
+          <input type="search" [value]="filtro()" (input)="filtro.set($any($event.target).value)"
+                 placeholder="Buscar nome ou placa" aria-label="Buscar entre os presentes">
+        </div>
+      }
+    </div>
+
+    @if (erroLista()) {
+      <p class="err lista-erro" role="alert">
+        <span>{{ erroLista() }}</span>
+        <button type="button" class="sm" (click)="carregarPresentes()">Tentar de novo</button>
+      </p>
+    }
+
+    <!-- Cada pessoa no Lar: o ponto colorido diz o objetivo (azul visita, verde doação, ocre outros) -->
+    <ul class="pessoas" aria-label="Pessoas no Lar">
+      @for (a of presentesFiltrados(); track a.id) {
+        <li class="linha" [class.recente]="a.id === recenteId()">
+          <span class="quem">
+            <span class="nome" [title]="a.nome"><span [class]="'ponto ' + a.objetivo" aria-hidden="true"></span>{{ a.nome }}</span>
+            <span class="detalhe">@if (a.objetivo !== 'VISITA') {<span class="objetivo">{{ objetivoLabel[a.objetivo] }}</span> · }{{ a.detalhe }}@if (a.unidade) {<span class="etiqueta ala">{{ a.unidade }}</span>}</span>
+          </span>
+          <span class="carro">
+            @if (a.veiculo) { <span class="placa-carro" [title]="a.veiculo">{{ placa(a.veiculo) }}</span> } @else { <span class="a-pe">a pé</span> }
+          </span>
+          <span class="hora" [title]="a.entradaPor ? 'Entrada registrada por ' + a.entradaPor : ''"><strong>{{ horaEntrada(a.entrada) }}</strong><small>{{ tempoNoLar(a.entrada) }}</small></span>
+          <button type="button" class="sm alerta" (click)="registrarSaida(a)"
+                  [disabled]="saindoId() !== null" [attr.aria-busy]="saindoId() === a.id"
+                  [attr.aria-label]="'Registrar saída de ' + a.nome">
+            <app-icone nome="sair" [tamanho]="17" />Registrar saída
+          </button>
+        </li>
+      } @empty {
+        <li class="vazio">
+          @if (carregando()) {
+            <span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span>
+          } @else if (presentes().length) {
+            Ninguém encontrado para "{{ filtro() }}". <button type="button" class="sm" (click)="filtro.set('')">Limpar busca</button>
+          } @else if (!erroLista()) {
+            Ninguém no Lar no momento. Quem entrar aparece aqui.
+          }
+        </li>
+      }
+    </ul>
+
+    @if (saidosHoje().length) {
+      <h3 class="separador">Saíram hoje <span class="contagem">{{ saidosHoje().length }}</span></h3>
+      <ul class="pessoas saidos" aria-label="Pessoas que saíram hoje">
+        @for (a of saidosHoje().slice(0, limiteSaidos); track a.id) {
+          <li class="linha">
+            <span class="quem">
+              <span class="nome" [title]="a.nome"><span class="ponto apagado" aria-hidden="true"></span>{{ a.nome }}</span>
+              <span class="detalhe">@if (a.objetivo !== 'VISITA') {<span class="objetivo">{{ objetivoLabel[a.objetivo] }}</span> · }{{ a.detalhe }}@if (a.unidade) {<span class="etiqueta ala">{{ a.unidade }}</span>}</span>
+            </span>
+            <span class="carro">@if (a.veiculo) { <span class="placa-carro">{{ placa(a.veiculo) }}</span> }</span>
+            <span class="hora" [title]="a.saidaPor ? 'Saída registrada por ' + a.saidaPor : ''"><strong>{{ horaEntrada(a.saida!) }}</strong><small>{{ resumoSaida(a) }}</small></span>
+            @if (podeDesfazer(a)) {
+              <button type="button" class="sm" (click)="desfazerSaida(a)" [attr.aria-label]="'Desfazer a saída de ' + a.nome">Desfazer</button>
+            } @else { <span></span> }
+          </li>
         }
-      </tbody>
-    </table>
+      </ul>
+      @if (saidosHoje().length > limiteSaidos) {
+        <p class="mais-saidos"><a routerLink="/consulta">Ver todas as {{ saidosHoje().length }} saídas na consulta</a></p>
+      }
+    }
   </section>
 </div>

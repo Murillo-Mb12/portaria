@@ -6,18 +6,18 @@ related_targets: ["src/app/layout/shell/shell.html","src/styles.css"]
 ---
 
 ## Scope
-Refazer o front-end inteiro (modo Operate): shell, Login, Entrada / Saída, Visitantes, Moradores, Veículos, Funcionários, Consulta e Relatórios. Tela principal: Entrada / Saída.
+Redesenho completo do front-end (modo Operate): shell, Login, Entrada e saída, Visitantes, Moradores, Veículos, Funcionários, Consulta e Relatórios. Tela principal: Entrada e saída. A versão "console de portaria" foi recusada pelo usuário por parecer painel genérico e ser pouco agradável de usar; azul e vermelho SSVP continuam, agora com cores de apoio. Uso dia e noite: tema claro e escuro.
 
 ## Direction contract
 
-THESIS: Um console de portaria profissional, como os softwares de controle de acesso usados em portarias de verdade: barra institucional azul com o emblema, menu lateral sóbrio, painéis com cabeçalho, tabelas densas e bem alinhadas e componentes retangulares. Recusa o visual "feito por IA": nada de neutros creme, botões em pílula, cartões amplos com ícone em quadradinho, saudações e subtítulos explicativos em toda tela.
+THESIS: A portaria com a calma da capela do Lar: parede caiada, madeira clara e o azul de Maria em tom suave; nada de caixas com borda, só superfícies brancas pousadas sobre a cal. Recusa o painel administrativo genérico e o esmalte pesado da Placa Esmaltada, que o grupo achou carregado.
 
-OWN-WORLD: Azul institucional SSVP #0053A1 na barra superior e no item ativo; vermelho SSVP #E20613 só como filete sob a barra e no emblema; cinzas frios de software (fundo #EEF1F5, painéis brancos, bordas #D5DBE3); fonte do sistema operacional (Segoe UI/Roboto); botões e campos retangulares de 4px com 40-44px de altura; selos de status retangulares (Visita, Doação, Outros); números tabulares.
+OWN-WORLD: Cal #F7F8F7 de fundo, superfície #FFFFFF com sombra levíssima (0 1px 2px #0000000d, 0 8px 24px -16px #2b344033) e raio 16 px; tinta #2B3440, apoio #626C78; azul mariano #3E6FB0 (ação, item ativo, visita) com tom suave #DCE6F2; madeira #C9B79C como filete de 4 px no menu; verde #4E9A6F (doação), ocre #C9993A (outros) como pontos de 10 px; vermelho SSVP #E20613 só no filete da barra; azul SSVP #0053A1 no emblema e nome do Lar; campos preenchidos #F2F4F3 sem borda; Source Sans 3 (400/600/700) em tudo; à noite, cal escura #14181D, superfície #1C2128, mariano #8AB0E0.
 
-STORY: O porteiro abre o console, vê quantas pessoas estão no Lar, quantas entraram e saíram hoje, registra a entrada no painel da esquerda e acompanha os presentes na tabela da direita, sem trocar de tela.
+STORY: O porteiro vê no topo quantas pessoas estão no Lar, registra a entrada no cartão à esquerda e encontra cada presente pelo ponto colorido do objetivo; quem saiu hoje fica em cinza e ainda pode ser desfeito.
 
-FIRST VIEWPORT: Barra azul (emblema em selo branco, "Lar São Vicente de Paulo / Sistema de Portaria", relógio, data, usuário e Sair) com filete vermelho; menu lateral branco com item ativo azul; título "Entrada e saída"; faixa de situação com No Lar agora / Entradas hoje / Saídas hoje; console em duas colunas: painel "Registrar entrada" (objetivo em controle segmentado, campos empilhados, botão de largura total) e painel "Presentes agora" (tabela com pessoa e detalhe, selo de objetivo, veículo, hora, tempo e "Registrar saída").
+FIRST VIEWPORT: Barra clara com emblema, nome do Lar em azul SSVP e um filete vermelho curto, relógio, tema e Sair; menu lateral claro com filete de madeira e grupos (Portaria, Cadastros, Histórico), item ativo em mariano suave; título com a pílula "5 pessoas no Lar agora" e o resumo "6 entradas · 1 saída hoje"; cartão de registro de 360 px com seletor segmentado; cartão "Presentes agora" em lista com ponto, nome, detalhe, veículo, hora à direita e Registrar saída; "Saíram hoje" em cinza.
 
-FORM: seed: none (pinned) — a equipe fixou o mundo e a tela nas próprias palavras: "faça um front-end com cara de sistema de portaria profissional", com "o ícone do lar" (emblema SSVP) e as cores dele.
+FORM: Capela caiada, escolha do Impeccable (pick) na rodada seed:55eb819cbbc16f9c. Reforços: cor só no que tem significado (objetivo, item ativo), quem saiu fica em cinza até o fim do dia, horários à direita em números tabulares, hierarquia pelo tamanho do texto, uma só família de letras.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

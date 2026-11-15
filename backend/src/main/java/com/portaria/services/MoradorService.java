@@ -31,7 +31,7 @@ public class MoradorService {
 
     @Transactional(readOnly = true)
     public List<MoradorResponse> getMoradores() {
-        return repository.findAll()
+        return repository.findAllByOrderByNomeAsc()
                 .stream()
                 .map(MoradorMapper::toDTO)
                 .toList();

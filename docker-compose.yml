@@ -1,5 +1,16 @@
-# Opcional: sobe um PostgreSQL pronto para o projeto (precisa do Docker instalado)
-#   docker compose up -d
+# Sobe o sistema inteiro (banco PostgreSQL + backend + frontend) só com o Docker.
+# O computador não precisa de Java, Node.js nem PostgreSQL instalados.
+#
+#   docker compose up -d --build     -> instala/atualiza e liga tudo
+#   docker compose down              -> desliga (os dados continuam guardados)
+#
+# Depois de ligar, o sistema abre em http://localhost:4200 (só neste computador).
+# No arquivo .env (ao lado deste arquivo), antes da primeira vez:
+#   DB_PASSWORD=...        senha do banco
+# Opcional, só se um dia tablets/celulares forem usar o sistema pelo Wi-Fi (INSTALACAO-LAR.md):
+#   ACESSO_WEB=0.0.0.0     abre a tela para a rede
+#   USAR_HTTPS=sim         liga o HTTPS com o certificado do Lar
+#   ENDERECOS=192.168.0.10 IP deste computador na rede (entra no certificado)
 services:
   postgres:
     image: postgres:16
@@ -7,9 +18,12 @@ services:
     environment:
       POSTGRES_DB: portariadb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      # A senha só vale na PRIMEIRA vez que o banco é criado
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      TZ: America/Sao_Paulo
     ports:
-      - "5432:5432"
+      # Só neste computador (para o pgAdmin); outros aparelhos da rede não enxergam o banco
+      - "127.0.0.1:5432:5432"
     volumes:
       - portaria-dados:/var/lib/postgresql/data
     healthcheck:
@@ -17,6 +31,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   backend:
     build:
@@ -29,9 +44,12 @@ services:
       SPRING_PROFILES_ACTIVE: postgre
       DB_URL: jdbc:postgresql://postgres:5432/portariadb
       DB_USER: postgres
-      DB_PASSWORD: postgres
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      # Sem isto o contêiner usa UTC e os horários de entrada e saída saem 3 horas adiantados
+      TZ: America/Sao_Paulo
     ports:
-      - "8080:8080"
+      # A tela chega no backend por dentro (nginx); a porta 8080 fica só neste computador
+      - "127.0.0.1:8080:8080"
     restart: unless-stopped
 
   frontend:
@@ -40,9 +58,20 @@ services:
     container_name: portaria-frontend
     depends_on:
       - backend
+    environment:
+      # HTTPS desligado por padrão (o sistema só é usado no computador da portaria)
+      USAR_HTTPS: ${USAR_HTTPS:-nao}
+      # Endereços que entram no certificado HTTPS (separados por vírgula). localhost já vem incluído.
+      ENDERECOS: ${ENDERECOS:-}
     ports:
-      - "4200:80"
+      # Por padrão só ESTE computador abre o sistema (127.0.0.1): ninguém no Wi-Fi do Lar chega à tela.
+      # Para liberar tablets/celulares: ACESSO_WEB=0.0.0.0 e USAR_HTTPS=sim no .env.
+      - "${ACESSO_WEB:-127.0.0.1}:${PORTA_WEB:-4200}:8080"
+    volumes:
+      # Certificado do Lar (só usado no modo HTTPS; não muda a cada reinício)
+      - portaria-certificados:/etc/nginx/certificados
     restart: unless-stopped
 
 volumes:
   portaria-dados:
+  portaria-certificados:

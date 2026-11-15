@@ -2,20 +2,21 @@
   <h1>Funcionários</h1>
 </header>
 
-<div class="card">
-  <h2 class="titulo-cartao">{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h2>
+<section #painelFormulario class="card painel-formulario" aria-labelledby="titulo-formulario">
+  <h2 class="titulo-cartao" id="titulo-formulario">{{ editandoId() ? 'Editar funcionário' : 'Cadastrar funcionário' }}</h2>
   <form class="grid" [formGroup]="form" (ngSubmit)="salvar()">
     <label>Nome
-      <input formControlName="nome">
+      <input formControlName="nome" maxlength="100" autocomplete="off">
       <app-erro-campo [control]="form.controls.nome" />
     </label>
-    <label>Usuário
-      <input formControlName="usuario" autocomplete="off">
+    <label>Usuário (para entrar no sistema)
+      <input formControlName="usuario" maxlength="50" autocomplete="off" autocapitalize="off" spellcheck="false">
       <app-erro-campo [control]="form.controls.usuario" />
     </label>
-    <label>{{ editandoId() ? 'Nova senha' : 'Senha' }}
-      <input formControlName="senha" type="password" autocomplete="new-password">
-      <app-erro-campo [control]="form.controls.senha" />
+    <label>{{ editandoId() ? 'Nova senha (opcional)' : 'Senha' }}
+      <input formControlName="senha" type="password" maxlength="100" autocomplete="new-password"
+             [placeholder]="editandoId() ? 'Em branco mantém a senha atual' : ''">
+      <app-erro-campo [control]="form.controls.senha" formato="Use pelo menos 8 caracteres, com letras e números." />
     </label>
     <label>Perfil
       <select formControlName="perfil">
@@ -24,40 +25,45 @@
         }
       </select>
     </label>
+    @if (erro()) { <p class="err largura-total" role="alert">{{ erro() }}</p> }
     <div class="acoes acoes-final">
-      <button type="submit">{{ editandoId() ? 'Atualizar' : 'Salvar' }}</button>
       @if (editandoId()) {
         <button type="button" class="sec" (click)="cancelar()">Cancelar</button>
       }
+      <button type="submit" [disabled]="salvando()" [attr.aria-busy]="salvando()">
+        {{ salvando() ? 'Salvando...' : editandoId() ? 'Salvar alterações' : 'Cadastrar funcionário' }}
+      </button>
     </div>
   </form>
-  @if (mensagem()) { <p class="ok">{{ mensagem() }}</p> }
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+</section>
 
-<div class="card tabela-scroll">
-  <h2 class="titulo-cartao">Funcionários cadastrados <span class="contagem">{{ funcionarios().length }}</span></h2>
+<section class="card tabela-scroll" aria-labelledby="titulo-lista">
+  <h2 class="titulo-cartao" id="titulo-lista">Funcionários cadastrados <span class="contagem">{{ funcionarios().length }}</span></h2>
   <table>
     <thead>
-      <tr><th>Nome</th><th>Usuário</th><th>Perfil</th><th></th></tr>
+      <tr><th scope="col">Nome</th><th scope="col">Usuário</th><th scope="col">Perfil</th><th scope="col"><span class="sr-only">Ações</span></th></tr>
     </thead>
     <tbody>
       @for (f of funcionarios(); track f.id) {
         <tr [class.editando]="f.id === editandoId()">
-          <td>{{ f.nome }}</td>
+          <td>{{ f.nome }} @if (f.id === auth.usuario()?.id) { <span class="secundario">Você</span> }</td>
           <td>{{ f.usuario }}</td>
           <td><span [class]="'etiqueta ' + f.perfil">{{ perfilLabel[f.perfil] }}</span></td>
           <td class="acoes-linha">
-            <button type="button" class="sm" (click)="editar(f)">Editar</button>
+            <button type="button" class="sm" (click)="editar(f)" [attr.aria-label]="'Editar ' + f.nome">Editar</button>
             <!-- não deixa o usuário logado excluir a si mesmo -->
             @if (f.id !== auth.usuario()?.id) {
-              <button type="button" class="sm perigo" (click)="excluir(f)">Excluir</button>
+              <button type="button" class="sm perigo" (click)="excluir(f)" [attr.aria-label]="'Excluir ' + f.nome">Excluir</button>
             }
           </td>
         </tr>
       } @empty {
-        <tr><td colspan="4">Nenhum registro.</td></tr>
+        @if (carregando()) {
+          <tr><td colspan="4" class="carregando"><span class="sr-only">Carregando...</span><span class="esqueleto"></span><span class="esqueleto"></span><span class="esqueleto"></span></td></tr>
+        } @else {
+          <tr><td colspan="4">Nenhum funcionário cadastrado.</td></tr>
+        }
       }
     </tbody>
   </table>
-</div>
+</section>

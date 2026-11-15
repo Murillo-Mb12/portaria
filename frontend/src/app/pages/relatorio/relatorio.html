@@ -2,23 +2,53 @@
   <h1>Relatório de acessos</h1>
 </header>
 
-<div class="card noprint">
-  <h2 class="titulo-cartao">Período</h2>
+<section class="card noprint" aria-labelledby="titulo-periodo">
+  <h2 class="titulo-cartao" id="titulo-periodo">Período</h2>
   <form class="grid" [formGroup]="periodo" (ngSubmit)="gerar()">
-    <label>De <input formControlName="de" type="date"></label>
-    <label>Até <input formControlName="ate" type="date"></label>
-    <button type="submit">Gerar</button>
+    <label>De <input formControlName="de" type="date" [max]="periodo.controls.ate.value"></label>
+    <label>Até <input formControlName="ate" type="date" [min]="periodo.controls.de.value"></label>
+    <button type="submit" [disabled]="gerando()" [attr.aria-busy]="gerando()">
+      {{ gerando() ? 'Gerando...' : 'Gerar relatório' }}
+    </button>
   </form>
-  @if (erro()) { <p class="err">{{ erro() }}</p> }
-</div>
+  @if (erro()) { <p class="err" role="alert">{{ erro() }}</p> }
+</section>
 
 @if (acessos(); as lista) {
-  <div class="card tabela-scroll">
-    <div class="painel-topo">
-      <h2 class="titulo-cartao">Acessos no período <span class="contagem">{{ lista.length }}</span></h2>
-      <button type="button" class="sm noprint" (click)="imprimir()">Imprimir / salvar PDF</button>
+  <!-- Cabeçalho que só sai no papel / PDF -->
+  <div class="so-impressao cabecalho-impressao">
+    <img src="logo-lsvp-64.png" alt="" width="52" height="52">
+    <div>
+      <strong>Lar São Vicente de Paulo · Portaria</strong>
+      <h1>Relatório de acessos</h1>
+      <p>Período: {{ textoPeriodo() }}. Emitido em {{ emitidoEm() | date: 'dd/MM/yyyy HH:mm' }}{{ auth.usuario() ? ' por ' + auth.usuario()?.nome : '' }}.</p>
     </div>
-    <app-tabela-acessos [acessos]="lista" />
-    <p class="total"><strong>Total de acessos: {{ lista.length }}</strong></p>
   </div>
+
+  <section class="situacao" aria-label="Resumo do período">
+    <div class="indicador"><span class="indicador-rotulo">Total de acessos</span><strong>{{ resumo().total }}</strong></div>
+    <div class="indicador"><span class="indicador-rotulo">Visitas</span><strong>{{ resumo().visitas }}</strong></div>
+    <div class="indicador"><span class="indicador-rotulo">Doações</span><strong>{{ resumo().doacoes }}</strong></div>
+    <div class="indicador"><span class="indicador-rotulo">Outros</span><strong>{{ resumo().outros }}</strong></div>
+  </section>
+
+  <section class="card tabela-scroll" aria-labelledby="titulo-resultado">
+    <div class="painel-topo">
+      <h2 class="titulo-cartao" id="titulo-resultado">Acessos de {{ textoPeriodo() }} <span class="contagem noprint">{{ lista.length }}</span></h2>
+      <div class="acoes noprint">
+        <button type="button" class="sm" (click)="baixarPlanilha()" [disabled]="!lista.length">
+          <app-icone nome="baixar" [tamanho]="16" />Baixar planilha
+        </button>
+        <button type="button" class="sm" (click)="imprimir()" [disabled]="!lista.length">
+          <app-icone nome="imprimir" [tamanho]="16" />Imprimir ou salvar PDF
+        </button>
+      </div>
+    </div>
+    <app-tabela-acessos [acessos]="lista" vazio="Nenhum acesso neste período." />
+  </section>
+} @else if (gerando()) {
+  <section class="card tabela-scroll" aria-busy="true">
+    <h2 class="titulo-cartao">Gerando o relatório</h2>
+    <app-tabela-acessos [acessos]="[]" [carregando]="true" />
+  </section>
 }
